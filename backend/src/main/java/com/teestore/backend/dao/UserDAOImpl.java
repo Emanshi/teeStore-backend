@@ -20,11 +20,16 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public User addUser(User user) throws Exception {
-        Query query= entityManager.createQuery("select u from UserEntity u where u.contactNumber =:contactNumber");
-        query.setParameter("contactNumber",user.getContactNumber());
 
-        List<UserEntity> result= query.getResultList();
-        if(result!=null && !result.isEmpty())
+        Query query1= entityManager.createQuery("select u from UserEntity u where u.contactNumber =:contactNumber");
+        query1.setParameter("contactNumber",user.getContactNumber());
+
+        Query query2= entityManager.createQuery("select u from UserEntity u where u.emailId =:emailId");
+        query2.setParameter("emailId",user.getEmailId());
+
+        List<UserEntity> result1= query1.getResultList();
+        List<UserEntity> result2= query2.getResultList();
+        if((result1!=null && !result1.isEmpty()) && (result2!=null && !result2.isEmpty()))
             return null;
 
         UserEntity userEntity=new UserEntity();
@@ -175,22 +180,71 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public User editUser(String userId, User user) throws Exception {
-        return null;
+    public String editUser(String userId, User user) throws Exception {
+        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
+
+        if(userEntity==null)
+            return null;
+
+        userEntity.setUserName(user.getUserName());
+        userEntity.setPassword(user.getPassword());
+        userEntity.setDateOfBirth(user.getDateOfBirth());
+
+        return userId;
     }
 
     @Override
-    public User addAddress(String userId, Address address) throws Exception {
+    public String addAddress(String userId, Address address) throws Exception {
+        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
 
-        return null;
+        if(userEntity==null)
+            return null;
+
+        List<AddressEntity> addressEntityList=userEntity.getAddresses();
+
+        if(addressEntityList==null)
+            addressEntityList=new ArrayList<>();
+
+        AddressEntity addressEntity=new AddressEntity();
+        addressEntity.setStreet(address.getStreet());
+        addressEntity.setCity(address.getCity());
+        addressEntity.setState(address.getState());
+        addressEntity.setPinCode(address.getPinCode());
+
+        entityManager.persist(addressEntity);
+        address.setAddressId(addressEntity.getAddressId());
+
+        entityManager.persist(userEntity);
+        return userId;
     }
 
     @Override
-    public String deleteAddress(String addressId) throws Exception {
+    public String deleteAddress(String userId,String addressId) throws Exception {
 
+        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
         AddressEntity addressEntity=entityManager.find(AddressEntity.class,addressId);
 
+        String uId=null;
+        if(userEntity!=null){
 
-        return null;
+            List<AddressEntity> addressEntityList=userEntity.getAddresses();
+
+            if(addressEntityList!=null && !addressEntityList.isEmpty() && addressEntity!=null){
+
+                for(AddressEntity aEntity:addressEntityList){
+                    if(aEntity.getAddressId()==addressEntity.getAddressId()){
+                        addressEntityList.remove(addressEntity);
+                        break;
+                    }
+                }
+
+            }
+
+            userEntity.setAddresses(addressEntityList);
+            entityManager.persist(userEntity);
+            return userId;
+        }
+
+        return uId;
     }
 }
