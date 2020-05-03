@@ -10,6 +10,6 @@ public interface UserDAO {
     public User getUserByEmailId(String emailId) throws Exception;
     public User getUser(String userId) throws Exception;
     public User editUser(String userId,User user) throws Exception;
-    public User addAddress(String emailId,Address address) throws Exception;
-    public User deleteAddress(String addressId) throws Exception;
+    public User addAddress(String userId, Address address) throws Exception;
+    public String deleteAddress(String addressId) throws Exception;
 }
