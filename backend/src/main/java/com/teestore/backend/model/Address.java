@@ -6,7 +6,6 @@ public class Address {
     private String city;
     private String state;
     private Integer pinCode;
-    private User user;
 
     public String getAddressId() {
         return addressId;
@@ -46,13 +45,5 @@ public class Address {
 
     public void setPinCode(Integer pinCode) {
         this.pinCode = pinCode;
-    }
-
-    public User getUser() {
-        return user;
-    }
-
-    public void setUser(User user) {
-        this.user = user;
     }
 }
