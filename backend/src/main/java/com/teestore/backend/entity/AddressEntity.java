@@ -15,8 +15,6 @@ public class AddressEntity {
     private String city;
     private String state;
     private Integer pinCode;
-    @ManyToOne(cascade = CascadeType.ALL)
-    private UserEntity user;
 
     public String getAddressId() {
         return addressId;
@@ -56,13 +54,5 @@ public class AddressEntity {
 
     public void setPinCode(Integer pinCode) {
         this.pinCode = pinCode;
-    }
-
-    public UserEntity getUser() {
-        return user;
-    }
-
-    public void setUser(UserEntity user) {
-        this.user = user;
     }
 }

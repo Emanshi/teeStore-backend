@@ -2,11 +2,9 @@ package com.teestore.backend.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "Users")
@@ -20,6 +18,17 @@ public class UserEntity {
     private String contactNumber;
     private String password;
     private LocalDateTime dateOfBirth;
+    @OneToMany(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private List<AddressEntity> addresses;
+
+    public List<AddressEntity> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<AddressEntity> addresses) {
+        this.addresses = addresses;
+    }
 
     public String getUserId() {
         return userId;
