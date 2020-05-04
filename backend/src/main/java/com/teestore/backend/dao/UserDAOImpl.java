@@ -211,11 +211,19 @@ public class UserDAOImpl implements UserDAO{
         addressEntity.setState(address.getState());
         addressEntity.setPinCode(address.getPinCode());
 
-        entityManager.persist(addressEntity);
-        address.setAddressId(addressEntity.getAddressId());
+//        entityManager.persist(addressEntity);
+//        address.setAddressId(addressEntity.getAddressId());
+//
+//        entityManager.persist(userEntity);
+
+        // Changed code
+
+        addressEntityList.add(addressEntity);
+        userEntity.setAddresses(addressEntityList);
 
         entityManager.persist(userEntity);
-        return userId;
+
+        return addressEntity.getAddressId();
     }
 
     @Override
@@ -224,7 +232,30 @@ public class UserDAOImpl implements UserDAO{
         UserEntity userEntity=entityManager.find(UserEntity.class,userId);
         AddressEntity addressEntity=entityManager.find(AddressEntity.class,addressId);
 
-        String uId=null;
+//        String uId=null;
+//        if(userEntity!=null){
+//
+//            List<AddressEntity> addressEntityList=userEntity.getAddresses();
+//
+//            if(addressEntityList!=null && !addressEntityList.isEmpty() && addressEntity!=null){
+//
+//                for(AddressEntity aEntity:addressEntityList){
+//                    if(aEntity.getAddressId().equals(addressEntity.getAddressId())){
+//                        addressEntityList.remove(addressEntity);
+//                        break;
+//                    }
+//                }
+//
+//            }
+//
+//            userEntity.setAddresses(addressEntityList);
+//            entityManager.persist(userEntity);
+//            return userId;
+//        }
+//
+//        return uId;
+
+        String id=null;
         if(userEntity!=null){
 
             List<AddressEntity> addressEntityList=userEntity.getAddresses();
@@ -232,8 +263,10 @@ public class UserDAOImpl implements UserDAO{
             if(addressEntityList!=null && !addressEntityList.isEmpty() && addressEntity!=null){
 
                 for(AddressEntity aEntity:addressEntityList){
-                    if(aEntity.getAddressId()==addressEntity.getAddressId()){
+                    if(aEntity.getAddressId().equals(addressEntity.getAddressId())){
                         addressEntityList.remove(addressEntity);
+                        entityManager.persist(addressEntity);
+                        id = addressEntity.getAddressId();
                         break;
                     }
                 }
@@ -245,6 +278,6 @@ public class UserDAOImpl implements UserDAO{
             return userId;
         }
 
-        return uId;
+        return id;
     }
 }
