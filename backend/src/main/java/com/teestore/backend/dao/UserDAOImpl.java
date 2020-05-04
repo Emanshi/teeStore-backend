@@ -186,11 +186,15 @@ public class UserDAOImpl implements UserDAO{
         if(userEntity==null)
             return null;
 
+        userEntity.setDateOfBirth(user.getDateOfBirth());
         userEntity.setUserName(user.getUserName());
-        userEntity.setPassword(user.getPassword());
+        if (user.getPassword() != null)
+            userEntity.setPassword(user.getPassword());
         userEntity.setDateOfBirth(user.getDateOfBirth());
 
-        return userId;
+        entityManager.persist(userEntity);
+
+        return userEntity.getUserId();
     }
 
     @Override
