@@ -263,19 +263,15 @@ public class UserDAOImpl implements UserDAO{
             if(addressEntityList!=null && !addressEntityList.isEmpty() && addressEntity!=null){
 
                 for(AddressEntity aEntity:addressEntityList){
-                    if(aEntity.getAddressId().equals(addressEntity.getAddressId())){
-                        addressEntityList.remove(addressEntity);
-                        entityManager.persist(addressEntity);
+                    if(aEntity.equals(addressEntity)){
+                        addressEntityList.remove(aEntity);
+                        entityManager.persist(userEntity);
+                        entityManager.remove(aEntity);
                         id = addressEntity.getAddressId();
                         break;
                     }
                 }
-
             }
-
-            userEntity.setAddresses(addressEntityList);
-            entityManager.persist(userEntity);
-            return userId;
         }
 
         return id;
