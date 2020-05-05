@@ -23,6 +23,13 @@ public class ProductEntity {
     private String productGroup;
     private Integer quantity;
     private LocalDateTime dateOfAddition;
+    //newly added attributes
+    private String productInfo;
+    private Double discount;
+    private String avgRating;
+
+
+
 
     public String getProductId() {
         return productId;
@@ -46,6 +53,30 @@ public class ProductEntity {
 
     public void setCost(Double cost) {
         this.cost = cost;
+    }
+
+    public String getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public String getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating) {
+        this.avgRating = avgRating;
     }
 
     public Size getSize() {
