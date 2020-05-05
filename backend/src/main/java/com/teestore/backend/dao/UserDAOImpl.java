@@ -42,7 +42,7 @@ public class UserDAOImpl implements UserDAO{
         List<Address> addressList=user.getAddresses();
         List<AddressEntity> addressEntityList=null;
 
-        if(addressList==null && !addressList.isEmpty()){
+        if(addressList!=null && !addressList.isEmpty()){
 
             addressEntityList=new ArrayList<>();
             for(Address address:addressList){
