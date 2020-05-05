@@ -28,7 +28,7 @@ public class ContactAPI {
         }
     }
 
-    @PostMapping("addMessage")
+    @PostMapping("/addMessage")
     public ResponseEntity<String> addMessage (@RequestBody Contact contact) throws Exception {
         try {
             String id = contactService.addMessage(contact);

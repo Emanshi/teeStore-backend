@@ -9,7 +9,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service(value = "contactDAO")
+@Service(value = "contactService")
 @Transactional
 public class ContactServiceImpl implements ContactService {
 
