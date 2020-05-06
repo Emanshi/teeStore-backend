@@ -16,6 +16,33 @@ public class Product {
     private String productGroup;
     private Integer quantity;
     private LocalDateTime dateOfAddition;
+    private String productInfo;
+    private Double discount;
+    private String avgRating;
+
+    public String getProductInfo() {
+        return productInfo;
+    }
+
+    public void setProductInfo(String productInfo) {
+        this.productInfo = productInfo;
+    }
+
+    public Double getDiscount() {
+        return discount;
+    }
+
+    public void setDiscount(Double discount) {
+        this.discount = discount;
+    }
+
+    public String getAvgRating() {
+        return avgRating;
+    }
+
+    public void setAvgRating(String avgRating) {
+        this.avgRating = avgRating;
+    }
 
     public String getProductId() {
         return productId;

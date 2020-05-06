@@ -13,5 +13,5 @@ public interface ProductDAO {
     List<Product> getAllProducts() throws Exception;
     List<Product> getNewArrivals() throws Exception;
     List<Product> getProductByDiscount(String category) throws Exception;
-    List<Product> getHotDeals() throws Exception;
+
 }
