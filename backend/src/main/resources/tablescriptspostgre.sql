@@ -68,37 +68,37 @@ constraint TS_CONTACT_PK primary key (contact_id),
 constraint TS_CONTACT_USERS_FK foreign  key (user_id) references Users (user_id)
 );
 
-insert into Users VALUES ('U1001', 'SCOTT', 'scott@stark.com', '8884967823', '3284cbd43ac6fc733d7c3d2176e7a52bbaeba81471702ec332a0a65689cf16e3', '2002-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES ('U1001', 'SCOTT', 'scott@stark.com', '8884967823', '3284cbd43ac6fc733d7c3d2176e7a52bbaeba81471702ec332a0a65689cf16e3', '2002-3-2'::timestamp);
 -- Scott@123
-insert into Users VALUES ('U1002', 'TONY', 'tony@stark.com', '8875632142', '1f7cbaa9168ffce48872d8fc4e5429dee55ed8f21d8d84bccd6aaa2a72ae1d79', '2001-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES ('U1002', 'TONY', 'tony@stark.com', '8875632142', '1f7cbaa9168ffce48872d8fc4e5429dee55ed8f21d8d84bccd6aaa2a72ae1d79', '2001-3-2'::timestamp);
 -- Tony@123
-insert into Users VALUES ('U1003', 'STEVE', 'steve@gmail.com', '9880253413', '97661249431ccedba1711b78fb58eceb2c03054a07a7b684ad53048691b34435', '1997-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES ('U1003', 'STEVE', 'steve@gmail.com', '9880253413', '97661249431ccedba1711b78fb58eceb2c03054a07a7b684ad53048691b34435', '1997-3-2'::timestamp);
 -- Steve@123
-insert into Users VALUES ('U1004', 'BANNER', 'banner@Uv.com', '8882039476', '9a8d7e96acac7b73f1f9c994dd512df9068bb0549961e42333745c67a994e6f1', '1952-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES ('U1004', 'BANNER', 'banner@Uv.com', '8882039476', '9a8d7e96acac7b73f1f9c994dd512df9068bb0549961e42333745c67a994e6f1', '1952-3-2'::timestamp);
 -- Banner@123
-insert into Users VALUES('U1005' ,'James' ,'james14@gmail.com', '7658459834','338c8bf01f4552dff1d4b2eed84c7a38c3a5f001604804fba47e3d28fc6ad4f5', '2002-12-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES('U1005' ,'James' ,'james14@gmail.com', '7658459834','338c8bf01f4552dff1d4b2eed84c7a38c3a5f001604804fba47e3d28fc6ad4f5', '2002-12-2'::timestamp);
 -- James@123
-insert into Users VALUES('U1006' ,'Leo Tondis' ,'leondistony@yahoo.com','9826728172', '433a6285c29c0265c19582e53321cc7892554d468576494da9247c6be903b867', '1975-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES('U1006' ,'Leo Tondis' ,'leondistony@yahoo.com','9826728172', '433a6285c29c0265c19582e53321cc7892554d468576494da9247c6be903b867', '1975-3-2'::timestamp);
 -- Leo@123
-insert into Users VALUES('U1006' ,'David Sandberg' ,'david1981@hotstar.com','6789273841','011f43602454216a9788b99e03e2bde8eae0a97e5b760507c8402bdd78b6f10d', '2000-10-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES('U1006' ,'David Sandberg' ,'david1981@hotstar.com','6789273841','011f43602454216a9788b99e03e2bde8eae0a97e5b760507c8402bdd78b6f10d', '2000-10-2'::timestamp);
 -- David@123
-insert into Users VALUES('U1008' ,'Tim Miller' , 'tom@gmail.com', '8719274910','12a7f5611794b4b0bc39136bc2d62a55e875a0d692d77ef23a285b7f36a9a2fc', '2002-1-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES('U1008' ,'Tim Miller' , 'tom@gmail.com', '8719274910','12a7f5611794b4b0bc39136bc2d62a55e875a0d692d77ef23a285b7f36a9a2fc', '2002-1-2'::timestamp);
 -- Tim@123
-insert into Users VALUES('U1009' ,'John Cena','johncena@hotmail.com','9182972829' ,'0f4dd6c67bc8c827a2b181bc763f9ab96166d8f50840fe1ae0bbc0e77464da2c', '1998-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES('U1009' ,'John Cena','johncena@hotmail.com','9182972829' ,'0f4dd6c67bc8c827a2b181bc763f9ab96166d8f50840fe1ae0bbc0e77464da2c', '1998-3-2'::timestamp);
 -- John@123
-insert into Users VALUES('U1010' ,'Miley Swan' ,'swanmiley@yux.com' , '8920381092','8ecf2ac126d3abe0dc52b92cbc990448e9ae90dfcb9e7e40fbdc4a86bc7a66cf', '2002-3-2'::timestamp);
+insert into Users(user_id,user_name,email_id,contact_number,password,date_of_birth) VALUES('U1010' ,'Miley Swan' ,'swanmiley@yux.com' , '8920381092','8ecf2ac126d3abe0dc52b92cbc990448e9ae90dfcb9e7e40fbdc4a86bc7a66cf', '2002-3-2'::timestamp);
 -- Miley@123
 
-insert into Address VALUES('A1001' ,'8 East Walnut Street' ,'pune' ,'maharashtra' ,'114590' ,'U1001' );
-insert into Address VALUES('A1002' ,'720 Rockland Road' ,'bengaluru' ,'karnataka' ,'113449' ,'U1002' );
-insert into Address VALUES('A1003' ,'37 Marlborough Street' ,'lucknow' ,'uttar pradesh' ,'110070' ,'U1003' );
-insert into Address VALUES('A1004' ,'56 Paranthe Wali Gali' ,'new delhi' ,'delhi' ,'110006' ,'U1004' );
-insert into Address VALUES('A1005' ,'120 Andheri West Road' ,'pune' ,'maharashtra' ,'114660' ,'U1005' );
-insert into Address VALUES('A1006' ,'2 A Mount Abu Street' ,'bengaluru' ,'karnataka' ,'113455' ,'U1006' );
-insert into Address VALUES('A1007' ,'101 B Sai Baba Temple Street' ,'lucknow' ,'uttar pradesh' ,'113370' ,'U1007' );
-insert into Address VALUES('A1008' ,'22 C Ambedkar Road' ,'new delhi' ,'delhi' ,'112206' ,'U1008' );
-insert into Address VALUES('A1009' ,'83 Silicon Housing Complex' ,'kolkata' ,'west bengal' ,'111190' ,'U1009' );
-insert into Address VALUES('A1010' ,'671 Rose Garden Street' ,'bengaluru' ,'karnataka' ,'110049' ,'U1010' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1001' ,'8 East Walnut Street' ,'pune' ,'maharashtra' ,'114590' ,'U1001' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1002' ,'720 Rockland Road' ,'bengaluru' ,'karnataka' ,'113449' ,'U1002' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1003' ,'37 Marlborough Street' ,'lucknow' ,'uttar pradesh' ,'110070' ,'U1003' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1004' ,'56 Paranthe Wali Gali' ,'new delhi' ,'delhi' ,'110006' ,'U1004' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1005' ,'120 Andheri West Road' ,'pune' ,'maharashtra' ,'114660' ,'U1005' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1006' ,'2 A Mount Abu Street' ,'bengaluru' ,'karnataka' ,'113455' ,'U1006' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1007' ,'101 B Sai Baba Temple Street' ,'lucknow' ,'uttar pradesh' ,'113370' ,'U1007' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1008' ,'22 C Ambedkar Road' ,'new delhi' ,'delhi' ,'112206' ,'U1008' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1009' ,'83 Silicon Housing Complex' ,'kolkata' ,'west bengal' ,'111190' ,'U1009' );
+insert into Address(address_id,street,city,state,pin_code,user_id) VALUES('A1010' ,'671 Rose Garden Street' ,'bengaluru' ,'karnataka' ,'110049' ,'U1010' );
 
 insert into Product VALUES('P10001' ,'cool shirt 1' ,1359.0,'s','m','shirt','PG1001',65,current_timestamp);
 insert into Product VALUES('P10002' ,'cool shirt 1' ,1359.0,'m','m','shirt','PG1001',73,current_timestamp);
@@ -279,9 +279,96 @@ insert into Contact VALUES('C102' ,'ivan@hotmail.com' , '6373838291', 'less vari
 insert into Contact VALUES('C103' ,'tony@stark.com', '8875632142', 'Quality is awesome' ,'will buy again', 'U1002');
 insert into Contact VALUES('C104' ,'banner@Uv.com' ,'8882039476','want more varities','in different colors and different styles','U1004');
 
-select * from Users;
+select * from users;
 select * from Address;
 select * from Product;
 select * from Review;
 select * from Contact;
-
+--
+--Hibernate:
+--2020-05-06T14:25:52.257624+00:00 app[web.1]:
+--2020-05-06T14:25:52.257632+00:00 app[web.1]:     create table address (
+--2020-05-06T14:25:52.257632+00:00 app[web.1]:        address_id varchar(255) not null,
+--2020-05-06T14:25:52.257633+00:00 app[web.1]:         city varchar(255),
+--2020-05-06T14:25:52.257633+00:00 app[web.1]:         pin_code int4,
+--2020-05-06T14:25:52.257634+00:00 app[web.1]:         state varchar(255),
+--2020-05-06T14:25:52.257634+00:00 app[web.1]:         street varchar(255),
+--2020-05-06T14:25:52.257634+00:00 app[web.1]:         user_id varchar(255),
+--2020-05-06T14:25:52.257635+00:00 app[web.1]:         primary key (address_id)
+--2020-05-06T14:25:52.257642+00:00 app[web.1]:     )
+--2020-05-06T14:25:52.271211+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.271213+00:00 app[web.1]:
+--2020-05-06T14:25:52.271214+00:00 app[web.1]:     create table contact (
+--2020-05-06T14:25:52.271215+00:00 app[web.1]:        contact_id varchar(255) not null,
+--2020-05-06T14:25:52.271215+00:00 app[web.1]:         contact_email varchar(255),
+--2020-05-06T14:25:52.271215+00:00 app[web.1]:         message varchar(255),
+--2020-05-06T14:25:52.271215+00:00 app[web.1]:         phone_no varchar(255),
+--2020-05-06T14:25:52.271216+00:00 app[web.1]:         subject varchar(255),
+--2020-05-06T14:25:52.271217+00:00 app[web.1]:         user_id varchar(255),
+--2020-05-06T14:25:52.271217+00:00 app[web.1]:         primary key (contact_id)
+--2020-05-06T14:25:52.271282+00:00 app[web.1]:     )
+--2020-05-06T14:25:52.280676+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.280677+00:00 app[web.1]:
+--2020-05-06T14:25:52.280678+00:00 app[web.1]:     create table product (
+--2020-05-06T14:25:52.280679+00:00 app[web.1]:        product_id varchar(255) not null,
+--2020-05-06T14:25:52.280679+00:00 app[web.1]:         avg_rating varchar(255),
+--2020-05-06T14:25:52.280679+00:00 app[web.1]:         category varchar(255),
+--2020-05-06T14:25:52.280680+00:00 app[web.1]:         cost float8,
+--2020-05-06T14:25:52.280680+00:00 app[web.1]:         date_of_addition timestamp,
+--2020-05-06T14:25:52.280680+00:00 app[web.1]:         discount float8,
+--2020-05-06T14:25:52.280681+00:00 app[web.1]:         product_group varchar(255),
+--2020-05-06T14:25:52.280681+00:00 app[web.1]:         product_info varchar(255),
+--2020-05-06T14:25:52.280681+00:00 app[web.1]:         product_name varchar(255),
+--2020-05-06T14:25:52.280682+00:00 app[web.1]:         quantity int4,
+--2020-05-06T14:25:52.280682+00:00 app[web.1]:         sex varchar(255),
+--2020-05-06T14:25:52.280683+00:00 app[web.1]:         size varchar(255),
+--2020-05-06T14:25:52.280683+00:00 app[web.1]:         primary key (product_id)
+--2020-05-06T14:25:52.280689+00:00 app[web.1]:     )
+--2020-05-06T14:25:52.291710+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.291712+00:00 app[web.1]:
+--2020-05-06T14:25:52.291713+00:00 app[web.1]:     create table review (
+--2020-05-06T14:25:52.291713+00:00 app[web.1]:        review_id varchar(255) not null,
+--2020-05-06T14:25:52.291714+00:00 app[web.1]:         rating_helpful int4,
+--2020-05-06T14:25:52.291714+00:00 app[web.1]:         ratings varchar(255),
+--2020-05-06T14:25:52.291714+00:00 app[web.1]:         review_body varchar(255),
+--2020-05-06T14:25:52.291714+00:00 app[web.1]:         review_date timestamp,
+--2020-05-06T14:25:52.291715+00:00 app[web.1]:         review_title varchar(255),
+--2020-05-06T14:25:52.291715+00:00 app[web.1]:         product_product_id varchar(255),
+--2020-05-06T14:25:52.291715+00:00 app[web.1]:         user_user_id varchar(255),
+--2020-05-06T14:25:52.291715+00:00 app[web.1]:         primary key (review_id)
+--2020-05-06T14:25:52.291720+00:00 app[web.1]:     )
+--2020-05-06T14:25:52.299666+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.299668+00:00 app[web.1]:
+--2020-05-06T14:25:52.299668+00:00 app[web.1]:     create table users (
+--2020-05-06T14:25:52.299669+00:00 app[web.1]:        user_id varchar(255) not null,
+--2020-05-06T14:25:52.299669+00:00 app[web.1]:         contact_number varchar(255),
+--2020-05-06T14:25:52.299670+00:00 app[web.1]:         date_of_birth timestamp,
+--2020-05-06T14:25:52.299670+00:00 app[web.1]:         email_id varchar(255),
+--2020-05-06T14:25:52.299670+00:00 app[web.1]:         password varchar(255),
+--2020-05-06T14:25:52.299671+00:00 app[web.1]:         user_name varchar(255),
+--2020-05-06T14:25:52.299671+00:00 app[web.1]:         primary key (user_id)
+--2020-05-06T14:25:52.299676+00:00 app[web.1]:     )
+--2020-05-06T14:25:52.308647+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.308649+00:00 app[web.1]:
+--2020-05-06T14:25:52.308650+00:00 app[web.1]:     alter table address
+--2020-05-06T14:25:52.308650+00:00 app[web.1]:        add constraint FK6i66ijb8twgcqtetl8eeeed6v
+--2020-05-06T14:25:52.308651+00:00 app[web.1]:        foreign key (user_id)
+--2020-05-06T14:25:52.308657+00:00 app[web.1]:        references users
+--2020-05-06T14:25:52.312388+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.312389+00:00 app[web.1]:
+--2020-05-06T14:25:52.312390+00:00 app[web.1]:     alter table contact
+--2020-05-06T14:25:52.312391+00:00 app[web.1]:        add constraint FKbxl6anxo14q097g8cd2e51v55
+--2020-05-06T14:25:52.312391+00:00 app[web.1]:        foreign key (user_id)
+--2020-05-06T14:25:52.312396+00:00 app[web.1]:        references users
+--2020-05-06T14:25:52.315594+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.315595+00:00 app[web.1]:
+--2020-05-06T14:25:52.315596+00:00 app[web.1]:     alter table review
+--2020-05-06T14:25:52.315596+00:00 app[web.1]:        add constraint FK11khguugixv7x8xw8gj99ph6m
+--2020-05-06T14:25:52.315597+00:00 app[web.1]:        foreign key (product_product_id)
+--2020-05-06T14:25:52.315601+00:00 app[web.1]:        references product
+--2020-05-06T14:25:52.320881+00:00 app[web.1]: Hibernate:
+--2020-05-06T14:25:52.320882+00:00 app[web.1]:
+--2020-05-06T14:25:52.320882+00:00 app[web.1]:     alter table review
+--2020-05-06T14:25:52.320883+00:00 app[web.1]:        add constraint FKq6prfoeqnogpi44xmtbgyuj8p
+--2020-05-06T14:25:52.320883+00:00 app[web.1]:        foreign key (user_user_id)
+--2020-05-06T14:25:52.320887+00:00 app[web.1]:        references users

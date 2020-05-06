@@ -30,7 +30,6 @@ public class ProductEntity {
 
 
 
-
     public String getProductId() {
         return productId;
     }
