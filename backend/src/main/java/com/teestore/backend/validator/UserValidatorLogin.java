@@ -14,7 +14,7 @@ public class UserValidatorLogin {
             throw new Exception("UserValidatorByContactNo.INVALID_PASSWORD_FORMAT");
     }
 
-    public static Boolean validatePassword(String password) {
+    private static Boolean validatePassword(String password) {
         if (password == null)
             return false;
         if (password.length() >= 7 && password.length() <= 20)
@@ -25,7 +25,7 @@ public class UserValidatorLogin {
         return false;
     }
 
-    public static Boolean validateContactNumber(String contactNumber) {
+    private static Boolean validateContactNumber(String contactNumber) {
         if (contactNumber == null)
             return false;
         boolean flag = false;
@@ -34,7 +34,9 @@ public class UserValidatorLogin {
         return flag;
     }
 
-    public static Boolean validateEmail(String email) {
+    private static Boolean validateEmail(String email) {
+        if (email == null || email.length()>70)
+            return false;
         String reg="^[A-Za-z0-9+_.-]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }

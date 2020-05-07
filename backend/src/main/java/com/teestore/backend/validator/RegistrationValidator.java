@@ -8,9 +8,7 @@ import java.time.temporal.ChronoUnit;
 
 public class RegistrationValidator {
 
-    public static void validateRegistration(User u)throws Exception
-
-    {
+    public static void validateRegistration(User u)throws Exception {
         if (!validateContactNumber(u.getContactNumber()))
             throw new Exception("RegistrationValidator.INVALID_CONTACT_NUMBER_FORMAT");
         if (!validatePassword(u.getPassword()))
@@ -24,7 +22,7 @@ public class RegistrationValidator {
 
     }
 
-    public static Boolean validatePassword(String password) {
+    private static Boolean validatePassword(String password) {
         if (password == null)
             return false;
         if (password.length() >= 7 && password.length() <= 20)
@@ -35,7 +33,7 @@ public class RegistrationValidator {
         return false;
     }
 
-    public static Boolean validateContactNumber(String contactNumber) {
+    private static Boolean validateContactNumber(String contactNumber) {
         if (contactNumber == null)
             return false;
         boolean flag = false;
@@ -44,13 +42,15 @@ public class RegistrationValidator {
         return flag;
     }
 
-    public static Boolean validateEmail(String email) {
+    private static Boolean validateEmail(String email) {
+        if (email == null || email.length()>70)
+            return false;
         String reg="^[A-Za-z0-9+_.-]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 
-    public static Boolean validateName(String name) {
-        if (name == null)
+    private static Boolean validateName(String name) {
+        if (name == null || name.length()>50)
             return false;
         if(!name.equals("")) {
             String reg="([A-Za-z]{2,})+( [A-Za-z]{2,}){0,2}";
@@ -59,7 +59,7 @@ public class RegistrationValidator {
         return false;
     }
 
-    public static Boolean validateDateOfBirth(LocalDateTime dateOfBirth) {
+    private static Boolean validateDateOfBirth(LocalDateTime dateOfBirth) {
         if(dateOfBirth == null)
             return false;
         LocalDate dob=dateOfBirth.toLocalDate();
