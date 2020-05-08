@@ -46,7 +46,7 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductsByCategory(Category category) throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.category :=category");
+        Query query= entityManager.createQuery("select p from ProductEntity p where p.category =:category");
         query.setParameter("category",category);
 
         List<ProductEntity> productEntityList=query.getResultList();
@@ -80,7 +80,7 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductByGroup(String productGroup) throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.productGroup:=productGroup");
+        Query query= entityManager.createQuery("select p from ProductEntity p where p.productGroup=:productGroup");
         query.setParameter("productGroup",productGroup);
 
         List<ProductEntity> productEntityList= query.getResultList();
@@ -115,11 +115,11 @@ public class ProductDAOImpl implements ProductDAO{
 
         Query query=null;
         if(reverse){
-            query= entityManager.createQuery("select p from ProductEntity p where p.category :=category order by p.price desc");
+            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.price desc");
             query.setParameter("category",category);
         }
         else{
-            query= entityManager.createQuery("select p from ProductEntity p where p.category :=category order by p.price asc");
+            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.price asc");
             query.setParameter("category",category);
         }
 
@@ -219,7 +219,7 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductByDiscount(Category category) throws Exception {
 
-        Query query= entityManager.createQuery(" select p from ProductEntity p where p.category :=category and p.discount>0.0");
+        Query query= entityManager.createQuery(" select p from ProductEntity p where p.category =:category and p.discount>0.0");
         query.setParameter("category", category);
 
         List<ProductEntity> productEntityList= query.getResultList();
