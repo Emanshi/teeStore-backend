@@ -1,6 +1,7 @@
 package com.teestore.backend.dao;
 
 import com.teestore.backend.entity.ProductEntity;
+import com.teestore.backend.enums.Category;
 import com.teestore.backend.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -43,10 +44,10 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
     @Override
-    public List<Product> getProductsByCategory(String category) throws Exception {
+    public List<Product> getProductsByCategory(Category category) throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p where Lower(p.category) :=category");
-        query.setParameter("category",category.toLowerCase());
+        Query query= entityManager.createQuery("select p from ProductEntity p where p.category :=category");
+        query.setParameter("category",category);
 
         List<ProductEntity> productEntityList=query.getResultList();
         List<Product> productList=null;
@@ -110,7 +111,7 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
     @Override
-    public List<Product> getProductCategoryByPrice(String category, Boolean reverse) throws Exception {
+    public List<Product> getProductCategoryByPrice(Category category, Boolean reverse) throws Exception {
 
         Query query=null;
         if(reverse){
@@ -216,7 +217,7 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
     @Override
-    public List<Product> getProductByDiscount(String category) throws Exception {
+    public List<Product> getProductByDiscount(Category category) throws Exception {
 
         Query query= entityManager.createQuery(" select p from ProductEntity p where p.category :=category and p.discount>0.0");
         query.setParameter("category", category);

@@ -1,6 +1,7 @@
 package com.teestore.backend.service;
 
 import com.teestore.backend.dao.ProductDAO;
+import com.teestore.backend.enums.Category;
 import com.teestore.backend.model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -31,7 +32,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductsByCategory(String category) throws Exception {
+    public List<Product> getProductsByCategory(Category category) throws Exception {
 
         if(category== null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
@@ -59,7 +60,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductCategoryByPrice(String category, Boolean reverse) throws Exception {
+    public List<Product> getProductCategoryByPrice(Category category, Boolean reverse) throws Exception {
 
         if(category ==null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
@@ -95,7 +96,7 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductByDiscount(String category) throws Exception {
+    public List<Product> getProductByDiscount(Category category) throws Exception {
 
         if(category ==null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
