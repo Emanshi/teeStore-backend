@@ -2,12 +2,18 @@ package com.teestore.backend.entity;
 
 import com.teestore.backend.enums.Rating;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Review")
+@TypeDef(
+        name = "pgsql_enum",
+        typeClass = PostgreSQLEnumType.class
+)
 public class ReviewEntity {
     @Id
     @GenericGenerator(name = "reviewIdGen", strategy = "com.teestore.backend.entity.generator.ReviewIdGenerator")
@@ -16,6 +22,8 @@ public class ReviewEntity {
     private String reviewTitle;
     private String reviewBody;
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "rating_type")
+    @Type(type = "pgsql_enum")
     private Rating ratings;
     private Integer ratingHelpful;
     private LocalDateTime reviewDate;

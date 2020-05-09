@@ -35,12 +35,9 @@ public class ProductEntity {
     private String productGroup;
     private Integer quantity;
     private LocalDateTime dateOfAddition;
-    //newly added attributes
     private String productInfo;
     private Double discount;
     private String avgRating;
-
-
 
     public String getProductId() {
         return productId;
