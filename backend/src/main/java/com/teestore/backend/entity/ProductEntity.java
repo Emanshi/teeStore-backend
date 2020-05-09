@@ -3,22 +3,34 @@ package com.teestore.backend.entity;
 import com.teestore.backend.enums.Category;
 import com.teestore.backend.enums.Sex;
 import com.teestore.backend.enums.Size;
+import org.hibernate.annotations.Type;
+import org.hibernate.annotations.TypeDef;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Product")
+@TypeDef(
+        name = "pgsql_enum",
+        typeClass = PostgreSQLEnumType.class
+)
 public class ProductEntity {
     @Id
     private String productId;
     private String productName;
     private Double cost;
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "size_type")
+    @Type(type = "pgsql_enum")
     private Size size;
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "sex_type")
+    @Type(type = "pgsql_enum")
     private Sex sex;
     @Enumerated(EnumType.STRING)
+    @Column(columnDefinition = "category_type")
+    @Type(type = "pgsql_enum")
     private Category category;
     private String productGroup;
     private Integer quantity;
