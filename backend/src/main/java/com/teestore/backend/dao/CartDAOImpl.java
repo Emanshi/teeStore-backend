@@ -15,7 +15,7 @@ import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository(value = "cartService")
+@Repository(value = "cartDAO")
 public class CartDAOImpl implements CartDAO {
 
     @Autowired
