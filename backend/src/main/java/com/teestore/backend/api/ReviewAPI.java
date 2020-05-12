@@ -14,7 +14,7 @@ import java.util.List;
 
 @CrossOrigin
 @RestController
-@RequestMapping(name = "ReviewAPI")
+@RequestMapping("ReviewAPI")
 public class ReviewAPI {
 
     @Autowired
