@@ -39,7 +39,7 @@ public class OrdersAPI {
         }
     }
 
-    @GetMapping("/getOrder")
+    @GetMapping("/getOrderByUserId")
     public ResponseEntity<List<Order>> getOrdersByUserId (@RequestParam String userId) throws Exception {
         try {
             List<Order> res = ordersService.getOrdersByUserId(userId);
