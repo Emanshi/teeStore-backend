@@ -9,11 +9,13 @@ import com.teestore.backend.service.OrdersService;
 import com.teestore.backend.service.ProductService;
 import com.teestore.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
+@Repository(value = "cartDAO")
 public class CartDAOImpl implements CartDAO {
 
     @Autowired

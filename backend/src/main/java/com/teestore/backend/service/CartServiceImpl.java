@@ -3,7 +3,11 @@ package com.teestore.backend.service;
 import com.teestore.backend.dao.CartDAO;
 import com.teestore.backend.model.Cart;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+@Service(value = "cartService")
+@Transactional
 public class CartServiceImpl implements CartService {
 
     @Autowired
