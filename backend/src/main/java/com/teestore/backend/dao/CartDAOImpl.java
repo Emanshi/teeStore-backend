@@ -5,6 +5,7 @@ import com.teestore.backend.entity.UserEntity;
 import com.teestore.backend.model.Cart;
 import com.teestore.backend.model.Product;
 import com.teestore.backend.model.User;
+import com.teestore.backend.service.OrdersService;
 import com.teestore.backend.service.ProductService;
 import com.teestore.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,7 +26,7 @@ public class CartDAOImpl implements CartDAO {
     private ProductService productDAO;
 
     @Autowired
-    private OrdersDAO ordersDAO;
+    private OrdersService ordersDAO;
 
     @Override
     public String addCart(Cart cart) throws Exception {
