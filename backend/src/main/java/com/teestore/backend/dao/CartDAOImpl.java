@@ -15,20 +15,20 @@ import javax.persistence.EntityManager;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository(value = "cartDAO")
+@Repository(value = "cartService")
 public class CartDAOImpl implements CartDAO {
 
     @Autowired
     private EntityManager entityManager;
 
     @Autowired
-    private UserService userDAO;
+    private UserService userService;
 
     @Autowired
-    private ProductService productDAO;
+    private ProductService productService;
 
     @Autowired
-    private OrdersService ordersDAO;
+    private OrdersService ordersService;
 
     @Override
     public String addCart(Cart cart) throws Exception {
@@ -92,7 +92,7 @@ public class CartDAOImpl implements CartDAO {
         List<Product> products = null;
         List<Integer> qty = null;
         if (entity != null) {
-            User user = userDAO.getUser(entity.getUser().getUserId());
+            User user = userService.getUser(entity.getUser().getUserId());
             if (user != null) {
                 cart = new Cart();
                 cart.setTotalCost(entity.getTotalCost());
@@ -104,7 +104,7 @@ public class CartDAOImpl implements CartDAO {
                     products = new ArrayList<>();
                     qty = new ArrayList<>();
                     for (String id:ids) {
-                        Product p = productDAO.getProductById(id);
+                        Product p = productService.getProductById(id);
                         products.add(p);
                     }
                     for (String q:qs) {
@@ -122,6 +122,6 @@ public class CartDAOImpl implements CartDAO {
     @Override
     public String buyNow(String cartId) throws Exception {
         Cart cart = getCart(cartId);
-        return ordersDAO.buyNow(cart);
+        return ordersService.buyNow(cart);
     }
 }
