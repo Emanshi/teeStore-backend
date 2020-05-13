@@ -280,10 +280,10 @@ insert into Review (review_id,review_title,review_body,ratings,rating_helpful,re
 insert into Review (review_id,review_title,review_body,ratings,rating_helpful,review_date,user_user_id,product_product_id) VALUES('R1099' ,'Not appealing','an ordinary product not so appealing','TWO',1, '2020-3-2'::timestamp, 'U1008','P10068');
 insert into Review (review_id,review_title,review_body,ratings,rating_helpful,review_date,user_user_id,product_product_id) VALUES('R1100' ,'Extremely bad','got a defective one','ONE',0, '2020-3-2'::timestamp, 'U1006','P10068');
 
-insert into Contact VALUES('C101' ,'willsmit@gmail.com', '7329837629' ,'Nice Website','good products satisfied',null);
-insert into Contact VALUES('C102' ,'ivan@hotmail.com' , '6373838291', 'less varities','less products to chose from',null);
-insert into Contact VALUES('C103' ,'tony@stark.com', '8875632142', 'Quality is awesome' ,'will buy again', 'U1002');
-insert into Contact VALUES('C104' ,'banner@Uv.com' ,'8882039476','want more varities','in different colors and different styles','U1004');
+insert into Contact (contact_id,contact_email,phone_no,subject,message,user_id) VALUES('C101' ,'willsmit@gmail.com', '7329837629' ,'Nice Website','good products satisfied',null);
+insert into Contact (contact_id,contact_email,phone_no,subject,message,user_id) VALUES('C102' ,'ivan@hotmail.com' , '6373838291', 'less varities','less products to chose from',null);
+insert into Contact (contact_id,contact_email,phone_no,subject,message,user_id) VALUES('C103' ,'tony@stark.com', '8875632142', 'Quality is awesome' ,'will buy again', 'U1002');
+insert into Contact (contact_id,contact_email,phone_no,subject,message,user_id) VALUES('C104' ,'banner@Uv.com' ,'8882039476','want more varities','in different colors and different styles','U1004');
 
 select * from users;
 select * from Address;

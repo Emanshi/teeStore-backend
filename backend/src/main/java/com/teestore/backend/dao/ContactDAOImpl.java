@@ -56,14 +56,10 @@ public class ContactDAOImpl implements ContactDAO {
         entity.setPhoneNo(contact.getPhoneNo());
         entity.setSubject(contact.getSubject());
 
-        UserEntity u = null;
-
         if (contact.getUser() != null) {
-            u = new UserEntity();
-            u.setUserId(contact.getUser().getUserId());
+            UserEntity u = entityManager.find(UserEntity.class, contact.getUser().getUserId());
+            entity.setUser(u);
         }
-
-        entity.setUser(u);
 
         entityManager.persist(entity);
 
