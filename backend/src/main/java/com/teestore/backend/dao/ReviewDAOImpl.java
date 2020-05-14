@@ -52,28 +52,6 @@ public class ReviewDAOImpl implements ReviewDAO{
                 User user =new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
-//                user.setPassword(userEntity.getPassword());
-//                user.setDateOfBirth(userEntity.getDateOfBirth());
-//                user.setContactNumber(userEntity.getContactNumber());
-//
-//                List<AddressEntity> addressEntityList=userEntity.getAddresses();
-//                List<Address> addressList=null;
-//
-//                if(addressEntityList!=null && !addressEntityList.isEmpty()){
-//                    addressList=new ArrayList<>();
-//
-//                    for(AddressEntity addressEntity: addressEntityList){
-//                        Address address=new Address();
-//                        address.setAddressId(addressEntity.getAddressId());
-//                        address.setStreet(addressEntity.getStreet());
-//                        address.setCity(addressEntity.getCity());
-//                        address.setState(addressEntity.getState());
-//                        address.setPinCode(addressEntity.getPinCode());
-//                        addressList.add(address);
-//                    }
-//                }
-//
-//                user.setAddresses(addressList);
                 review.setUser(user);
 
                 ProductEntity productEntity= reviewEntity.getProduct();
@@ -83,23 +61,12 @@ public class ReviewDAOImpl implements ReviewDAO{
 
                 Product product =new Product();
                 product.setProductId(productEntity.getProductId());
-//                product.setProductInfo(productEntity.getProductInfo());
-//                product.setProductGroup(productEntity.getProductGroup());
-//                product.setDiscount(productEntity.getDiscount());
-//                product.setSize(productEntity.getSize());
-//                product.setDateOfAddition(productEntity.getDateOfAddition());
-//                product.setAvgRating(productEntity.getAvgRating());
-//                product.setSex(productEntity.getSex());
-//                product.setCategory(productEntity.getCategory());
-//                product.setCost(productEntity.getCost());
                 product.setProductName(productEntity.getProductName());
-//                product.setQuantity(productEntity.getQuantity());
 
                 review.setProduct(product);
 
                 reviewList.add(review);
             }
-
         }
         return reviewList;
     }
@@ -133,28 +100,6 @@ public class ReviewDAOImpl implements ReviewDAO{
                 User user =new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
-//                user.setPassword(userEntity.getPassword());
-//                user.setDateOfBirth(userEntity.getDateOfBirth());
-//                user.setContactNumber(userEntity.getContactNumber());
-//
-//                List<AddressEntity> addressEntityList=userEntity.getAddresses();
-//                List<Address> addressList=null;
-//
-//                if(addressEntityList!=null && !addressEntityList.isEmpty()){
-//                    addressList=new ArrayList<>();
-//
-//                    for(AddressEntity addressEntity: addressEntityList){
-//                        Address address=new Address();
-//                        address.setAddressId(addressEntity.getAddressId());
-//                        address.setStreet(addressEntity.getStreet());
-//                        address.setCity(addressEntity.getCity());
-//                        address.setState(addressEntity.getState());
-//                        address.setPinCode(addressEntity.getPinCode());
-//                        addressList.add(address);
-//                    }
-//                }
-//
-//                user.setAddresses(addressList);
                 review.setUser(user);
 
                 ProductEntity productEntity= reviewEntity.getProduct();
@@ -164,26 +109,14 @@ public class ReviewDAOImpl implements ReviewDAO{
 
                 Product product =new Product();
                 product.setProductId(productEntity.getProductId());
-//                product.setProductInfo(productEntity.getProductInfo());
-//                product.setProductGroup(productEntity.getProductGroup());
-//                product.setDiscount(productEntity.getDiscount());
-//                product.setSize(productEntity.getSize());
-//                product.setDateOfAddition(productEntity.getDateOfAddition());
-//                product.setAvgRating(productEntity.getAvgRating());
-//                product.setSex(productEntity.getSex());
-//                product.setCategory(productEntity.getCategory());
-//                product.setCost(productEntity.getCost());
                 product.setProductName(productEntity.getProductName());
-//                product.setQuantity(productEntity.getQuantity());
 
                 review.setProduct(product);
 
                 reviewList.add(review);
             }
-
         }
         return reviewList;
-
     }
 
     @Override
@@ -374,48 +307,11 @@ public class ReviewDAOImpl implements ReviewDAO{
                 User user =new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
-//                user.setPassword(userEntity.getPassword());
-//                user.setDateOfBirth(userEntity.getDateOfBirth());
-//                user.setContactNumber(userEntity.getContactNumber());
 
-//                List<AddressEntity> addressEntityList=userEntity.getAddresses();
-//                List<Address> addressList=null;
-//
-//                if(addressEntityList!=null && !addressEntityList.isEmpty()){
-//                    addressList=new ArrayList<>();
-//
-//                    for(AddressEntity addressEntity: addressEntityList){
-//                        Address address=new Address();
-//                        address.setAddressId(addressEntity.getAddressId());
-//                        address.setStreet(addressEntity.getStreet());
-//                        address.setCity(addressEntity.getCity());
-//                        address.setState(addressEntity.getState());
-//                        address.setPinCode(addressEntity.getPinCode());
-//                        addressList.add(address);
-//                    }
-//                }
-//
-//                user.setAddresses(addressList);
                 review.setUser(user);
 
-//                ProductEntity productEntity= reviewEntity.getProduct();
-//
-//                if(productEntity== null)
-//                    return null;
-//
                 Product product =new Product();
                 product.setProductId(productId);
-//                product.setProductInfo(productEntity.getProductInfo());
-//                product.setProductGroup(productEntity.getProductGroup());
-//                product.setDiscount(productEntity.getDiscount());
-//                product.setSize(productEntity.getSize());
-//                product.setDateOfAddition(productEntity.getDateOfAddition());
-//                product.setAvgRating(productEntity.getAvgRating());
-//                product.setSex(productEntity.getSex());
-//                product.setCategory(productEntity.getCategory());
-//                product.setCost(productEntity.getCost());
-//                product.setProductName(productEntity.getProductName());
-//                product.setQuantity(productEntity.getQuantity());
 
                 review.setProduct(product);
 

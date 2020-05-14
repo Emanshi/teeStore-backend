@@ -219,8 +219,40 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductByDiscount(Category category) throws Exception {
 
-        Query query= entityManager.createQuery(" select p from ProductEntity p where p.category =:category and p.discount>0.0");
+        Query query= entityManager.createQuery("select p from ProductEntity p where p.category =:category and p.discount>0.0");
         query.setParameter("category", category);
+
+        List<ProductEntity> productEntityList= query.getResultList();
+        List<Product> productList= null;
+
+        if(productEntityList!=null && !productEntityList.isEmpty()){
+
+            productList=new ArrayList<>();
+            for(ProductEntity productEntity:productEntityList){
+                Product product=new Product();
+                product.setProductId(productEntity.getProductId());
+                product.setProductName(productEntity.getProductName());
+                product.setCategory(productEntity.getCategory());
+                product.setCost(productEntity.getCost());
+                product.setQuantity(productEntity.getQuantity());
+                product.setDateOfAddition(productEntity.getDateOfAddition());
+                product.setSex(productEntity.getSex());
+                product.setSize(productEntity.getSize());
+                product.setProductGroup(productEntity.getProductGroup());
+                product.setProductInfo(productEntity.getProductInfo());
+                product.setAvgRating(productEntity.getAvgRating());
+                product.setDiscount(productEntity.getDiscount());
+
+                productList.add(product);
+            }
+        }
+        return productList;
+    }
+
+    @Override
+    public List<Product> getProductBySearchQuery(String search) throws Exception {
+        Query query= entityManager.createQuery("select p from ProductEntity p where p.productName like :search or p.productInfo like :search");
+        query.setParameter("search", "%"+search+"%");
 
         List<ProductEntity> productEntityList= query.getResultList();
         List<Product> productList= null;

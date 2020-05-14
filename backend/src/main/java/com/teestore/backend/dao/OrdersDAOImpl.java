@@ -1,6 +1,7 @@
 package com.teestore.backend.dao;
 
 import com.teestore.backend.entity.OrdersEntity;
+import com.teestore.backend.entity.ProductEntity;
 import com.teestore.backend.entity.UserEntity;
 import com.teestore.backend.model.Cart;
 import com.teestore.backend.model.Order;
@@ -35,6 +36,11 @@ public class OrdersDAOImpl implements OrdersDAO {
         if (cart.getProducts() != null && !cart.getProducts().isEmpty()) {
             StringBuilder products = new StringBuilder();
             for (Product p:cart.getProducts()) {
+                ProductEntity pe = entityManager.find(ProductEntity.class, p.getProductId());
+                if (pe.getQuantity() < p.getQuantity())
+                    return null;
+                else
+                    pe.setQuantity(pe.getQuantity() - p.getQuantity());
                 products.append(p.getProductId()).append(",");
             }
             StringBuilder qty = new StringBuilder();

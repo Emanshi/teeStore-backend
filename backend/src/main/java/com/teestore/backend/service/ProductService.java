@@ -14,4 +14,5 @@ public interface ProductService {
     List<Product> getAllProducts() throws Exception;
     List<Product> getNewArrivals() throws Exception;
     List<Product> getProductByDiscount(Category category) throws Exception;
+    List<Product> getProductBySearch(String search) throws Exception;
 }

@@ -91,4 +91,12 @@ public class ProductAPI {
         }
     }
 
+    @GetMapping(value = "/getProducts")
+    public ResponseEntity<List<Product>> getProductBySearch(@RequestParam String search) throws Exception {
+        try{
+            return new ResponseEntity<>(productService.getProductBySearch(search), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
 }
