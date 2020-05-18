@@ -18,7 +18,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public Contact getMessage(String contactId) throws Exception {
-        if (contactId == null)
+        if (contactId == null || contactId.equals(""))
             throw new Exception("ContactService.INVALID_CONTACT_ID");
 
         Contact contact = contactDAO.getMessage(contactId);
@@ -44,7 +44,7 @@ public class ContactServiceImpl implements ContactService {
 
     @Override
     public List<Contact> getMessagesOfUser(String userId) throws Exception {
-        if (userId == null)
+        if (userId == null || userId.equals(""))
             throw new Exception("ContactService.INVALID_USER_ID");
 
         List<Contact> contacts = contactDAO.getMessagesOfUser(userId);

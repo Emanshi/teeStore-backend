@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -150,7 +151,7 @@ public class ReviewDAOImpl implements ReviewDAO{
         reviewEntity.setProduct(productEntity);
         reviewEntity.setReviewTitle(review.getReviewTitle());
         reviewEntity.setReviewBody(review.getReviewBody());
-        reviewEntity.setReviewDate(review.getReviewDate());
+        reviewEntity.setReviewDate(LocalDateTime.now());
         reviewEntity.setRatingHelpful(0);
         reviewEntity.setRatings(review.getRatings());
 
@@ -169,10 +170,10 @@ public class ReviewDAOImpl implements ReviewDAO{
 
         String avgRating= productEntity.getAvgRating();
         String[] ratingParameter = avgRating.split("\\.",2);
-        Integer noOfRatings= Integer.parseInt(ratingParameter[0]);
-        Double avgRatingInNo= Math.round(((Double.parseDouble(ratingParameter[1])*noOfRatings + ratingInNo)/(noOfRatings+1))*10)/10.0 ;
+        int noOfRatings= Integer.parseInt(ratingParameter[0]);
+        double avgRatingInNo= Math.round(((Double.parseDouble(ratingParameter[1])*noOfRatings + ratingInNo)/(noOfRatings+1))*10)/10.0 ;
         noOfRatings+=1;
-        String newAvgRating= noOfRatings.toString()+"." + avgRatingInNo.toString();
+        String newAvgRating= Integer.toString(noOfRatings) +"." + Double.toString(avgRatingInNo);
 
         productEntity.setAvgRating(newAvgRating);
 

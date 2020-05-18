@@ -52,6 +52,18 @@ public class ReviewDAOImplTest {
     }
 
     @Test
+    public void getReviewByRatingValidTest () throws Exception {
+        List<Review> contacts = reviewDAO.getReviewByRating("P10001", Rating.FOUR);
+        Assert.assertNotNull(contacts);
+    }
+
+    @Test
+    public void getReviewByRatingInvalidTest () throws Exception {
+        List<Review> contacts = reviewDAO.getReviewByRating("P10000", Rating.FOUR);
+        Assert.assertNull(contacts);
+    }
+
+    @Test
     public void deleteReviewValidTest () throws Exception {
         String contacts = reviewDAO.deleteReview("R1001");
         Assert.assertTrue(contacts.matches("[R][0-9]{4}"));

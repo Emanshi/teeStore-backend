@@ -19,7 +19,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public List<Review> getReviewByUserId(String userId) throws Exception {
 
-        if(userId == null)
+        if(userId == null || userId.equals(""))
             throw new Exception("ReviewService.INVALID_USER_ID");
 
         List<Review> reviewList = reviewDAO.getReviewByUserId(userId);
@@ -33,7 +33,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public List<Review> getReviewByProductId(String productId) throws Exception {
 
-        if(productId == null)
+        if(productId == null || productId.equals(""))
             throw new Exception("ReviewService.INVALID_PRODUCT_ID");
 
         List<Review> reviewList= reviewDAO.getReviewByProductId(productId);
@@ -61,7 +61,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public String editReview(String reviewId, Review review) throws Exception {
 
-        if(reviewId== null || review == null)
+        if(reviewId== null || review == null || reviewId.equals(""))
             throw new Exception("ReviewService.INVALID_REVIEW");
 
         String rId= reviewDAO.editReview(reviewId, review);
@@ -75,7 +75,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public String deleteReview(String reviewId) throws Exception {
 
-        if(reviewId == null)
+        if(reviewId == null || reviewId.equals(""))
             throw new Exception("ReviewService.INVALID_REVIEW_ID");
 
         String rId= reviewDAO.deleteReview(reviewId);
@@ -89,13 +89,13 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public Integer reviewHelpful(String reviewId, String userId) throws Exception {
 
-        if(reviewId == null || userId == null)
+        if(reviewId == null || userId == null || reviewId.equals("") || userId.equals(""))
             throw new Exception("ReviewService.INVALID_REVIEW_ID");
 
         Integer noOfHelpfulLikes= reviewDAO.reviewHelpful(reviewId);
 
         if(noOfHelpfulLikes == null)
-            throw new Exception("ReviewService.REVIEW_NOT_DELETED");
+            throw new Exception("ReviewService.REVIEW_NOT_HELPFUL");
 
         return noOfHelpfulLikes;
     }
@@ -103,7 +103,7 @@ public class ReviewServiceImpl implements ReviewService{
     @Override
     public List<Review> getReviewByRating(String productId, Rating rating) throws Exception {
 
-        if(productId == null || rating == null)
+        if(productId == null || rating == null || productId.equals(""))
             throw new Exception("ReviewService.INVALID_PRODUCT_ID");
 
         List<Review> reviewList= reviewDAO.getReviewByRating(productId, rating);

@@ -27,7 +27,7 @@ public class ContactValidator {
     private static Boolean validateEmail(String email) {
         if (email == null || email.length()>70)
             return false;
-        String reg="^[A-Za-z0-9+_.-]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
+        String reg="^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 
@@ -35,7 +35,7 @@ public class ContactValidator {
         if (name == null || name.length()>50)
             return false;
         if(!name.equals("")) {
-            String reg="([A-Za-z]{2,})+( [A-Za-z]{2,}){0,15}";
+            String reg="([A-Za-z]+)+( [A-Za-z]+){0,15}";
             return name.matches(reg);
         }
         return false;

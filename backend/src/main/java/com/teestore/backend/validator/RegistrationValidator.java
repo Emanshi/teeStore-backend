@@ -45,7 +45,7 @@ public class RegistrationValidator {
     private static Boolean validateEmail(String email) {
         if (email == null || email.length()>70)
             return false;
-        String reg="^[A-Za-z0-9+_.-]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
+        String reg="^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 

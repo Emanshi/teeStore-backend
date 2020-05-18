@@ -20,7 +20,7 @@ public class CartIdGenerator implements IdentifierGenerator {
         try {
             Statement statement=connection.createStatement();
 
-            ResultSet set=statement.executeQuery("select count(cart_id) as Id from Carts");
+            ResultSet set=statement.executeQuery("select count(cart_id) as Id from Cart");
 
             if(set.next())
             {

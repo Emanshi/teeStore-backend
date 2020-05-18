@@ -25,7 +25,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public String addProductToCart(String cartId, String productId) throws Exception {
-        if (cartId == null)
+        if (cartId == null || productId == null || cartId.equals("") || productId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
         String res = cartDAO.addProductToCart(cartId, productId);
         if (res == null)
@@ -35,7 +35,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public String removeProductFromCart(String cartId, String productId) throws Exception {
-        if (cartId == null)
+        if (cartId == null || productId == null || cartId.equals("") || productId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
         String res = cartDAO.removeProductFromCart(cartId, productId);
         if (res == null)
@@ -45,7 +45,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public String clearCart(String cartId) throws Exception {
-        if (cartId == null)
+        if (cartId == null || cartId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
         String res = cartDAO.clearCart(cartId);
         if (res == null)
@@ -55,7 +55,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public Cart getCart(String cartId) throws Exception {
-        if (cartId == null)
+        if (cartId == null || cartId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
         Cart res = cartDAO.getCart(cartId);
         if (res == null)
@@ -65,7 +65,7 @@ public class CartServiceImpl implements CartService {
 
     @Override
     public String buyNow(String cartId) throws Exception {
-        if (cartId == null)
+        if (cartId == null || cartId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
         String res = cartDAO.buyNow(cartId);
         if (res == null)
