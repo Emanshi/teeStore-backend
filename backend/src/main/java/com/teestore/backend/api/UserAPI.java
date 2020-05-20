@@ -37,13 +37,12 @@ public class UserAPI {
         try{
             return new ResponseEntity<User>(userService.loginUser(user), HttpStatus.OK);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,e.getMessage());
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,environment.getProperty(e.getMessage()));
         }
     }
 
     @RequestMapping(value = "/getUser/{userId}" , method= RequestMethod.GET)
     public ResponseEntity<User> getUser(@PathVariable String userId) throws  Exception{
-
         try{
             return new ResponseEntity<User>(userService.getUser(userId),HttpStatus.OK);
         }catch(Exception e){
