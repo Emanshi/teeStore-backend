@@ -32,7 +32,7 @@ public class UserAPI {
     }
 
     @RequestMapping(value = "/userLogin" , method= RequestMethod.POST)
-    public ResponseEntity<User> authenticateUser(@RequestBody User user) throws Exception{
+    public ResponseEntity<User> authenticateUser(@RequestBody User user) {
 
         try{
             return new ResponseEntity<User>(userService.loginUser(user), HttpStatus.OK);
