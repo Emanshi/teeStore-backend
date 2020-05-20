@@ -37,6 +37,7 @@ public class UserAPI {
         try{
             return new ResponseEntity<User>(userService.loginUser(user), HttpStatus.OK);
         } catch (Exception e) {
+            System.out.println(environment.getProperty(e.getMessage())+"---------s");
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Not possible",e);
         }
     }
