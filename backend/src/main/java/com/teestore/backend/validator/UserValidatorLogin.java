@@ -6,12 +6,14 @@ public class UserValidatorLogin {
 
     public static void validateUserForLogin(User user) throws Exception {
 
+        if(user.getEmailId() == null && user.getContactNumber() == null)
+            throw new Exception("UserValidatorLogin.INVALID_USER");
         if (user.getEmailId() == null && !validateContactNumber(user.getContactNumber()))
-            throw new Exception("UserValidatorByContactNo.INVALID_CONTACT_NUMBER_FORMAT");
+            throw new Exception("UserValidatorLogin.INVALID_CONTACT_NUMBER_FORMAT");
         if (user.getContactNumber() == null && !validateEmail(user.getEmailId()))
-            throw new Exception("UserValidatorByEmailId.INVALID_EMAIL_ID_FORMAT");
+            throw new Exception("UserValidatorLogin.INVALID_EMAIL_ID_FORMAT");
         if (!validatePassword(user.getPassword()))
-            throw new Exception("UserValidatorByContactNo.INVALID_PASSWORD_FORMAT");
+            throw new Exception("UserValidatorLogin.INVALID_PASSWORD_FORMAT");
     }
 
     private static Boolean validatePassword(String password) {
@@ -37,7 +39,7 @@ public class UserValidatorLogin {
     private static Boolean validateEmail(String email) {
         if (email == null || email.length()>70)
             return false;
-        String reg="^[A-Za-z0-9+_.-]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
+        String reg="^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 }

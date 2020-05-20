@@ -5,9 +5,9 @@ import com.teestore.backend.model.Review;
 public class ReviewValidator {
 
     public static void validateReview (Review review) throws Exception {
-        if (!validateTitle(review.getReviewTitle()))
+        if (validateTitle(review.getReviewTitle()))
             throw new Exception("ReviewValidator.INVALID_TITLE");
-        if (!validateBody(review.getReviewBody()))
+        if (validateBody(review.getReviewBody()))
             throw new Exception("ReviewValidator.INVALID_BODY");
     }
 
