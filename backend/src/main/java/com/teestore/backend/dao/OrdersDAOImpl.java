@@ -14,6 +14,7 @@ import org.springframework.stereotype.Repository;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -55,6 +56,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                 entity.setProductIds(products.toString());
                 entity.setQuantities(qty.toString());
                 entity.setTotalCost(cart.getTotalCost());
+                entity.setTimeOfOrder(LocalDateTime.now());
                 entity.setUser(user);
 
                 entityManager.persist(entity);
@@ -94,6 +96,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                 }
                 orders.setQuantities(qty);
                 orders.setProducts(products);
+                orders.setTimeOfOrder(entity.getTimeOfOrder());
                 orders.setOrderId(entity.getOrderId());
             }
         }
@@ -136,6 +139,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                         }
                         order.setQuantities(qty);
                         order.setProducts(products);
+                        order.setTimeOfOrder(entity.getTimeOfOrder());
                         order.setOrderId(entity.getOrderId());
                     }
                 }

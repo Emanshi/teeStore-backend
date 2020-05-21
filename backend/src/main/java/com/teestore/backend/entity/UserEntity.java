@@ -3,7 +3,7 @@ package com.teestore.backend.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 @Entity
@@ -17,7 +17,7 @@ public class UserEntity {
     private String emailId;
     private String contactNumber;
     private String password;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private List<AddressEntity> addresses;
@@ -62,11 +62,11 @@ public class UserEntity {
         this.password = password;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 }

@@ -3,6 +3,7 @@ package com.teestore.backend.entity;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
+import java.time.LocalDateTime;
 
 @Entity
 @Table(name = "Orders")
@@ -18,6 +19,7 @@ public class OrdersEntity {
     @Column(length = 1000)
     private String quantities;
     private Double totalCost;
+    private LocalDateTime timeOfOrder;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity user;
@@ -48,6 +50,14 @@ public class OrdersEntity {
 
     public Double getTotalCost() {
         return totalCost;
+    }
+
+    public LocalDateTime getTimeOfOrder() {
+        return timeOfOrder;
+    }
+
+    public void setTimeOfOrder(LocalDateTime timeOfOrder) {
+        this.timeOfOrder = timeOfOrder;
     }
 
     public void setTotalCost(Double totalCost) {

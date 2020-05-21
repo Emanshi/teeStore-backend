@@ -7,6 +7,7 @@ import org.junit.runner.RunWith;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -20,7 +21,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         RegistrationValidator.validateRegistration(u);
     }
 
@@ -31,7 +32,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User1");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_USERNAME_FORMAT", e.getMessage());
@@ -44,7 +45,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User Name Test");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_USERNAME_FORMAT", e.getMessage());
@@ -57,7 +58,7 @@ public class RegistrationValidatorTest {
         u.setUserName("S User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_USERNAME_FORMAT", e.getMessage());
@@ -70,7 +71,7 @@ public class RegistrationValidatorTest {
         u.setUserName(null);
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_USERNAME_FORMAT", e.getMessage());
@@ -83,7 +84,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_PASSWORD_FORMAT", e.getMessage());
@@ -96,7 +97,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_PASSWORD_FORMAT", e.getMessage());
@@ -109,7 +110,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_PASSWORD_FORMAT", e.getMessage());
@@ -122,7 +123,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_PASSWORD_FORMAT", e.getMessage());
@@ -135,7 +136,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7894561230");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_PASSWORD_FORMAT", e.getMessage());
@@ -148,7 +149,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("1234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_CONTACT_NUMBER_FORMAT", e.getMessage());
@@ -161,7 +162,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("734567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_CONTACT_NUMBER_FORMAT", e.getMessage());
@@ -174,7 +175,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber(null);
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_CONTACT_NUMBER_FORMAT", e.getMessage());
@@ -187,7 +188,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.emailweb.com");
         u.setContactNumber("7234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_EMAIL_ID_FORMAT", e.getMessage());
@@ -200,7 +201,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@webcom");
         u.setContactNumber("7234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_EMAIL_ID_FORMAT", e.getMessage());
@@ -213,7 +214,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId(".sample.email@web.com");
         u.setContactNumber("7234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_EMAIL_ID_FORMAT", e.getMessage());
@@ -226,7 +227,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample+email@web.com");
         u.setContactNumber("7234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_EMAIL_ID_FORMAT", e.getMessage());
@@ -239,7 +240,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.fffvxsrvfbhuibjbbhhvhbhhhgghhhkkvhhhohhhohhuhuvyviohhkemail@web.com");
         u.setContactNumber("7234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(25));
+        u.setDateOfBirth(LocalDate.now().minusYears(25));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_EMAIL_ID_FORMAT", e.getMessage());
@@ -252,7 +253,7 @@ public class RegistrationValidatorTest {
         u.setUserName("Sample User");
         u.setEmailId("sample.email@web.com");
         u.setContactNumber("7234567892");
-        u.setDateOfBirth(LocalDateTime.now().minusYears(5));
+        u.setDateOfBirth(LocalDate.now().minusYears(5));
         Exception e = Assert.assertThrows(Exception.class,
                 () -> RegistrationValidator.validateRegistration(u));
         Assert.assertEquals("RegistrationValidator.INVALID_DATE_OF_BIRTH_FORMAT", e.getMessage());

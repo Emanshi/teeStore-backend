@@ -1,6 +1,6 @@
 package com.teestore.backend.model;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 public class User {
@@ -9,7 +9,7 @@ public class User {
     private String emailId;
     private String contactNumber;
     private String password;
-    private LocalDateTime dateOfBirth;
+    private LocalDate dateOfBirth;
     private List<Address> addresses;
 
     public String getUserId() {
@@ -52,11 +52,11 @@ public class User {
         this.password = password;
     }
 
-    public LocalDateTime getDateOfBirth() {
+    public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    public void setDateOfBirth(LocalDateTime dateOfBirth) {
+    public void setDateOfBirth(LocalDate dateOfBirth) {
         this.dateOfBirth = dateOfBirth;
     }
 

@@ -59,10 +59,9 @@ public class RegistrationValidator {
         return false;
     }
 
-    private static Boolean validateDateOfBirth(LocalDateTime dateOfBirth) {
+    private static Boolean validateDateOfBirth(LocalDate dateOfBirth) {
         if(dateOfBirth == null)
             return false;
-        LocalDate dob=dateOfBirth.toLocalDate();
-        return dob.until(LocalDate.now(), ChronoUnit.YEARS) > 16;
+        return dateOfBirth.until(LocalDate.now(), ChronoUnit.YEARS) > 16;
     }
 }

@@ -1,5 +1,6 @@
 package com.teestore.backend.model;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 public class Order {
@@ -8,7 +9,16 @@ public class Order {
     private List<Product> products;
     private List<Integer> quantities;
     private Double totalCost;
+    private LocalDateTime timeOfOrder;
     private User user;
+
+    public LocalDateTime getTimeOfOrder() {
+        return timeOfOrder;
+    }
+
+    public void setTimeOfOrder(LocalDateTime timeOfOrder) {
+        this.timeOfOrder = timeOfOrder;
+    }
 
     public String getOrderId() {
         return orderId;
