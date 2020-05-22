@@ -29,7 +29,7 @@ public class UserDAOImpl implements UserDAO{
 
         List<UserEntity> result1= query1.getResultList();
         List<UserEntity> result2= query2.getResultList();
-        if((result1!=null && !result1.isEmpty()) && (result2!=null && !result2.isEmpty()))
+        if((result1!=null && !result1.isEmpty()) || (result2!=null && !result2.isEmpty()))
             return null;
 
         UserEntity userEntity=new UserEntity();

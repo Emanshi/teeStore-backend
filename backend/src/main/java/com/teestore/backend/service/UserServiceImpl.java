@@ -20,6 +20,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User addUser(User user) throws Exception {
+
+        if(user == null)
+            throw new Exception("UserService.INVALID_USER");
+
         RegistrationValidator.validateRegistration(user);
         user.setPassword(HashingUtility.getHashValue(user.getPassword()));
         User u=userDAO.addUser(user);
@@ -30,6 +34,10 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public User loginUser(User user) throws Exception {
+
+        if(user == null)
+            throw new Exception("UserService.INVALID_USER");
+
         UserValidatorLogin.validateUserForLogin(user);
         User userFromDB=null;
 
@@ -48,15 +56,22 @@ public class UserServiceImpl implements UserService{
 
             if (hashedPassword.equals(passwordFromDB)) {
                 userFromDB.setPassword(null);
+                return userFromDB;
             } else {
                 throw new Exception("UserService.INVALID_CREDENTIALS");
             }
+        }else{
+            throw new Exception("UserService.INVALID_CREDENTIALS");
         }
-        return userFromDB;
+
     }
 
     @Override
     public User getUser(String userId) throws Exception {
+
+        if(userId == null || userId.equals("")){
+            throw new Exception("UserService.Invalid_User");
+        }
 
         User userFromDB=userDAO.getUser(userId);
 
@@ -69,7 +84,7 @@ public class UserServiceImpl implements UserService{
     @Override
     public String editUser(String userId, User user) throws Exception {
 
-        if(userId==null || user==null)
+        if(userId==null || user==null || userId.equals(""))
             throw new Exception("UserService.INVALID_USER");
 
         if(user.getPassword() !=null)
@@ -78,7 +93,7 @@ public class UserServiceImpl implements UserService{
         String uId=userDAO.editUser(userId, user);
 
         if(uId==null)
-            throw new Exception("UserService.USER_NOT_FOUND");
+            throw new Exception("UserService.UNABLE_TO_EDIT_USER");
 
         return uId;
     }
@@ -86,8 +101,8 @@ public class UserServiceImpl implements UserService{
     @Override
     public String addAddress(String userId, Address address) throws Exception {
 
-        if(userId==null)
-            throw new Exception("UserService.INVALID_USER");
+        if(userId==null || userId.equals(""))
+            throw new Exception("UserService.INVALID_USER_ID");
 
         if(address==null)
             throw new Exception("UserService.INVALID_ADDRESS");
@@ -95,7 +110,7 @@ public class UserServiceImpl implements UserService{
         String aId=userDAO.addAddress(userId,address);
 
         if(aId==null)
-            throw new Exception("UserService.INVALID_USER");
+            throw new Exception("UserService.UNABLE_TO_ADD_ADDRESS");
 
         return aId;
     }
@@ -103,18 +118,17 @@ public class UserServiceImpl implements UserService{
     @Override
     public String deleteAddress(String userId, String addressId) throws Exception {
 
-        if(userId==null)
-            throw new Exception("UserService.INVALID_USER");
+        if(userId==null || userId.equals(""))
+            throw new Exception("UserService.INVALID_USER_ID");
 
-        if(addressId==null)
+        if(addressId==null || addressId.equals(""))
             throw new Exception("UserService.INVALID_ADDRESS_ID");
 
         String aId=userDAO.deleteAddress(userId,addressId);
 
         if(aId==null)
-            throw new Exception("UserService.INVALID_USER");
+            throw new Exception("UserService.UNABLE_TO_DELETE_ADDRESS");
 
         return aId;
-
     }
 }

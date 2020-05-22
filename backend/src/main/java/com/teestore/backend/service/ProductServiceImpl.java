@@ -21,7 +21,7 @@ public class ProductServiceImpl implements ProductService {
     public Product getProductById(String productId) throws Exception {
 
         if(productId==null)
-            throw new Exception("ProductService.INVALID_PRODUCT");
+            throw new Exception("ProductService.INVALID_PRODUCT_ID");
 
         Product product= productDAO.getProductById(productId);
 
@@ -62,13 +62,13 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductCategoryByPrice(Category category, Boolean reverse) throws Exception {
 
-        if(category ==null)
+        if(category ==null || reverse==null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
 
         List<Product> productList= productDAO.getProductCategoryByPrice(category, reverse);
 
         if(productList == null || productList.isEmpty())
-            throw new Exception("ProductService.INVALID_PRODUCT_LIST_NOT_FOUND");
+            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
     }
@@ -79,7 +79,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList= productDAO.getAllProducts();
 
         if(productList == null || productList.isEmpty())
-            throw new Exception("ProductService.INVALID_PRODUCT_LIST_NOT_FOUND");
+            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
     }
@@ -90,7 +90,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList= productDAO.getNewArrivals();
 
         if(productList == null || productList.isEmpty())
-            throw new Exception("ProductService.INVALID_PRODUCT_LIST_NOT_FOUND");
+            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
     }
@@ -104,7 +104,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList= productDAO.getProductByDiscount(category);
 
         if(productList == null || productList.isEmpty())
-            throw new Exception("ProductService.INVALID_PRODUCT_LIST_NOT_FOUND");
+            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
     }
