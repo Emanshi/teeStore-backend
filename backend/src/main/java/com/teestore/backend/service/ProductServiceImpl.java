@@ -118,7 +118,7 @@ public class ProductServiceImpl implements ProductService {
         List<Product> productList= productDAO.getProductBySearchQuery(search);
 
         if(productList == null || productList.isEmpty())
-            throw new Exception("ProductService.MATCHING_PRODUCT_LIST_NOT_FOUND");
+            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
     }

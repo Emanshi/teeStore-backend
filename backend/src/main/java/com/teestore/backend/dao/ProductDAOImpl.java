@@ -115,11 +115,11 @@ public class ProductDAOImpl implements ProductDAO{
 
         Query query=null;
         if(reverse){
-            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.price desc");
+            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.cost desc");
             query.setParameter("category",category);
         }
         else{
-            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.price asc");
+            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.cost asc");
             query.setParameter("category",category);
         }
 
