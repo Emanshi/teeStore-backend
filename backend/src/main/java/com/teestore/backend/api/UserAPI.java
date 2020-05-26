@@ -22,7 +22,7 @@ public class UserAPI {
     private Environment environment;
 
     @RequestMapping(value = "/userRegister", method= RequestMethod.POST)
-    public ResponseEntity<User> registerUser(@RequestBody User user) throws  Exception{
+    public ResponseEntity<User> registerUser(@RequestBody User user) {
 
         try{
             return new ResponseEntity<User>(userService.addUser(user), HttpStatus.OK);
@@ -37,13 +37,13 @@ public class UserAPI {
         try{
             return new ResponseEntity<User>(userService.loginUser(user), HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(environment.getProperty(e.getMessage())+"---------s");
+            System.out.println(environment.getProperty(e.getMessage()));
             throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Not possible",e);
         }
     }
 
     @RequestMapping(value = "/getUser/{userId}" , method= RequestMethod.GET)
-    public ResponseEntity<User> getUser(@PathVariable String userId) throws  Exception{
+    public ResponseEntity<User> getUser(@PathVariable String userId) {
         try{
             return new ResponseEntity<User>(userService.getUser(userId),HttpStatus.OK);
         }catch(Exception e){
@@ -53,7 +53,7 @@ public class UserAPI {
     }
 
     @RequestMapping(value = "/editUserProfile/{userId}" , method= RequestMethod.POST)
-    public ResponseEntity<String> editUser(@PathVariable String userId,@RequestBody User user) throws  Exception{
+    public ResponseEntity<String> editUser(@PathVariable String userId,@RequestBody User user) {
 
         try{
             return  new ResponseEntity<String>(userService.editUser(userId,user),HttpStatus.OK);
@@ -82,8 +82,8 @@ public class UserAPI {
         }
     }
 
-    @RequestMapping(value = "/deleteAddress/{uId}/{aId}", method= RequestMethod.GET)
-    public ResponseEntity<String> deleteAddress(@PathVariable(value="uId") String userId,@PathVariable(value="aId") String addressId ) throws  Exception{
+    @RequestMapping(value = "/deleteAddress", method= RequestMethod.GET)
+    public ResponseEntity<String> deleteAddress(@RequestParam String userId,@RequestParam String addressId ) {
 
         try{
             return  new ResponseEntity<String>(userService.deleteAddress(userId,addressId),HttpStatus.OK);
