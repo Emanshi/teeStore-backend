@@ -11,5 +11,6 @@ public interface UserDAO {
     User getUser(String userId) throws Exception;
     String editUser(String userId,User user) throws Exception;
     String addAddress(String userId, Address address) throws Exception;
+    String editAddress(String userId, Address address) throws Exception;
     String deleteAddress(String userId,String addressId) throws Exception;
 }

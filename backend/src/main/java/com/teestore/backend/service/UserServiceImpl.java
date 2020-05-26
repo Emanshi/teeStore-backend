@@ -101,6 +101,22 @@ public class UserServiceImpl implements UserService{
     }
 
     @Override
+    public String editAddress(String addressId, Address address) throws Exception {
+        if(addressId==null || addressId.equals(""))
+            throw new Exception("UserService.INVALID_USER_ADDRESS");
+
+        if(address==null)
+            throw new Exception("UserService.INVALID_ADDRESS");
+
+        String aId=userDAO.editAddress(addressId,address);
+
+        if(aId==null)
+            throw new Exception("UserService.ADDRESS_NOT_PERSISTED");
+
+        return aId;
+    }
+
+    @Override
     public String deleteAddress(String userId, String addressId) throws Exception {
 
         if(userId==null)

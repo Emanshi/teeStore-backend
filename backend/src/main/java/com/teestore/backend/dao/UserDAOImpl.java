@@ -218,17 +218,27 @@ public class UserDAOImpl implements UserDAO{
         addressEntity.setState(address.getState());
         addressEntity.setPinCode(address.getPinCode());
 
-//        entityManager.persist(addressEntity);
-//        address.setAddressId(addressEntity.getAddressId());
-//
-//        entityManager.persist(userEntity);
-
-        // Changed code
-
         addressEntityList.add(addressEntity);
         userEntity.setAddresses(addressEntityList);
 
         entityManager.persist(userEntity);
+
+        return addressEntity.getAddressId();
+    }
+
+    @Override
+    public String editAddress(String addressId, Address address) throws Exception {
+        AddressEntity addressEntity=entityManager.find(AddressEntity.class,addressId);
+
+        if(addressEntity==null)
+            return null;
+
+        addressEntity.setStreet(address.getStreet());
+        addressEntity.setCity(address.getCity());
+        addressEntity.setState(address.getState());
+        addressEntity.setPinCode(address.getPinCode());
+
+        entityManager.persist(addressEntity);
 
         return addressEntity.getAddressId();
     }

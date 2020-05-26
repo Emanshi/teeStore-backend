@@ -53,7 +53,7 @@ public class UserAPI {
     }
 
     @RequestMapping(value = "/editUserProfile" , method= RequestMethod.POST)
-    public ResponseEntity<String> editUser(@RequestBody User user) throws  Exception{
+    public ResponseEntity<String> editUser(@RequestBody User user) {
 
         try{
             return  new ResponseEntity<String>(userService.editUser(user.getUserId(),user),HttpStatus.OK);
@@ -63,10 +63,20 @@ public class UserAPI {
     }
 
     @RequestMapping(value = "/addAddress/{userId}" , method=RequestMethod.POST)
-    public ResponseEntity<String> addAddress(@PathVariable String userId, @RequestBody Address address) throws Exception{
+    public ResponseEntity<String> addAddress(@PathVariable String userId, @RequestBody Address address) {
 
         try{
             return  new ResponseEntity<String>(userService.addAddress(userId,address),HttpStatus.OK);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
+        }
+    }
+
+    @RequestMapping(value = "/editAddress/{addressId}" , method=RequestMethod.PUT)
+    public ResponseEntity<String> editAddress(@PathVariable String addressId, @RequestBody Address address) {
+
+        try{
+            return  new ResponseEntity<String>(userService.editAddress(addressId,address),HttpStatus.OK);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
         }
