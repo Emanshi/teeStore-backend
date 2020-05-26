@@ -52,11 +52,11 @@ public class UserAPI {
 
     }
 
-    @RequestMapping(value = "/editUserProfile" , method= RequestMethod.POST)
-    public ResponseEntity<String> editUser(@RequestBody User user) throws  Exception{
+    @RequestMapping(value = "/editUserProfile/{userId}" , method= RequestMethod.POST)
+    public ResponseEntity<String> editUser(@PathVariable String userId,@RequestBody User user) throws  Exception{
 
         try{
-            return  new ResponseEntity<String>(userService.editUser(user.getUserId(),user),HttpStatus.OK);
+            return  new ResponseEntity<String>(userService.editUser(userId,user),HttpStatus.OK);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
         }
