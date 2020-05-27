@@ -20,11 +20,11 @@ public class AddressIdGenerator implements IdentifierGenerator {
         try {
             Statement statement=connection.createStatement();
 
-            ResultSet set=statement.executeQuery("select count(address_id) as Id from Address");
+            ResultSet set=statement.executeQuery("select max(address_id) as Id from Address");
 
             if(set.next())
             {
-                int id=set.getInt(1)+1001;
+                int id=Integer.parseInt(set.getString(1).substring(1)) +1;
                 return prefix + id;
             }
         } catch (SQLException e) {
