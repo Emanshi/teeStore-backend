@@ -21,72 +21,72 @@ public class UserAPI {
     @Autowired
     private Environment environment;
 
-    @RequestMapping(value = "/userRegister", method= RequestMethod.POST)
-    public ResponseEntity<User> registerUser(@RequestBody User user) {
-
+    @PostMapping(value = "/userRegister")
+    public ResponseEntity<User> registerUser(@RequestBody User user) throws Exception {
         try{
-            return new ResponseEntity<User>(userService.addUser(user), HttpStatus.OK);
+            User res = userService.addUser(user);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/userLogin" , method= RequestMethod.POST)
-    public ResponseEntity<User> authenticateUser(@RequestBody User user) {
-
+    @PostMapping(value = "/userLogin")
+    public ResponseEntity<User> authenticateUser(@RequestBody User user) throws Exception {
         try{
-            return new ResponseEntity<User>(userService.loginUser(user), HttpStatus.OK);
+            User res = userService.loginUser(user);
+            return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
-            System.out.println(environment.getProperty(e.getMessage()));
-            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED,"Not possible",e);
+            throw new ResponseStatusException(HttpStatus.UNAUTHORIZED, e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/getUser/{userId}" , method= RequestMethod.GET)
-    public ResponseEntity<User> getUser(@PathVariable String userId) {
+    @GetMapping(value = "/getUser/{userId}")
+    public ResponseEntity<User> getUser(@PathVariable String userId) throws Exception {
         try{
-            return new ResponseEntity<User>(userService.getUser(userId),HttpStatus.OK);
+            User res = userService.getUser(userId);
+            return new ResponseEntity<>(res,HttpStatus.OK);
         }catch(Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
         }
 
     }
 
-    @RequestMapping(value = "/editUserProfile/{userId}" , method= RequestMethod.POST)
-    public ResponseEntity<String> editUser(@PathVariable String userId,@RequestBody User user) {
-
+    @PutMapping(value = "/editUserProfile/{userId}")
+    public ResponseEntity<String> editUser(@PathVariable String userId,@RequestBody User user) throws Exception {
         try{
-            return  new ResponseEntity<String>(userService.editUser(userId,user),HttpStatus.OK);
+            String res = userService.editUser(userId,user);
+            return  new ResponseEntity<>(res,HttpStatus.OK);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/addAddress/{userId}" , method=RequestMethod.POST)
-    public ResponseEntity<String> addAddress(@PathVariable String userId, @RequestBody Address address) {
-
+    @PostMapping(value = "/addAddress/{userId}")
+    public ResponseEntity<String> addAddress(@PathVariable String userId, @RequestBody Address address) throws Exception {
         try{
-            return  new ResponseEntity<String>(userService.addAddress(userId,address),HttpStatus.OK);
+            String res = userService.addAddress(userId,address);
+            return  new ResponseEntity<>(res,HttpStatus.OK);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/editAddress/{addressId}" , method=RequestMethod.PUT)
-    public ResponseEntity<String> editAddress(@PathVariable String addressId, @RequestBody Address address) {
-
+    @PutMapping(value = "/editAddress/{addressId}")
+    public ResponseEntity<String> editAddress(@PathVariable String addressId, @RequestBody Address address) throws Exception {
         try{
-            return  new ResponseEntity<String>(userService.editAddress(addressId,address),HttpStatus.OK);
+            String res = userService.editAddress(addressId,address);
+            return  new ResponseEntity<>(res,HttpStatus.OK);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/deleteAddress", method= RequestMethod.GET)
-    public ResponseEntity<String> deleteAddress(@RequestParam String userId,@RequestParam String addressId ) {
-
+    @DeleteMapping(value = "/deleteAddress")
+    public ResponseEntity<String> deleteAddress(@RequestParam String userId,@RequestParam String addressId ) throws Exception {
         try{
-            return  new ResponseEntity<String>(userService.deleteAddress(userId,addressId),HttpStatus.OK);
+            String res = userService.deleteAddress(userId,addressId);
+            return  new ResponseEntity<>(res,HttpStatus.OK);
         }catch (Exception e){
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
         }
