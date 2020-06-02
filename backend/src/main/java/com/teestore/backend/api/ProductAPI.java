@@ -82,7 +82,7 @@ public class ProductAPI {
     }
 
     @RequestMapping(value = "/getProductByDiscount/{category}" ,method = RequestMethod.GET)
-    private ResponseEntity<List<Product>> getProductByDiscount(Category category){
+    private ResponseEntity<List<Product>> getProductByDiscount(@PathVariable Category category){
 
         try{
             return new ResponseEntity<>(productService.getProductByDiscount(category), HttpStatus.OK);
