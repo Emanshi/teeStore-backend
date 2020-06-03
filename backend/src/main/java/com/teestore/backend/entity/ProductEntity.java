@@ -16,6 +16,7 @@ import java.time.LocalDateTime;
         typeClass = PostgreSQLEnumType.class
 )
 public class ProductEntity {
+
     @Id
     private String productId;
     private String productName;
