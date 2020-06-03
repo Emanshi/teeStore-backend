@@ -1,7 +1,6 @@
 package com.teestore.backend.model;
 
 public class Images {
-
     private String imageId;
     private String linkImage;
     private String reference;
