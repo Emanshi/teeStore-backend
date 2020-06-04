@@ -83,6 +83,8 @@ public class ProductDAOImpl implements ProductDAO{
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
 
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+
                 productList.add(product);
             }
 
@@ -119,6 +121,8 @@ public class ProductDAOImpl implements ProductDAO{
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
+
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
 
                 productList.add(product);
             }
@@ -163,6 +167,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+
                 productList.add(product);
             }
         }
@@ -197,6 +203,8 @@ public class ProductDAOImpl implements ProductDAO{
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
+
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
 
                 productList.add(product);
             }
@@ -235,6 +243,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+
                 productList.add(product);
             }
         }
@@ -271,6 +281,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+
                 productList.add(product);
             }
         }
@@ -305,6 +317,8 @@ public class ProductDAOImpl implements ProductDAO{
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
+
+                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
 
                 productList.add(product);
             }
