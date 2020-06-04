@@ -1,11 +1,9 @@
 package com.teestore.backend.api;
 
-import com.teestore.backend.model.Address;
 import com.teestore.backend.model.Images;
-import com.teestore.backend.model.User;
 import com.teestore.backend.service.ImagesService;
-import org.omg.CORBA.Environment;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
