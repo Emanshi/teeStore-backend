@@ -5,6 +5,7 @@ import com.teestore.backend.enums.Sex;
 import com.teestore.backend.enums.Size;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 public class Product {
     private String productId;
@@ -19,6 +20,24 @@ public class Product {
     private String productInfo;
     private Double discount;
     private String avgRating;
+    private String totalRaters;
+    private List<Images> images;
+
+    public String getTotalRaters() {
+        return totalRaters;
+    }
+
+    public void setTotalRaters(String totalRaters) {
+        this.totalRaters = totalRaters;
+    }
+
+    public List<Images> getImages() {
+        return images;
+    }
+
+    public void setImages(List<Images> images) {
+        this.images = images;
+    }
 
     public String getProductInfo() {
         return productInfo;
