@@ -43,8 +43,8 @@ public class ProductDAOImpl implements ProductDAO{
         product.setProductGroup(productEntity.getProductGroup());
         product.setProductInfo(productEntity.getProductInfo());
         product.setDiscount(productEntity.getDiscount());
-        product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-        double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+        product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+        double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
         rating = rating/(Integer.parseInt(product.getTotalRaters()));
         product.setAvgRating(String.valueOf(rating));
 
@@ -78,8 +78,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setDiscount(productEntity.getDiscount());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
 
@@ -114,8 +114,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setSize(productEntity.getSize());
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
@@ -157,8 +157,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setSize(productEntity.getSize());
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
@@ -192,8 +192,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setSize(productEntity.getSize());
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
@@ -229,8 +229,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setSize(productEntity.getSize());
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
@@ -265,8 +265,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setSize(productEntity.getSize());
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
@@ -300,8 +300,8 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setSize(productEntity.getSize());
                 product.setProductGroup(productEntity.getProductGroup());
                 product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split(".")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split(".")[0]);
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
