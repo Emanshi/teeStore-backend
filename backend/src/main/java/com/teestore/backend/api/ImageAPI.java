@@ -62,5 +62,13 @@ public class ImageAPI {
         }
     }
 
-
+    @GetMapping(value = "/getImage/{imageId}")
+    public ResponseEntity<Images> getImageById(@PathVariable String imageId) throws Exception {
+        try{
+            Images res= imagesService.getImageById(imageId);
+            return  new ResponseEntity<>(res,HttpStatus.OK);
+        }catch (Exception e){
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+        }
+    }
 }

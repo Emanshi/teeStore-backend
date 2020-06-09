@@ -76,4 +76,19 @@ public class ImagesDAOImpl implements ImagesDAO{
 
         return imagesEntity.getImageId();
     }
+
+    @Override
+    public Images getImageById(String id) throws Exception {
+        ImagesEntity imagesEntity= entityManager.find(ImagesEntity.class,id);
+        Images image = null;
+
+        if(imagesEntity!=null) {
+            image = new Images();
+            image.setImageId(imagesEntity.getImageId());
+            image.setLinkImage(imagesEntity.getLinkImage());
+            image.setReference(imagesEntity.getReference());
+        }
+
+        return image;
+    }
 }

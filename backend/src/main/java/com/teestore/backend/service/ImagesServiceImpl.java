@@ -66,4 +66,16 @@ public class ImagesServiceImpl implements ImagesService {
 
         return iId;
     }
+
+    @Override
+    public Images getImageById(String imageId) throws Exception {
+        if(imageId == null || imageId.equals(""))
+            throw new Exception("ImagesService.INVALID_IMAGE_ID");
+
+        Images iId= imagesDAO.getImageById(imageId);
+        if(iId== null)
+            throw new Exception("ImagesService.IMAGE_NOT_RETRIEVED");
+
+        return iId;
+    }
 }
