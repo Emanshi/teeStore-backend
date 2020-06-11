@@ -6,7 +6,6 @@ import com.teestore.backend.model.Review;
 import java.util.List;
 
 public interface ReviewService {
-
     List<Review> getReviewByUserId(String userId) throws Exception;
     List<Review> getReviewByProductId(String productId) throws Exception;
     String addReview(Review review) throws Exception;
@@ -14,4 +13,5 @@ public interface ReviewService {
     String deleteReview(String reviewId) throws Exception;
     Integer reviewHelpful(String reviewId, String userId) throws Exception;
     List<Review> getReviewByRating(String productId, Rating rating) throws Exception;
+    List<Review> getTopReviewsByProduct (String productId) throws Exception;
 }

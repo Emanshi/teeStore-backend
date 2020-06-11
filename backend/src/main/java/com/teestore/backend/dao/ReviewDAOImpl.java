@@ -322,4 +322,47 @@ public class ReviewDAOImpl implements ReviewDAO{
         }
         return reviewList;
     }
+
+    @Override
+    public List<Review> getTopReviewsForProduct(String productId) throws Exception {
+        Query query= entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId order by r.ratingHelpful desc");
+        query.setParameter("productId",productId);
+
+        List<ReviewEntity> reviewEntityList= query.setMaxResults(3).getResultList();
+        List<Review> reviewList=null;
+
+        if(reviewEntityList!=null && !reviewEntityList.isEmpty()){
+
+            reviewList=new ArrayList<>();
+            for(ReviewEntity reviewEntity: reviewEntityList){
+                Review review=new Review();
+                review.setReviewId(reviewEntity.getReviewId());
+                review.setReviewTitle(reviewEntity.getReviewTitle());
+                review.setReviewBody(reviewEntity.getReviewBody());
+                review.setReviewDate(reviewEntity.getReviewDate());
+                review.setRatings(reviewEntity.getRatings());
+                review.setRatingHelpful(reviewEntity.getRatingHelpful());
+
+                UserEntity userEntity= reviewEntity.getUser();
+
+                if(userEntity == null)
+                    return null;
+
+                User user =new User();
+                user.setUserId(userEntity.getUserId());
+                user.setUserName(userEntity.getUserName());
+
+                review.setUser(user);
+
+                Product product =new Product();
+                product.setProductId(productId);
+
+                review.setProduct(product);
+
+                reviewList.add(review);
+            }
+
+        }
+        return reviewList;
+    }
 }

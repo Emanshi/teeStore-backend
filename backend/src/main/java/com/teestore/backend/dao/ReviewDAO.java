@@ -14,5 +14,5 @@ public interface ReviewDAO {
     String deleteReview(String reviewId) throws Exception;
     Integer reviewHelpful(String reviewId) throws Exception;
     List<Review> getReviewByRating(String productId, Rating rating) throws Exception;
-
+    List<Review> getTopReviewsForProduct (String productId) throws Exception;
 }

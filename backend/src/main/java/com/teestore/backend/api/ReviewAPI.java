@@ -94,4 +94,12 @@ public class ReviewAPI {
         }
     }
 
+    @GetMapping(value = "/getTopReviews/{productId}")
+    public ResponseEntity<List<Review>> getTopReviews(@PathVariable String productId) throws Exception{
+        try{
+            return new ResponseEntity<>(reviewService.getTopReviewsByProduct(productId), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
 }
