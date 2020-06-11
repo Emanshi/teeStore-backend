@@ -5,10 +5,7 @@ import com.teestore.backend.entity.ProductEntity;
 import com.teestore.backend.entity.ReviewEntity;
 import com.teestore.backend.entity.UserEntity;
 import com.teestore.backend.enums.Rating;
-import com.teestore.backend.model.Address;
-import com.teestore.backend.model.Product;
-import com.teestore.backend.model.Review;
-import com.teestore.backend.model.User;
+import com.teestore.backend.model.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -364,5 +361,29 @@ public class ReviewDAOImpl implements ReviewDAO{
 
         }
         return reviewList;
+    }
+
+    @Override
+    public RatingCounts getRatingCounts(String productId) throws Exception {
+        Query query= entityManager.createQuery("select r.rating, count(r) from ReviewEntity r where r.product.productId =:productId group by r.rating");
+        query.setParameter("productId",productId);
+
+        List<Object[]> reviewCounts = query.getResultList();
+        RatingCounts rc = new RatingCounts();
+
+        for (Object[] o:reviewCounts) {
+            if (o[0] == Rating.ONE)
+                rc.setOne((int)o[1]);
+            else if (o[0] == Rating.THREE)
+            rc.setThree((int)o[1]);
+            else if (o[0] == Rating.TWO)
+            rc.setTwo((int)o[1]);
+            else if (o[0] == Rating.FIVE)
+            rc.setFive((int)o[1]);
+            else if (o[0] == Rating.FOUR)
+            rc.setFour((int)o[1]);
+        }
+
+        return rc;
     }
 }

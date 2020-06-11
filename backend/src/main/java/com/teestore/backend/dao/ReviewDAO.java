@@ -1,6 +1,7 @@
 package com.teestore.backend.dao;
 
 import com.teestore.backend.enums.Rating;
+import com.teestore.backend.model.RatingCounts;
 import com.teestore.backend.model.Review;
 
 import java.util.List;
@@ -15,4 +16,5 @@ public interface ReviewDAO {
     Integer reviewHelpful(String reviewId) throws Exception;
     List<Review> getReviewByRating(String productId, Rating rating) throws Exception;
     List<Review> getTopReviewsForProduct (String productId) throws Exception;
+    RatingCounts getRatingCounts (String productId) throws Exception;
 }

@@ -2,6 +2,7 @@ package com.teestore.backend.service;
 
 import com.teestore.backend.dao.ReviewDAO;
 import com.teestore.backend.enums.Rating;
+import com.teestore.backend.model.RatingCounts;
 import com.teestore.backend.model.Review;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -123,6 +124,19 @@ public class ReviewServiceImpl implements ReviewService{
 
         if(reviewList== null || reviewList.isEmpty())
             throw new Exception("ReviewService.REVIEW_LIST_NOT_FOUND");
+
+        return reviewList;
+    }
+
+    @Override
+    public RatingCounts getRatingCounts(String productId) throws Exception {
+        if(productId == null ||productId.equals(""))
+            throw new Exception("ReviewService.INVALID_PRODUCT_ID");
+
+        RatingCounts reviewList= reviewDAO.getRatingCounts(productId);
+
+        if(reviewList== null)
+            throw new Exception("ReviewService.RATINGS_NOT_RETRIEVED");
 
         return reviewList;
     }

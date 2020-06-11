@@ -1,6 +1,7 @@
 package com.teestore.backend.api;
 
 import com.teestore.backend.enums.Rating;
+import com.teestore.backend.model.RatingCounts;
 import com.teestore.backend.model.Review;
 import com.teestore.backend.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -98,6 +99,15 @@ public class ReviewAPI {
     public ResponseEntity<List<Review>> getTopReviews(@PathVariable String productId) throws Exception{
         try{
             return new ResponseEntity<>(reviewService.getTopReviewsByProduct(productId), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
+        }
+    }
+
+    @GetMapping(value = "/getRatingCounts/{productId}")
+    public ResponseEntity<RatingCounts> getRatingCounts(@PathVariable String productId) throws Exception{
+        try{
+            return new ResponseEntity<>(reviewService.getRatingCounts(productId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }

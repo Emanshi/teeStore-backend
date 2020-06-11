@@ -1,6 +1,7 @@
 package com.teestore.backend.service;
 
 import com.teestore.backend.enums.Rating;
+import com.teestore.backend.model.RatingCounts;
 import com.teestore.backend.model.Review;
 
 import java.util.List;
@@ -14,4 +15,5 @@ public interface ReviewService {
     Integer reviewHelpful(String reviewId, String userId) throws Exception;
     List<Review> getReviewByRating(String productId, Rating rating) throws Exception;
     List<Review> getTopReviewsByProduct (String productId) throws Exception;
+    RatingCounts getRatingCounts (String productId) throws Exception;
 }
