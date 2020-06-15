@@ -365,7 +365,7 @@ public class ReviewDAOImpl implements ReviewDAO{
 
     @Override
     public RatingCounts getRatingCounts(String productId) throws Exception {
-        Query query= entityManager.createQuery("select r.rating, count(r) from ReviewEntity r where r.product.productId =:productId group by r.rating");
+        Query query= entityManager.createQuery("select r.ratings, count(r) from ReviewEntity r where r.product.productId =:productId group by r.ratings");
         query.setParameter("productId",productId);
 
         List<Object[]> reviewCounts = query.getResultList();
