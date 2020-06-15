@@ -373,15 +373,15 @@ public class ReviewDAOImpl implements ReviewDAO{
 
         for (Object[] o:reviewCounts) {
             if (o[0] == Rating.ONE)
-                rc.setOne((int)o[1]);
+                rc.setOne((int)(long)o[1]);
             else if (o[0] == Rating.THREE)
-            rc.setThree((int)o[1]);
+            rc.setThree((int)(long)o[1]);
             else if (o[0] == Rating.TWO)
-            rc.setTwo((int)o[1]);
+            rc.setTwo((int)(long)o[1]);
             else if (o[0] == Rating.FIVE)
-            rc.setFive((int)o[1]);
+            rc.setFive((int)(long)o[1]);
             else if (o[0] == Rating.FOUR)
-            rc.setFour((int)o[1]);
+            rc.setFour((int)(long)o[1]);
         }
 
         return rc;
