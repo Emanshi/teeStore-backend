@@ -11,6 +11,7 @@ public class ImagesEntity {
     @Id
     @GenericGenerator(name = "iIdGen", strategy = "com.teestore.backend.entity.generator.ImageIdGenerator")
     @GeneratedValue(generator = "iIdGen")
+    @Column(length = 7)
     private String imageId;
     @Column(length= 200)
     private String linkImage;

@@ -18,8 +18,11 @@ public class ReviewEntity {
     @Id
     @GenericGenerator(name = "reviewIdGen", strategy = "com.teestore.backend.entity.generator.ReviewIdGenerator")
     @GeneratedValue(generator = "reviewIdGen")
+    @Column(length = 5)
     private String reviewId;
+    @Column(length = 50)
     private String reviewTitle;
+    @Column(length = 500)
     private String reviewBody;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "rating_type")
@@ -28,8 +31,10 @@ public class ReviewEntity {
     private Integer ratingHelpful;
     private LocalDateTime reviewDate;
     @ManyToOne(cascade = CascadeType.ALL)
+    @Column(length = 5)
     private UserEntity user;
     @ManyToOne(cascade = CascadeType.ALL)
+    @Column(length = 6)
     private ProductEntity product;
 
     public String getReviewId() {
