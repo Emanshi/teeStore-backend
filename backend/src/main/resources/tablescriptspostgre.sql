@@ -438,6 +438,55 @@ alter password type varchar(70);
 --2020-06-03T14:57:09.288217+00:00 app[web.1]:         primary key (image_id)
 --2020-06-03T14:57:09.288224+00:00 app[web.1]:     )
 
+--2020-06-19T15:30:39.451610+00:00 app[web.1]: Hibernate:
+--2020-06-19T15:30:39.451641+00:00 app[web.1]:
+--2020-06-19T15:30:39.451642+00:00 app[web.1]:     create table images (
+--2020-06-19T15:30:39.451643+00:00 app[web.1]:        image_id varchar(7) not null,
+--2020-06-19T15:30:39.451643+00:00 app[web.1]:         link_image varchar(200),
+--2020-06-19T15:30:39.451644+00:00 app[web.1]:         reference varchar(9),
+--2020-06-19T15:30:39.451644+00:00 app[web.1]:         primary key (image_id)
+--2020-06-19T15:30:39.451651+00:00 app[web.1]:     )
+--2020-06-19T15:30:41.341599+00:00 app[web.1]: Hibernate:
+--2020-06-19T15:30:41.341642+00:00 app[web.1]:
+--2020-06-19T15:30:41.341644+00:00 app[web.1]:     create table product (
+--2020-06-19T15:30:41.341645+00:00 app[web.1]:        product_id varchar(7) not null,
+--2020-06-19T15:30:41.341645+00:00 app[web.1]:         avg_rating varchar(10),
+--2020-06-19T15:30:41.341646+00:00 app[web.1]:         category category_type,
+--2020-06-19T15:30:41.341646+00:00 app[web.1]:         cost float8,
+--2020-06-19T15:30:41.341647+00:00 app[web.1]:         date_of_addition timestamp,
+--2020-06-19T15:30:41.341648+00:00 app[web.1]:         discount float8,
+--2020-06-19T15:30:41.341648+00:00 app[web.1]:         product_info varchar(2000),
+--2020-06-19T15:30:41.341649+00:00 app[web.1]:         product_name varchar(150),
+--2020-06-19T15:30:41.341649+00:00 app[web.1]:         quantity varchar(30),
+--2020-06-19T15:30:41.341649+00:00 app[web.1]:         sex sex_type,
+--2020-06-19T15:30:41.341650+00:00 app[web.1]:         size size_type,
+--2020-06-19T15:30:41.341650+00:00 app[web.1]:         primary key (product_id)
+--2020-06-19T15:30:41.341659+00:00 app[web.1]:     )
+--2020-06-19T15:30:41.474528+00:00 app[web.1]: Hibernate:
+--2020-06-19T15:30:41.474530+00:00 app[web.1]:
+--2020-06-19T15:30:41.474531+00:00 app[web.1]:     create table review (
+--2020-06-19T15:30:41.474532+00:00 app[web.1]:        review_id varchar(5) not null,
+--2020-06-19T15:30:41.474532+00:00 app[web.1]:         rating_helpful int4,
+--2020-06-19T15:30:41.474534+00:00 app[web.1]:         ratings rating_type,
+--2020-06-19T15:30:41.474535+00:00 app[web.1]:         review_body varchar(500),
+--2020-06-19T15:30:41.474535+00:00 app[web.1]:         review_date timestamp,
+--2020-06-19T15:30:41.474535+00:00 app[web.1]:         review_title varchar(50),
+--2020-06-19T15:30:41.474536+00:00 app[web.1]:         product_product_id varchar(7),
+--2020-06-19T15:30:41.474536+00:00 app[web.1]:         user_user_id varchar(255),
+--2020-06-19T15:30:41.474537+00:00 app[web.1]:         primary key (review_id)
+--2020-06-19T15:30:41.474543+00:00 app[web.1]:     )
+--2020-06-19T15:30:42.047295+00:00 app[web.1]: Hibernate:
+--2020-06-19T15:30:42.047315+00:00 app[web.1]:
+--2020-06-19T15:30:42.047317+00:00 app[web.1]:     alter table review
+--2020-06-19T15:30:42.047318+00:00 app[web.1]:        add constraint FK11khguugixv7x8xw8gj99ph6m
+--2020-06-19T15:30:42.047318+00:00 app[web.1]:        foreign key (product_product_id)
+--2020-06-19T15:30:42.047327+00:00 app[web.1]:        references product
+--2020-06-19T15:30:42.111768+00:00 app[web.1]: Hibernate:
+--2020-06-19T15:30:42.111770+00:00 app[web.1]:
+--2020-06-19T15:30:42.111771+00:00 app[web.1]:     alter table review
+--2020-06-19T15:30:42.111772+00:00 app[web.1]:        add constraint FKq6prfoeqnogpi44xmtbgyuj8p
+--2020-06-19T15:30:42.111773+00:00 app[web.1]:        foreign key (user_user_id)
+--2020-06-19T15:30:42.125644+00:00 app[web.1]:        references users
 
 insert into Images(image_id,link_image,reference) VALUES('I10001','https://lh3.googleusercontent.com/kilUEc3t0Zzc5q55X-Oj558V5T2etKN2Gc2EOzEdJgJJHc2RQ1DrNiX9Tr4NWBzu1ifJsAMQCPIleXl6u7CRk_xizafvveSwLuSzfbLBOg-j2MltylVvryP8dtqQRMwKbkyUWpHt8A','P10001');
 insert into Images(image_id,link_image,reference) VALUES('I10002','https://lh3.googleusercontent.com/6DpQGIiU8iXXdja6dTbxp-GGlLbjkUvZJt2_rKgYDTV_2bysNdRS6K7aR4Lz7ULEAC_8tpstlE_btPf_92DCrUjwD3-t38DLPhkckcMYcsWDlZC3rCeEeBOkMtPNWxUyUw3CW7o1Cg','P10001');
@@ -511,6 +560,5 @@ insert into Images(image_id,link_image,reference) VALUES('I10069','https://lh3.g
 insert into Images(image_id,link_image,reference) VALUES('I10070','https://lh3.googleusercontent.com/wRto43U_zDTaXk_ebg4n6sIhELth5ICnnX3tfao4qKZ8XstkYBYtPhGhMnY-U2Hdcm-IHmh-hbjrg5vgtHYxuqUzlsNqWOmRPguKIqctZrydVTBFm14RovqCt7pZpqMwQQYPbnscRA','P10024');
 insert into Images(image_id,link_image,reference) VALUES('I10071','https://lh3.googleusercontent.com/4UIgVZ6z6jAW1zX5bg9Ia2TgoPiqEgznXeACS6-wO44_UxHYCtXSbsOZwKhe0T0P-m7bHM6ulXY9dHVC3pC5FdS_GnYdkTDhjq3ulG9lHGZYWLJ-BSKGnFtVne3KtO6HmWDYG5RQog','P10024');
 insert into Images(image_id,link_image,reference) VALUES('I10072','https://lh3.googleusercontent.com/y7lsMqVMF2mUXs58NjbHuD_9yxNoT8aYk5uMUYGnG2n3gnrFW1e7FbfgM4Pv3piaSjrTwuPNoxHUvD8Z0emAp6GAGk-ED_mauCiszkIPKr1ogmeRMis7DPuVCVtQUEgt2Mfa8w4tFQ','P10024');
-
 
 

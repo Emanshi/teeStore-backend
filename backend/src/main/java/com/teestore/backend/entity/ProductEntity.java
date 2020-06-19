@@ -22,7 +22,7 @@ public class ProductEntity {
     @Column(length = 150)
     private String productName;
     private Double cost;
-    @Column(columnDefinition = "size_type",length = 15)
+    @Column(length = 15)
     private String size;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "sex_type")
