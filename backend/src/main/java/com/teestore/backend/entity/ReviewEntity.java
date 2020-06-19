@@ -31,10 +31,8 @@ public class ReviewEntity {
     private Integer ratingHelpful;
     private LocalDateTime reviewDate;
     @ManyToOne(cascade = CascadeType.ALL)
-    @Column(length = 5)
     private UserEntity user;
     @ManyToOne(cascade = CascadeType.ALL)
-    @Column(length = 6)
     private ProductEntity product;
 
     public String getReviewId() {
