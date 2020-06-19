@@ -9,8 +9,6 @@ public interface ProductService {
 
     Product getProductById(String productId) throws Exception;
     List<Product> getProductsByCategory(Category category) throws Exception;
-    List<Product> getProductByGroup(String productGroup) throws Exception;
-    List<Product> getProductCategoryByPrice(Category category,Boolean reverse) throws Exception;
     List<Product> getAllProducts() throws Exception;
     List<Product> getNewArrivals() throws Exception;
     List<Product> getProductByDiscount(Category category) throws Exception;

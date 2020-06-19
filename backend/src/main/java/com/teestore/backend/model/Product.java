@@ -2,20 +2,18 @@ package com.teestore.backend.model;
 
 import com.teestore.backend.enums.Category;
 import com.teestore.backend.enums.Sex;
-import com.teestore.backend.enums.Size;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Map;
 
 public class Product {
     private String productId;
     private String productName;
     private Double cost;
-    private Size size;
+    private Map<String,Integer> sizeAndQuantity;
     private Sex sex;
     private Category category;
-    private String productGroup;
-    private Integer quantity;
     private LocalDateTime dateOfAddition;
     private String productInfo;
     private Double discount;
@@ -23,20 +21,60 @@ public class Product {
     private String totalRaters;
     private List<Images> images;
 
-    public String getTotalRaters() {
-        return totalRaters;
+    public String getProductId() {
+        return productId;
     }
 
-    public void setTotalRaters(String totalRaters) {
-        this.totalRaters = totalRaters;
+    public void setProductId(String productId) {
+        this.productId = productId;
     }
 
-    public List<Images> getImages() {
-        return images;
+    public String getProductName() {
+        return productName;
     }
 
-    public void setImages(List<Images> images) {
-        this.images = images;
+    public void setProductName(String productName) {
+        this.productName = productName;
+    }
+
+    public Double getCost() {
+        return cost;
+    }
+
+    public void setCost(Double cost) {
+        this.cost = cost;
+    }
+
+    public Map<String, Integer> getSizeAndQuantity() {
+        return sizeAndQuantity;
+    }
+
+    public void setSizeAndQuantity(Map<String, Integer> sizeAndQuantity) {
+        this.sizeAndQuantity = sizeAndQuantity;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public LocalDateTime getDateOfAddition() {
+        return dateOfAddition;
+    }
+
+    public void setDateOfAddition(LocalDateTime dateOfAddition) {
+        this.dateOfAddition = dateOfAddition;
     }
 
     public String getProductInfo() {
@@ -63,75 +101,19 @@ public class Product {
         this.avgRating = avgRating;
     }
 
-    public String getProductId() {
-        return productId;
+    public String getTotalRaters() {
+        return totalRaters;
     }
 
-    public void setProductId(String productId) {
-        this.productId = productId;
+    public void setTotalRaters(String totalRaters) {
+        this.totalRaters = totalRaters;
     }
 
-    public String getProductName() {
-        return productName;
+    public List<Images> getImages() {
+        return images;
     }
 
-    public void setProductName(String productName) {
-        this.productName = productName;
-    }
-
-    public Double getCost() {
-        return cost;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getProductGroup() {
-        return productGroup;
-    }
-
-    public void setProductGroup(String productGroup) {
-        this.productGroup = productGroup;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDateTime getDateOfAddition() {
-        return dateOfAddition;
-    }
-
-    public void setDateOfAddition(LocalDateTime dateOfAddition) {
-        this.dateOfAddition = dateOfAddition;
+    public void setImages(List<Images> images) {
+        this.images = images;
     }
 }

@@ -46,34 +46,6 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
-    public List<Product> getProductByGroup(String productGroup) throws Exception {
-
-        if(productGroup ==null)
-            throw new Exception("ProductService.INVALID_PRODUCT_GROUP");
-
-        List<Product> productList= productDAO.getProductByGroup(productGroup);
-
-        if(productList== null || productList.isEmpty())
-            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
-
-        return productList;
-    }
-
-    @Override
-    public List<Product> getProductCategoryByPrice(Category category, Boolean reverse) throws Exception {
-
-        if(category ==null || reverse==null)
-            throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
-
-        List<Product> productList= productDAO.getProductCategoryByPrice(category, reverse);
-
-        if(productList == null || productList.isEmpty())
-            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
-
-        return productList;
-    }
-
-    @Override
     public List<Product> getAllProducts() throws Exception {
 
         List<Product> productList= productDAO.getAllProducts();

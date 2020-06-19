@@ -59,51 +59,6 @@ public class ProductDAOImplTest {
     }
 
     @Test
-    public void getProductByGroupValidTest() throws Exception{
-        Product p= new Product();
-        p.setProductGroup("PG1001");
-
-        List<Product> productList= productDAO.getProductByGroup(p.getProductGroup());
-        Assert.assertNotNull(productList);
-    }
-
-    @Test
-    public void getProductByGroupInValidTest() throws Exception{
-        Product p= new Product();
-        p.setProductGroup("PG101");
-
-        List<Product> productList= productDAO.getProductByGroup(p.getProductGroup());
-        Assert.assertNull(productList);
-    }
-
-    @Test
-    public void getProductCategoryByPriceValidTest1() throws Exception{
-        Product p= new Product();
-        p.setCategory(Category.SHIRT);
-
-        List<Product> productList= productDAO.getProductCategoryByPrice(p.getCategory(),true);
-        Assert.assertNotNull(productList);
-    }
-
-    @Test
-    public void getProductCategoryByPriceValidTest2() throws Exception{
-        Product p= new Product();
-        p.setCategory(Category.SHIRT);
-
-        List<Product> productList= productDAO.getProductCategoryByPrice(p.getCategory(),false);
-        Assert.assertNotNull(productList);
-    }
-
-    @Test
-    public void getProductCategoryByPriceInValidTest() throws Exception{
-        Product p= new Product();
-        p.setCategory(null);
-
-        List<Product> productList= productDAO.getProductCategoryByPrice(p.getCategory(),true);
-        Assert.assertNull(productList);
-    }
-
-    @Test
     public void getAllProductsValidTest() throws Exception{
         List<Product> productList= productDAO.getAllProducts();
         Assert.assertNotNull(productList);
@@ -142,12 +97,6 @@ public class ProductDAOImplTest {
     @Test
     public void getProductBySearchQueryValidTest2() throws Exception{
         List<Product> productList= productDAO.getProductBySearchQuery("cute");
-        Assert.assertNotNull(productList);
-    }
-
-    //@Test
-    public void getProductBySearchQueryValidTest3() throws Exception{
-        List<Product> productList= productDAO.getProductBySearchQuery("good-for-you");
         Assert.assertNotNull(productList);
     }
 

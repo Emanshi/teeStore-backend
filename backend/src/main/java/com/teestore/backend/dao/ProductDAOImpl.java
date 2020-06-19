@@ -2,7 +2,6 @@ package com.teestore.backend.dao;
 
 import com.teestore.backend.entity.ProductEntity;
 import com.teestore.backend.enums.Category;
-import com.teestore.backend.model.Images;
 import com.teestore.backend.model.Product;
 import com.teestore.backend.service.ImagesService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,7 +11,9 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @Repository(value= "productDAO")
 public class ProductDAOImpl implements ProductDAO{
@@ -36,11 +37,17 @@ public class ProductDAOImpl implements ProductDAO{
         product.setProductName(productEntity.getProductName());
         product.setCategory(productEntity.getCategory());
         product.setCost(productEntity.getCost());
-        product.setQuantity(productEntity.getQuantity());
         product.setDateOfAddition(productEntity.getDateOfAddition());
         product.setSex(productEntity.getSex());
-        product.setSize(productEntity.getSize());
-        product.setProductGroup(productEntity.getProductGroup());
+
+        Map<String,Integer> sizeMap= new HashMap<>();
+        String[] sizes=productEntity.getSize().split(",");
+        String[] quantities=productEntity.getQuantity().split(",");
+
+        for(int i=0;i<sizes.length;i++){
+            sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+        }
+        product.setSizeAndQuantity(sizeMap);
         product.setProductInfo(productEntity.getProductInfo());
         product.setDiscount(productEntity.getDiscount());
         product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
@@ -48,7 +55,7 @@ public class ProductDAOImpl implements ProductDAO{
         rating = rating/(Integer.parseInt(product.getTotalRaters()));
         product.setAvgRating(String.valueOf(rating));
 
-        product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+        product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
         return product;
     }
@@ -71,11 +78,17 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
                 product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
+
+                Map<String,Integer> sizeMap= new HashMap<>();
+                String[] sizes=productEntity.getSize().split(",");
+                String[] quantities=productEntity.getQuantity().split(",");
+
+                for(int i=0;i<sizes.length;i++){
+                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                }
+                product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setDiscount(productEntity.getDiscount());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
@@ -83,94 +96,11 @@ public class ProductDAOImpl implements ProductDAO{
                 rating = rating/(Integer.parseInt(product.getTotalRaters()));
                 product.setAvgRating(String.valueOf(rating));
 
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+                product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
                 productList.add(product);
             }
 
-        }
-        return productList;
-    }
-
-    @Override
-    public List<Product> getProductByGroup(String productGroup) throws Exception {
-
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.productGroup=:productGroup");
-        query.setParameter("productGroup",productGroup);
-
-        List<ProductEntity> productEntityList= query.getResultList();
-        List<Product> productList= null;
-
-        if(productEntityList!=null && !productEntityList.isEmpty()){
-
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
-                product.setProductId(productEntity.getProductId());
-                product.setProductName(productEntity.getProductName());
-                product.setCategory(productEntity.getCategory());
-                product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
-                product.setDateOfAddition(productEntity.getDateOfAddition());
-                product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
-                product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(String.valueOf(rating));
-                product.setDiscount(productEntity.getDiscount());
-
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
-
-                productList.add(product);
-            }
-        }
-        return productList;
-    }
-
-    @Override
-    public List<Product> getProductCategoryByPrice(Category category, Boolean reverse) throws Exception {
-
-        Query query=null;
-        if(reverse){
-            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.cost desc");
-            query.setParameter("category",category);
-        }
-        else{
-            query= entityManager.createQuery("select p from ProductEntity p where p.category =:category order by p.cost asc");
-            query.setParameter("category",category);
-        }
-
-        List<ProductEntity> productEntityList= query.getResultList();
-        List<Product> productList= null;
-
-        if(productEntityList!=null && !productEntityList.isEmpty()){
-
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
-                product.setProductId(productEntity.getProductId());
-                product.setProductName(productEntity.getProductName());
-                product.setCategory(productEntity.getCategory());
-                product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
-                product.setDateOfAddition(productEntity.getDateOfAddition());
-                product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
-                product.setProductInfo(productEntity.getProductInfo());
-                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
-                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(String.valueOf(rating));
-                product.setDiscount(productEntity.getDiscount());
-
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
-
-                productList.add(product);
-            }
         }
         return productList;
     }
@@ -192,11 +122,17 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
                 product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
+
+                Map<String,Integer> sizeMap= new HashMap<>();
+                String[] sizes=productEntity.getSize().split(",");
+                String[] quantities=productEntity.getQuantity().split(",");
+
+                for(int i=0;i<sizes.length;i++){
+                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                }
+                product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
@@ -204,7 +140,7 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+                product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
                 productList.add(product);
             }
@@ -231,11 +167,17 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
                 product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
+
+                Map<String,Integer> sizeMap= new HashMap<>();
+                String[] sizes=productEntity.getSize().split(",");
+                String[] quantities=productEntity.getQuantity().split(",");
+
+                for(int i=0;i<sizes.length;i++){
+                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                }
+                product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
@@ -243,7 +185,7 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+                product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
                 productList.add(product);
             }
@@ -269,11 +211,17 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
                 product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
+
+                Map<String,Integer> sizeMap= new HashMap<>();
+                String[] sizes=productEntity.getSize().split(",");
+                String[] quantities=productEntity.getQuantity().split(",");
+
+                for(int i=0;i<sizes.length;i++){
+                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                }
+                product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
@@ -281,7 +229,7 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+                product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
                 productList.add(product);
             }
@@ -306,11 +254,17 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
                 product.setCost(productEntity.getCost());
-                product.setQuantity(productEntity.getQuantity());
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
-                product.setSize(productEntity.getSize());
-                product.setProductGroup(productEntity.getProductGroup());
+
+                Map<String,Integer> sizeMap= new HashMap<>();
+                String[] sizes=productEntity.getSize().split(",");
+                String[] quantities=productEntity.getQuantity().split(",");
+
+                for(int i=0;i<sizes.length;i++){
+                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                }
+                product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
@@ -318,7 +272,7 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setAvgRating(String.valueOf(rating));
                 product.setDiscount(productEntity.getDiscount());
 
-                product.setImages(imagesService.getImagesByReference(product.getProductGroup()));
+                product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
                 productList.add(product);
             }

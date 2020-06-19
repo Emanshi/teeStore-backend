@@ -2,7 +2,6 @@ package com.teestore.backend.entity;
 
 import com.teestore.backend.enums.Category;
 import com.teestore.backend.enums.Sex;
-import com.teestore.backend.enums.Size;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -18,13 +17,13 @@ import java.time.LocalDateTime;
 public class ProductEntity {
 
     @Id
+    @Column(length = 7)
     private String productId;
+    @Column(length = 150)
     private String productName;
     private Double cost;
-    @Enumerated(EnumType.STRING)
-    @Column(columnDefinition = "size_type")
-    @Type(type = "pgsql_enum")
-    private Size size;
+    @Column(columnDefinition = "size_type",length = 15)
+    private String size;
     @Enumerated(EnumType.STRING)
     @Column(columnDefinition = "sex_type")
     @Type(type = "pgsql_enum")
@@ -33,11 +32,13 @@ public class ProductEntity {
     @Column(columnDefinition = "category_type")
     @Type(type = "pgsql_enum")
     private Category category;
-    private String productGroup;
-    private Integer quantity;
+    @Column(length = 30)
+    private String quantity;
     private LocalDateTime dateOfAddition;
+    @Column(length = 2000)
     private String productInfo;
     private Double discount;
+    @Column(length = 10)
     private String avgRating;
 
     public String getProductId() {
@@ -64,6 +65,46 @@ public class ProductEntity {
         this.cost = cost;
     }
 
+    public String getSize() {
+        return size;
+    }
+
+    public void setSize(String size) {
+        this.size = size;
+    }
+
+    public Sex getSex() {
+        return sex;
+    }
+
+    public void setSex(Sex sex) {
+        this.sex = sex;
+    }
+
+    public Category getCategory() {
+        return category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
+    }
+
+    public String getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(String quantity) {
+        this.quantity = quantity;
+    }
+
+    public LocalDateTime getDateOfAddition() {
+        return dateOfAddition;
+    }
+
+    public void setDateOfAddition(LocalDateTime dateOfAddition) {
+        this.dateOfAddition = dateOfAddition;
+    }
+
     public String getProductInfo() {
         return productInfo;
     }
@@ -86,53 +127,5 @@ public class ProductEntity {
 
     public void setAvgRating(String avgRating) {
         this.avgRating = avgRating;
-    }
-
-    public Size getSize() {
-        return size;
-    }
-
-    public void setSize(Size size) {
-        this.size = size;
-    }
-
-    public Sex getSex() {
-        return sex;
-    }
-
-    public void setSex(Sex sex) {
-        this.sex = sex;
-    }
-
-    public Category getCategory() {
-        return category;
-    }
-
-    public void setCategory(Category category) {
-        this.category = category;
-    }
-
-    public String getProductGroup() {
-        return productGroup;
-    }
-
-    public void setProductGroup(String productGroup) {
-        this.productGroup = productGroup;
-    }
-
-    public Integer getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(Integer quantity) {
-        this.quantity = quantity;
-    }
-
-    public LocalDateTime getDateOfAddition() {
-        return dateOfAddition;
-    }
-
-    public void setDateOfAddition(LocalDateTime dateOfAddition) {
-        this.dateOfAddition = dateOfAddition;
     }
 }

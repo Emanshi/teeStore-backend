@@ -38,10 +38,10 @@ public class OrdersDAOImpl implements OrdersDAO {
             StringBuilder products = new StringBuilder();
             for (Product p:cart.getProducts()) {
                 ProductEntity pe = entityManager.find(ProductEntity.class, p.getProductId());
-                if (pe.getQuantity() < p.getQuantity())
-                    return null;
-                else
-                    pe.setQuantity(pe.getQuantity() - p.getQuantity());
+//                if (pe.getQuantity() < p.getQuantity())
+//                    return null;
+//                else
+//                    pe.setQuantity(pe.getQuantity() - p.getQuantity());
                 products.append(p.getProductId()).append(",");
             }
             StringBuilder qty = new StringBuilder();

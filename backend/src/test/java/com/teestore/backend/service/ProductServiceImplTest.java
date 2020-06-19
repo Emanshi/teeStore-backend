@@ -84,106 +84,10 @@ public class ProductServiceImplTest {
     }
 
     @Test
-    public void getProductByGroupValidTest() throws Exception{
-        Product p= new Product();
-        p.setCategory(Category.TOPS);
-        p.setProductId("P10001");
-        p.setProductGroup("PG10001");
-
-        List<Product> pList= new ArrayList<>();
-        pList.add(p);
-        Mockito.when(productDAO.getProductByGroup(Mockito.anyString())).thenReturn(pList);
-        List<Product> productList= productService.getProductByGroup(p.getProductGroup());
-        Assert.assertNotNull(productList);
-    }
-
-    @Test
-    public void getProductByGroupInvalidTest1() throws Exception{
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductByGroup(null));
-        Assert.assertNotNull("ProductService.INVALID_PRODUCT_GROUP",e.getMessage());
-    }
-
-    @Test
-    public void getProductByGroupInvalidTest2() throws Exception{
-        Mockito.when(productDAO.getProductByGroup(Mockito.any())).thenReturn(null);
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductByGroup("PG101"));
-        Assert.assertNotNull("ProductService.PRODUCT_LIST_NOT_FOUND",e.getMessage());
-    }
-
-    @Test
-    public void getProductByGroupInvalidTest3() throws Exception{
-        Mockito.when(productDAO.getProductByGroup(Mockito.any())).thenReturn(new ArrayList<Product>());
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductByGroup("PG101"));
-        Assert.assertNotNull("ProductService.PRODUCT_LIST_NOT_FOUND",e.getMessage());
-    }
-
-    @Test
-    public void getProductCategoryByPriceValidTest1() throws Exception{
-        Product p= new Product();
-        p.setCategory(Category.TOPS);
-        p.setProductId("P10001");
-        p.setProductGroup("PG10001");
-
-        List<Product> pList= new ArrayList<>();
-        pList.add(p);
-        Mockito.when(productDAO.getProductCategoryByPrice(Mockito.any(),Mockito.anyBoolean())).thenReturn(pList);
-        List<Product> productList= productService.getProductCategoryByPrice(p.getCategory(),true);
-        Assert.assertNotNull(productList);
-    }
-
-    @Test
-    public void getProductCategoryByPriceValidTest2() throws Exception{
-        Product p= new Product();
-        p.setCategory(Category.TOPS);
-        p.setProductId("P10001");
-        p.setProductGroup("PG10001");
-
-        List<Product> pList= new ArrayList<>();
-        pList.add(p);
-        Mockito.when(productDAO.getProductCategoryByPrice(Mockito.any(),Mockito.anyBoolean())).thenReturn(pList);
-        List<Product> productList= productService.getProductCategoryByPrice(p.getCategory(),false);
-        Assert.assertNotNull(productList);
-    }
-
-    @Test
-    public void getProductCategoryByPriceInvalidTest1() throws Exception{
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductCategoryByPrice(Category.TOPS,null));
-        Assert.assertNotNull("ProductService.INVALID_PRODUCT_CATEGORY",e.getMessage());
-    }
-
-    @Test
-    public void getProductCategoryByPriceInvalidTest2() throws Exception{
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductCategoryByPrice(null,true));
-        Assert.assertNotNull("ProductService.INVALID_PRODUCT_CATEGORY",e.getMessage());
-    }
-
-    @Test
-    public void getProductCategoryByPriceInvalidTest3() throws Exception{
-        Mockito.when(productDAO.getProductCategoryByPrice(Mockito.any(),Mockito.anyBoolean())).thenReturn(null);
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductCategoryByPrice(Category.TOPS,true));
-        Assert.assertNotNull("ProductService.PRODUCT_LIST_NOT_FOUND",e.getMessage());
-    }
-
-    @Test
-    public void getProductCategoryByPriceInvalidTest4() throws Exception{
-        Mockito.when(productDAO.getProductCategoryByPrice(Mockito.any(),Mockito.anyBoolean())).thenReturn(new ArrayList<>());
-        Exception e= Assert.assertThrows(Exception.class,
-                ()-> productService.getProductCategoryByPrice(Category.TOPS,true));
-        Assert.assertNotNull("ProductService.PRODUCT_LIST_NOT_FOUND",e.getMessage());
-    }
-
-    @Test
     public void getAllProductsValidTest() throws Exception{
         Product p= new Product();
         p.setCategory(Category.TOPS);
         p.setProductId("P10001");
-        p.setProductGroup("PG10001");
 
         List<Product> pList= new ArrayList<>();
         pList.add(p);
@@ -213,7 +117,6 @@ public class ProductServiceImplTest {
         Product p= new Product();
         p.setCategory(Category.TOPS);
         p.setProductId("P10001");
-        p.setProductGroup("PG10001");
 
         List<Product> pList= new ArrayList<>();
         pList.add(p);
@@ -243,7 +146,6 @@ public class ProductServiceImplTest {
         Product p= new Product();
         p.setCategory(Category.TOPS);
         p.setProductId("P10001");
-        p.setProductGroup("PG10001");
 
         List<Product> pList= new ArrayList<>();
         pList.add(p);
@@ -280,7 +182,6 @@ public class ProductServiceImplTest {
         Product p= new Product();
         p.setCategory(Category.TOPS);
         p.setProductId("P10001");
-        p.setProductGroup("PG10001");
 
         List<Product> pList= new ArrayList<>();
         pList.add(p);
