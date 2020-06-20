@@ -239,21 +239,58 @@ public class ProductDAOImpl implements ProductDAO{
 
     @Override
     public List<Product> getProductBySearchQuery(String search) throws Exception {
+        search = search.toLowerCase();
+        String[] categories = new String[]{"t-shirt","t shirt","tshirt","skirt","shirt","top","jean","trouser"};
 
-        Query query1= entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search");
-        query1.setParameter("search", "%"+search.toLowerCase()+"%");
+        Category category = null;
+        List<ProductEntity> productEntityList=null;
 
-        List<ProductEntity> productEntityList= query1.getResultList();
+        for (int i=0; i<categories.length; i++) {
+            if (search.contains(categories[i])) {
+                if (i < 3) category = Category.TSHIRT;
+                else if (i==3) category = Category.SKIRTS;
+                else if (i==4) category = Category.SHIRT;
+                else if (i==5) category = Category.TOPS;
+                else if (i==6) category = Category.JEANS;
+                else category = Category.TROUSERS;
+                break;
+            }
+        }
 
-        Query query2= entityManager.createQuery("select p from ProductEntity p where lower(p.productInfo) like :search");
-        query2.setParameter("search", "%"+search.toLowerCase()+"%");
+        if (category == null) {
+            Query query1 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search");
+            query1.setParameter("search", "%" + search.toLowerCase() + "%");
 
-        productEntityList.addAll(query2.getResultList());
+            productEntityList = query1.getResultList();
 
-        Query query3= entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
-        query3.setParameter("search", "%"+search.replace(' ','%').toLowerCase()+"%");
+            Query query2 = entityManager.createQuery("select p from ProductEntity p where lower(p.productInfo) like :search");
+            query2.setParameter("search", "%" + search.toLowerCase() + "%");
 
-        productEntityList.addAll(query3.getResultList());
+            productEntityList.addAll(query2.getResultList());
+
+            Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
+            query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
+
+            productEntityList.addAll(query3.getResultList());
+        } else {
+            Query query1 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search and p.category =:category");
+            query1.setParameter("search", "%" + search.toLowerCase() + "%");
+            query1.setParameter("category", category);
+
+            productEntityList = query1.getResultList();
+
+            Query query2 = entityManager.createQuery("select p from ProductEntity p where lower(p.productInfo) like :search and p.category =:category");
+            query2.setParameter("search", "%" + search.toLowerCase() + "%");
+            query2.setParameter("category", category);
+
+            productEntityList.addAll(query2.getResultList());
+
+            Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search and p.category =:category");
+            query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
+            query3.setParameter("category", category);
+
+            productEntityList.addAll(query3.getResultList());
+        }
 
         List<Product> productList= null;
 
