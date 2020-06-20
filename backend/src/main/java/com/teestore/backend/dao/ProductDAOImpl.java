@@ -266,7 +266,7 @@ public class ProductDAOImpl implements ProductDAO{
             Query query2 = entityManager.createQuery("select p from ProductEntity p where lower(p.productInfo) like :search");
             query2.setParameter("search", "%" + search.toLowerCase() + "%");
 
-            List<ProductEntity> tempList = query1.getResultList();
+            List<ProductEntity> tempList = query2.getResultList();
             for (ProductEntity pe:tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
@@ -274,7 +274,7 @@ public class ProductDAOImpl implements ProductDAO{
 
             Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
             query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
-            tempList = query1.getResultList();
+            tempList = query3.getResultList();
             for (ProductEntity pe:tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
@@ -290,7 +290,7 @@ public class ProductDAOImpl implements ProductDAO{
             query2.setParameter("search", "%" + search.toLowerCase() + "%");
             query2.setParameter("category", category);
 
-            List<ProductEntity> tempList = query1.getResultList();
+            List<ProductEntity> tempList = query2.getResultList();
             for (ProductEntity pe:tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
@@ -299,7 +299,7 @@ public class ProductDAOImpl implements ProductDAO{
             Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search and p.category =:category");
             query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
             query3.setParameter("category", category);
-            tempList = query1.getResultList();
+            tempList = query3.getResultList();
             for (ProductEntity pe:tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
