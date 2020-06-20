@@ -266,12 +266,19 @@ public class ProductDAOImpl implements ProductDAO{
             Query query2 = entityManager.createQuery("select p from ProductEntity p where lower(p.productInfo) like :search");
             query2.setParameter("search", "%" + search.toLowerCase() + "%");
 
-            productEntityList.addAll(query2.getResultList());
+            List<ProductEntity> tempList = query1.getResultList();
+            for (ProductEntity pe:tempList) {
+                if (!productEntityList.contains(pe))
+                    productEntityList.add(pe);
+            }
 
             Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
             query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
-
-            productEntityList.addAll(query3.getResultList());
+            tempList = query1.getResultList();
+            for (ProductEntity pe:tempList) {
+                if (!productEntityList.contains(pe))
+                    productEntityList.add(pe);
+            }
         } else {
             Query query1 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search and p.category =:category");
             query1.setParameter("search", "%" + search.toLowerCase() + "%");
@@ -283,13 +290,20 @@ public class ProductDAOImpl implements ProductDAO{
             query2.setParameter("search", "%" + search.toLowerCase() + "%");
             query2.setParameter("category", category);
 
-            productEntityList.addAll(query2.getResultList());
+            List<ProductEntity> tempList = query1.getResultList();
+            for (ProductEntity pe:tempList) {
+                if (!productEntityList.contains(pe))
+                    productEntityList.add(pe);
+            }
 
             Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search and p.category =:category");
             query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
             query3.setParameter("category", category);
-
-            productEntityList.addAll(query3.getResultList());
+            tempList = query1.getResultList();
+            for (ProductEntity pe:tempList) {
+                if (!productEntityList.contains(pe))
+                    productEntityList.add(pe);
+            }
         }
 
         List<Product> productList= null;
