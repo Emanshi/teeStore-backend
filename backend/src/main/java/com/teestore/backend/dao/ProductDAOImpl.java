@@ -239,10 +239,22 @@ public class ProductDAOImpl implements ProductDAO{
 
     @Override
     public List<Product> getProductBySearchQuery(String search) throws Exception {
-        Query query= entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
-        query.setParameter("search", "%"+search.toLowerCase()+"%");
 
-        List<ProductEntity> productEntityList= query.getResultList();
+        Query query1= entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search");
+        query1.setParameter("search", "%"+search.toLowerCase()+"%");
+
+        List<ProductEntity> productEntityList= query1.getResultList();
+
+        Query query2= entityManager.createQuery("select p from ProductEntity p where lower(p.productInfo) like :search");
+        query2.setParameter("search", "%"+search.toLowerCase()+"%");
+
+        productEntityList.addAll(query2.getResultList());
+
+        Query query3= entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
+        query3.setParameter("search", "%"+search.replace(' ','%').toLowerCase()+"%");
+
+        productEntityList.addAll(query3.getResultList());
+
         List<Product> productList= null;
 
         if(productEntityList!=null && !productEntityList.isEmpty()){
