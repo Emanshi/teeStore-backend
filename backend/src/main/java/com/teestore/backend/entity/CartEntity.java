@@ -18,8 +18,8 @@ public class CartEntity {
     @Column(length = 1000)
     private String quantities;
     private Double totalCost;
-    @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id")
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id",unique=true)
     private UserEntity user;
 
     public String getCartId() {
