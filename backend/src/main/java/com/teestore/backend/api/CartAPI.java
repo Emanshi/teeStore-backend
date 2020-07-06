@@ -26,7 +26,7 @@ public class CartAPI {
         }
     }
 
-    @PostMapping("/addProduct")
+    @GetMapping("/addProduct")
     public ResponseEntity<Integer> addProductToCart (@RequestParam String userId, @RequestParam String productId) throws Exception {
         try {
             Integer res = cartService.addProductToCart(userId, productId);
