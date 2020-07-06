@@ -27,9 +27,9 @@ public class CartAPI {
     }
 
     @PostMapping("/addProduct")
-    public ResponseEntity<String> addProductToCart (@RequestParam String cartId, @RequestParam String productId) throws Exception {
+    public ResponseEntity<Integer> addProductToCart (@RequestParam String userId, @RequestParam String productId) throws Exception {
         try {
-            String res = cartService.addProductToCart(cartId, productId);
+            Integer res = cartService.addProductToCart(userId, productId);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());

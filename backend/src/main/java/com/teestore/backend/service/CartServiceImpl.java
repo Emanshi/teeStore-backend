@@ -24,12 +24,14 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String addProductToCart(String cartId, String productId) throws Exception {
-        if (cartId == null || productId == null || cartId.equals("") || productId.equals(""))
+    public Integer addProductToCart(String userId, String productId) throws Exception {
+        if (userId == null || productId == null || userId.equals("") || productId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
-        String res = cartDAO.addProductToCart(cartId, productId);
+        Integer res = cartDAO.addProductToCart(userId, productId);
         if (res == null)
             throw new Exception("CartService.UNABLE_TO_ADD_PRODUCT_TO_CART");
+        else if (res == 0)
+            throw new Exception("CartService.PRODUCT_ALREADY_IN_CART");
         return res;
     }
 

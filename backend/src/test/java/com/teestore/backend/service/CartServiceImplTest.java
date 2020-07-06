@@ -48,8 +48,8 @@ public class CartServiceImplTest {
 
     @Test
     public void addProductToCartValidTest () throws Exception {
-        Mockito.when(cartDAO.addProductToCart(Mockito.anyString(), Mockito.anyString())).thenReturn("P1001");
-        String res = cartService.addProductToCart("C1001", "P");
+        Mockito.when(cartDAO.addProductToCart(Mockito.anyString(), Mockito.anyString())).thenReturn(1);
+        Integer res = cartService.addProductToCart("C1001", "P");
         Assert.assertNotNull(res);
     }
 
