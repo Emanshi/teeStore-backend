@@ -67,9 +67,9 @@ public class CartAPI {
     }
 
     @PostMapping("/buyNow")
-    public ResponseEntity<String> buyNow (@RequestParam String cartId) throws Exception {
+    public ResponseEntity<String> buyNow (@RequestParam String userId) throws Exception {
         try {
-            String res = cartService.buyNow(cartId);
+            String res = cartService.buyNow(userId);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
