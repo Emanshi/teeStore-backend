@@ -56,10 +56,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Cart getCart(String cartId) throws Exception {
-        if (cartId == null || cartId.equals(""))
-            throw new Exception("CartService.INVALID_CART_ID");
-        Cart res = cartDAO.getCart(cartId);
+    public Cart getCart(String userId) throws Exception {
+        if (userId == null || userId.equals(""))
+            throw new Exception("CartService.INVALID_USER_ID");
+        Cart res = cartDAO.getCart(userId);
         if (res == null)
             throw new Exception("CartService.UNABLE_TO_RETRIEVE_CART");
         return res;
