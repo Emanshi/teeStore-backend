@@ -133,20 +133,20 @@ public class CartDAOImpl implements CartDAO {
         Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
         query.setParameter("userId",userId);
 
-        CartEntity entity = (CartEntity)query.getResultList().get(0);
+        List<CartEntity> entities = query.getResultList();
 
         Cart cart = null;
         List<Product> products = null;
         List<Integer> qty = null;
-        if (entity != null) {
-            User user = userService.getUser(entity.getUser().getUserId());
+        if (entities != null && !entities.isEmpty()) {
+            User user = userService.getUser(entities.get(0).getUser().getUserId());
             if (user != null) {
                 cart = new Cart();
-                cart.setTotalCost(entity.getTotalCost());
+                cart.setTotalCost(entities.get(0).getTotalCost());
                 cart.setUser(user);
-                String productIds = entity.getProductIds();
+                String productIds = entities.get(0).getProductIds();
                 String[] ids = productIds.split(",");
-                String[] qs = entity.getQuantities().split(",");
+                String[] qs = entities.get(0).getQuantities().split(",");
                 if (ids.length > 0) {
                     products = new ArrayList<>();
                     qty = new ArrayList<>();
@@ -164,7 +164,7 @@ public class CartDAOImpl implements CartDAO {
                 }
                 cart.setQuantities(qty);
                 cart.setProducts(products);
-                cart.setCartId(entity.getCartId());
+                cart.setCartId(entities.get(0).getCartId());
             }
         }
         return cart;

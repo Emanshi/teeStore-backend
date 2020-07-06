@@ -57,9 +57,9 @@ public class CartAPI {
     }
 
     @GetMapping("/getCart")
-    public ResponseEntity<Cart> getCart (@RequestParam String cartId) throws Exception {
+    public ResponseEntity<Cart> getCart (@RequestParam String userId) throws Exception {
         try {
-            Cart res = cartService.getCart(cartId);
+            Cart res = cartService.getCart(userId);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
