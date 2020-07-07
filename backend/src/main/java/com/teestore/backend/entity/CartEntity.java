@@ -17,10 +17,20 @@ public class CartEntity {
     private String productIds;
     @Column(length = 1000)
     private String quantities;
+    @Column
+    private String sizes;
     private Double totalCost;
     @OneToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id",unique=true)
     private UserEntity user;
+
+    public String getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
+    }
 
     public String getCartId() {
         return cartId;

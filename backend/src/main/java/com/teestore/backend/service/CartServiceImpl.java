@@ -24,10 +24,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public Integer addProductToCart(String userId, String productId) throws Exception {
+    public Integer addProductToCart(String userId, String productId, String size) throws Exception {
         if (userId == null || productId == null || userId.equals("") || productId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
-        Integer res = cartDAO.addProductToCart(userId, productId);
+        Integer res = cartDAO.addProductToCart(userId, productId, size);
         if (res == null)
             throw new Exception("CartService.UNABLE_TO_ADD_PRODUCT_TO_CART");
         else if (res == 0)

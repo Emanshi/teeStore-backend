@@ -7,8 +7,17 @@ public class Cart {
     private String cartId;
     private List<Product> products;
     private List<Integer> quantities;
+    private List<String> sizes;
     private Double totalCost;
     private User user;
+
+    public List<String> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(List<String> sizes) {
+        this.sizes = sizes;
+    }
 
     public String getCartId() {
         return cartId;

@@ -68,7 +68,7 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
-    public Integer addProductToCart(String userId, String productId) throws Exception {
+    public Integer addProductToCart(String userId, String productId, String size) throws Exception {
         Integer i = null;
 
         Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
@@ -88,25 +88,21 @@ public class CartDAOImpl implements CartDAO {
             CartEntity entity = entityManager.find(CartEntity.class, cartId);
 
             entity.setProductIds(productId);
+            entity.setSizes(size);
             entity.setQuantities("1");
 
             entityManager.persist(entity);
-            i=1;
         }
         else {
             CartEntity entity = entities.get(0);
-            boolean exists = entity.getProductIds().contains(productId);
-
-            if (exists) {
-                return 0;
-            }
 
             entity.setProductIds(entity.getProductIds() + "," + productId);
+            entity.setSizes(entity.getSizes() + "," + size);
             entity.setQuantities(entity.getQuantities() + ",1");
 
             entityManager.persist(entity);
-            i=1;
         }
+        i=1;
 
         return i;
     }
