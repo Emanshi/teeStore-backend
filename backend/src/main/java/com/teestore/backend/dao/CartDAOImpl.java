@@ -135,6 +135,7 @@ public class CartDAOImpl implements CartDAO {
         Cart cart = null;
         List<Product> products = null;
         List<Integer> qty = null;
+        List<String> size = null;
         if (entities != null && !entities.isEmpty()) {
             User user = userService.getUser(entities.get(0).getUser().getUserId());
             if (user != null) {
@@ -144,9 +145,11 @@ public class CartDAOImpl implements CartDAO {
                 String productIds = entities.get(0).getProductIds();
                 String[] ids = productIds.split(",");
                 String[] qs = entities.get(0).getQuantities().split(",");
+                String[] sizes = entities.get(0).getSizes().split(",");
                 if (ids.length > 0) {
                     products = new ArrayList<>();
                     qty = new ArrayList<>();
+                    size = new ArrayList<>();
                     for (String id:ids) {
                         if (id.equals(""))
                             continue;
@@ -158,9 +161,15 @@ public class CartDAOImpl implements CartDAO {
                             continue;
                         qty.add(Integer.parseInt(q));
                     }
+                    for (String q:sizes) {
+                        if (q.equals(""))
+                            continue;
+                        size.add(q);
+                    }
                 }
                 cart.setQuantities(qty);
                 cart.setProducts(products);
+                cart.setSizes(size);
                 cart.setCartId(entities.get(0).getCartId());
             }
         }
