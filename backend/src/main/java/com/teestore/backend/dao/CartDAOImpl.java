@@ -74,9 +74,9 @@ public class CartDAOImpl implements CartDAO {
         Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
         query.setParameter("userId",userId);
 
-        CartEntity entity = (CartEntity)query.getResultList().get(0);
+        List<CartEntity> entities = query.getResultList();
 
-        if (entity == null) {
+        if (entities == null || entities.isEmpty()) {
 
             Cart c = new Cart();
             User u = new User();
@@ -85,7 +85,7 @@ public class CartDAOImpl implements CartDAO {
             c.setUser(u);
             String cartId = cartService.addCart(c);
 
-            entity = entityManager.find(CartEntity.class, cartId);
+            CartEntity entity = entityManager.find(CartEntity.class, cartId);
 
             entity.setProductIds(productId);
             entity.setQuantities("1");
@@ -94,6 +94,7 @@ public class CartDAOImpl implements CartDAO {
             i=1;
         }
         else {
+            CartEntity entity = entities.get(0);
             boolean exists = entity.getProductIds().contains(productId);
 
             if (exists) {
