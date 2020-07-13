@@ -217,7 +217,12 @@ public class CartDAOImpl implements CartDAO {
         CartEntity entity = entityManager.find(CartEntity.class, cartId);
 
         if (entity != null) {
-            entityManager.remove(entity);
+            entity.setSizes("");
+            entity.setProductIds("");
+            entity.setQuantities("");
+            entity.setTotalCost(0.0);
+
+            entityManager.persist(entity);
             id = entity.getCartId();
         }
         return id;
