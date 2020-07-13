@@ -5,7 +5,7 @@ import com.teestore.backend.model.Cart;
 public interface CartService {
     String addCart (Cart cart) throws Exception;
     Integer addProductToCart (String userId, String productId, String size) throws Exception;
-    String removeProductFromCart (String cartId, String productId) throws Exception;
+    Integer removeProductFromCart (String userId, String productId, String size) throws Exception;
     String clearCart (String cartId) throws Exception;
     Cart getCart (String userId) throws Exception;
     String buyNow (String cartId) throws Exception;

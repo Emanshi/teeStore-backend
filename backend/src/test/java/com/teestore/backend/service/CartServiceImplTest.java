@@ -70,23 +70,23 @@ public class CartServiceImplTest {
 
     @Test
     public void removeProductToCartValidTest () throws Exception {
-        Mockito.when(cartDAO.removeProductFromCart(Mockito.anyString(), Mockito.anyString())).thenReturn("C1001");
-        String res = cartService.removeProductFromCart("C1001", "P");
+        Mockito.when(cartDAO.removeProductFromCart(Mockito.anyString(), Mockito.anyString(), Mockito.anyString())).thenReturn(1);
+        Integer res = cartService.removeProductFromCart("C1001", "P", "XS");
         Assert.assertNotNull(res);
     }
 
     @Test
     public void removeProductToCartInvalidTest () throws Exception {
-        Mockito.when(cartDAO.removeProductFromCart(Mockito.anyString(), Mockito.anyString())).thenReturn(null);
+        Mockito.when(cartDAO.removeProductFromCart(Mockito.anyString(), Mockito.anyString(), Mockito.anyString())).thenReturn(null);
         Exception e = Assert.assertThrows(Exception.class,
-                () -> cartService.removeProductFromCart("C", "P"));
+                () -> cartService.removeProductFromCart("C", "P", "XS"));
         Assert.assertEquals("CartService.UNABLE_TO_REMOVE_PRODUCT_FROM_CART", e.getMessage());
     }
 
     @Test
     public void removeProductToCartInvalidTestNull () throws Exception {
         Exception e = Assert.assertThrows(Exception.class,
-                () -> cartService.removeProductFromCart("C", ""));
+                () -> cartService.removeProductFromCart("C", "", "XS"));
         Assert.assertEquals("CartService.INVALID_CART_ID", e.getMessage());
     }
 

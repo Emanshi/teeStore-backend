@@ -15,6 +15,7 @@ import org.springframework.stereotype.Repository;
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository(value = "cartDAO")
@@ -108,8 +109,68 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
-    public String removeProductFromCart(String cartId, String productId) throws Exception {
-        return null;
+    public Integer removeProductFromCart(String userId, String productId, String size) throws Exception {
+        Integer n = null;
+
+        Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
+        query.setParameter("userId",userId);
+
+        List<CartEntity> entities = query.getResultList();
+
+        if (entities == null || entities.isEmpty()) {
+
+            Cart c = new Cart();
+            User u = new User();
+
+            u.setUserId(userId);
+            c.setUser(u);
+            String cartId = cartService.addCart(c);
+
+            CartEntity entity = entityManager.find(CartEntity.class, cartId);
+
+            entity.setProductIds(productId);
+            entity.setSizes(size);
+            entity.setQuantities("1");
+
+            entityManager.persist(entity);
+        }
+        else {
+            CartEntity entity = entities.get(0);
+
+            List<String> products = Arrays.asList(entity.getProductIds().split(","));
+            List<String> sizes = Arrays.asList(entity.getSizes().split(","));
+            List<String> qtys = Arrays.asList(entity.getQuantities().split(","));
+
+            int r = -1;
+
+            for (int i = 0; i < products.size(); i++) {
+                if (products.get(i).equals(productId) && sizes.get(i).equals(size)) {
+                    r = i;
+                }
+            }
+            products.remove(r);
+            sizes.remove(r);
+            qtys.remove(r);
+
+            StringBuilder a = new StringBuilder();
+            StringBuilder b = new StringBuilder();
+            StringBuilder c = new StringBuilder();
+
+            for (int i = 0; i < products.size(); i++){
+                a.append(products.get(i)).append(",");
+                b.append(sizes.get(i)).append(",");
+                c.append(qtys.get(i)).append(",");
+            }
+
+            entity.setProductIds(a.toString().substring(0,a.length()-1));
+            entity.setSizes(b.toString().substring(0,b.length()-1));
+            entity.setQuantities(c.toString().substring(0,c.length()-1));
+
+            entityManager.persist(entity);
+            n=1;
+        }
+
+        return n;
     }
 
     @Override

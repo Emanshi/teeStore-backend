@@ -36,10 +36,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String removeProductFromCart(String cartId, String productId) throws Exception {
-        if (cartId == null || productId == null || cartId.equals("") || productId.equals(""))
+    public Integer removeProductFromCart(String userId, String productId, String size) throws Exception {
+        if (userId == null || productId == null || userId.equals("") || productId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
-        String res = cartDAO.removeProductFromCart(cartId, productId);
+        Integer res = cartDAO.removeProductFromCart(userId, productId, size);
         if (res == null)
             throw new Exception("CartService.UNABLE_TO_REMOVE_PRODUCT_FROM_CART");
         return res;

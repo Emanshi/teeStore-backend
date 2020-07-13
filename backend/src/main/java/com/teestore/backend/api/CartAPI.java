@@ -37,9 +37,9 @@ public class CartAPI {
     }
 
     @DeleteMapping("/removeProduct")
-    public ResponseEntity<String> removeProductFromCart (@RequestParam String cartId, @RequestParam String productId) throws Exception {
+    public ResponseEntity<Integer> removeProductFromCart (@RequestParam String userId, @RequestParam String productId, @RequestParam String size) throws Exception {
         try {
-            String res = cartService.removeProductFromCart(cartId, productId);
+            Integer res = cartService.removeProductFromCart(userId, productId, size);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
