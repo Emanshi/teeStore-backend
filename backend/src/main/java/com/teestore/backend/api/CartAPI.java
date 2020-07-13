@@ -57,7 +57,7 @@ public class CartAPI {
     }
 
     @PutMapping("/editCart/{cartId}")
-    public ResponseEntity<String> clearCart (@PathVariable String cartId, @RequestBody Cart cart) throws Exception {
+    public ResponseEntity<String> editCart (@PathVariable String cartId, @RequestBody Cart cart) throws Exception {
         try {
             String res = cartService.editCart(cartId, cart);
             return new ResponseEntity<>(res, HttpStatus.OK);
