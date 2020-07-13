@@ -137,9 +137,9 @@ public class CartDAOImpl implements CartDAO {
         else {
             CartEntity entity = entities.get(0);
 
-            List<String> products = Arrays.asList(entity.getProductIds().split(","));
-            List<String> sizes = Arrays.asList(entity.getSizes().split(","));
-            List<String> qtys = Arrays.asList(entity.getQuantities().split(","));
+            ArrayList<String> products = new ArrayList<>(Arrays.asList(entity.getProductIds().split(",")));
+            ArrayList<String> sizes = new ArrayList<>(Arrays.asList(entity.getSizes().split(",")));
+            ArrayList<String> qtys = new ArrayList<>(Arrays.asList(entity.getQuantities().split(",")));
 
             int r = -1;
 
