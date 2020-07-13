@@ -56,6 +56,16 @@ public class CartAPI {
         }
     }
 
+    @PutMapping("/editCart/{cartId}")
+    public ResponseEntity<String> clearCart (@PathVariable String cartId, @RequestBody Cart cart) throws Exception {
+        try {
+            String res = cartService.editCart(cartId, cart);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
+        }
+    }
+
     @GetMapping("/getCart")
     public ResponseEntity<Cart> getCart (@RequestParam String userId) throws Exception {
         try {

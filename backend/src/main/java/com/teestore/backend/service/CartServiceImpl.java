@@ -56,6 +56,16 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
+    public String editCart(String cartId, Cart cart) throws Exception {
+        if (cartId == null || cartId.equals(""))
+            throw new Exception("CartService.INVALID_CART_ID");
+        String res = cartDAO.editCart(cartId, cart);
+        if (res == null)
+            throw new Exception("CartService.UNABLE_TO_UPDATE_CART");
+        return res;
+    }
+
+    @Override
     public Cart getCart(String userId) throws Exception {
         if (userId == null || userId.equals(""))
             throw new Exception("CartService.INVALID_USER_ID");

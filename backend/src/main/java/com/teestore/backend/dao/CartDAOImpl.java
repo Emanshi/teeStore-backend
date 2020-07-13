@@ -174,6 +174,43 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
+    public String editCart(String cartId, Cart cart) throws Exception {
+        String id = null;
+
+        CartEntity entity = entityManager.find(CartEntity.class, cartId);
+
+        if (cart.getProducts() != null && !cart.getProducts().isEmpty()) {
+            StringBuilder products = new StringBuilder();
+            for (Product p : cart.getProducts()) {
+                products.append(p.getProductId()).append(",");
+            }
+            StringBuilder qty = new StringBuilder();
+            for (Integer i : cart.getQuantities()) {
+                qty.append(i).append(",");
+            }
+            StringBuilder sizes = new StringBuilder();
+            for (String i : cart.getSizes()) {
+                sizes.append(i).append(",");
+            }
+
+            UserEntity user = entityManager.find(UserEntity.class, cart.getUser().getUserId());
+
+            if (user != null) {
+                entity.setProductIds(products.toString().substring(0,products.length()-1));
+                entity.setQuantities(qty.toString().substring(0,qty.length()-1));
+                entity.setSizes(sizes.toString().substring(0,sizes.length()-1));
+                entity.setTotalCost(cart.getTotalCost());
+                entity.setUser(user);
+
+                entityManager.persist(entity);
+
+                id = entity.getCartId();
+            }
+        }
+        return id;
+    }
+
+    @Override
     public String clearCart(String cartId) throws Exception {
         String id = null;
 
