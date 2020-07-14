@@ -47,9 +47,9 @@ public class CartAPI {
     }
 
     @DeleteMapping("/clearCart/{cartId}")
-    public ResponseEntity<String> clearCart (@PathVariable String cartId) throws Exception {
+    public ResponseEntity<Cart> clearCart (@PathVariable String cartId) throws Exception {
         try {
-            String res = cartService.clearCart(cartId);
+            Cart res = cartService.clearCart(cartId);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());

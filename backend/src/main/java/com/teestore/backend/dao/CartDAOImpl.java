@@ -211,8 +211,8 @@ public class CartDAOImpl implements CartDAO {
     }
 
     @Override
-    public String clearCart(String cartId) throws Exception {
-        String id = null;
+    public Cart clearCart(String cartId) throws Exception {
+        Cart id = null;
 
         CartEntity entity = entityManager.find(CartEntity.class, cartId);
 
@@ -223,8 +223,9 @@ public class CartDAOImpl implements CartDAO {
             entity.setTotalCost(0.0);
 
             entityManager.persist(entity);
-            id = entity.getCartId();
+            id = cartService.getCart(entity.getUser().getUserId());
         }
+
         return id;
     }
 

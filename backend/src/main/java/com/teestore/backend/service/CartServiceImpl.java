@@ -46,10 +46,10 @@ public class CartServiceImpl implements CartService {
     }
 
     @Override
-    public String clearCart(String cartId) throws Exception {
+    public Cart clearCart(String cartId) throws Exception {
         if (cartId == null || cartId.equals(""))
             throw new Exception("CartService.INVALID_CART_ID");
-        String res = cartDAO.clearCart(cartId);
+        Cart res = cartDAO.clearCart(cartId);
         if (res == null)
             throw new Exception("CartService.UNABLE_TO_CLEAR_CART");
         return res;
