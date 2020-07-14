@@ -92,8 +92,8 @@ public class CartServiceImplTest {
 
     @Test
     public void clearCartValidTest () throws Exception {
-        Mockito.when(cartDAO.clearCart(Mockito.anyString())).thenReturn(Mockito.anyString());
-        String res = cartService.clearCart("C1001");
+        Mockito.when(cartDAO.clearCart(Mockito.anyString())).thenReturn(Mockito.any());
+        Cart res = cartService.clearCart("C1001");
         Assert.assertNotNull(res);
     }
 
