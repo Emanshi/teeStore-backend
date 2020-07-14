@@ -223,7 +223,7 @@ public class CartDAOImpl implements CartDAO {
             entity.setTotalCost(0.0);
 
             entityManager.persist(entity);
-            id = cartService.getCart(entity.getUser().getUserId());
+            id = getCart(entity.getUser().getUserId());
         }
 
         return id;
