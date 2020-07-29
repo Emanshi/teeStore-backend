@@ -8,9 +8,27 @@ public class Order {
     private String orderId;
     private List<Product> products;
     private List<Integer> quantities;
+    private List<String> sizes;
     private Double totalCost;
     private LocalDateTime timeOfOrder;
     private User user;
+    private List<Double> prices;
+
+    public List<String> getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(List<String> sizes) {
+        this.sizes = sizes;
+    }
+
+    public List<Double> getPrices() {
+        return prices;
+    }
+
+    public void setPrices(List<Double> prices) {
+        this.prices = prices;
+    }
 
     public LocalDateTime getTimeOfOrder() {
         return timeOfOrder;

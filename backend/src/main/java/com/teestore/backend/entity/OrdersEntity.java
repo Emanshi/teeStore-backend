@@ -18,11 +18,31 @@ public class OrdersEntity {
     private String productIds;
     @Column(length = 1000)
     private String quantities;
+    @Column(length= 1000)
+    private String prices;
+    @Column
+    private String sizes;
     private Double totalCost;
     private LocalDateTime timeOfOrder;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity user;
+
+    public String getSizes() {
+        return sizes;
+    }
+
+    public void setSizes(String sizes) {
+        this.sizes = sizes;
+    }
+
+    public String getPrices() {
+        return prices;
+    }
+
+    public void setPrices(String prices) {
+        this.prices = prices;
+    }
 
     public String getOrderId() {
         return orderId;

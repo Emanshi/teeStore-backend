@@ -30,7 +30,7 @@ public class OrdersAPI {
     }
 
     @GetMapping("/getOrder")
-    public ResponseEntity<Order> getCart (@RequestParam String orderId) throws Exception {
+    public ResponseEntity<Order> getOrder (@RequestParam String orderId) throws Exception {
         try {
             Order res = ordersService.getOrder(orderId);
             return new ResponseEntity<>(res, HttpStatus.OK);
