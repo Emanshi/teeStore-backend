@@ -30,8 +30,8 @@ public class CartDAOImpl implements CartDAO {
     @Autowired
     private ProductService productService;
 
-    @Autowired
-    private OrdersService ordersService;
+//    @Autowired
+//    private OrdersService ordersService;
 
     @Autowired
     private CartService cartService;
@@ -282,7 +282,8 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public String buyNow(String cartId) throws Exception {
-        Cart cart = getCart(cartId);
-        return ordersService.buyNow(cart);
+//        Cart cart = getCart(cartId);
+//        return ordersService.buyNow(cart);
+        return null;
     }
 }
