@@ -1,7 +1,5 @@
 package com.teestore.backend.entity;
 
-import com.teestore.backend.model.User;
-
 import javax.persistence.*;
 
 @Entity
@@ -15,7 +13,7 @@ public class CardEntity {
     private String cvv;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name="user_id")
-    private User user;
+    private UserEntity user;
 
     public String getExpiryMonthYear() {
         return expiryMonthYear;
@@ -49,11 +47,11 @@ public class CardEntity {
         this.cvv = cvv;
     }
 
-    public User getUser() {
+    public UserEntity getUser() {
         return user;
     }
 
-    public void setUser(User user) {
+    public void setUser(UserEntity user) {
         this.user = user;
     }
 }
