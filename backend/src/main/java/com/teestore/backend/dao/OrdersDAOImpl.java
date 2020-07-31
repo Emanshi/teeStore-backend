@@ -55,10 +55,17 @@ public class OrdersDAOImpl implements OrdersDAO {
                 String[] size = pe.getSize().split(",");
                 Integer index = Arrays.asList(size).indexOf(sizesList.get(i));
                 if(index >= 0 && index < productList.size()) {
-                    if (Integer.parseInt(quantity[index]) < qtyList.get(i))
+                    if (Integer.parseInt(quantity[index]) < qtyList.get(i)) {
                         return null;
-                    else
-                        pe.setQuantity(String.valueOf(Integer.parseInt(quantity[index]) - qtyList.get(i)));
+                    }
+                    else {
+                        quantity[index]=String.valueOf(Integer.parseInt(quantity[index]) - qtyList.get(i));
+                        StringBuilder s = new StringBuilder();
+                        for(String q : quantity){
+                            s.append(q).append(',');
+                        }
+                        pe.setQuantity(s.toString().substring(0,s.length()-1));
+                    }
                 }
                 else{
                     return null;
@@ -73,10 +80,10 @@ public class OrdersDAOImpl implements OrdersDAO {
 
             if (user != null) {
                 OrdersEntity entity = new OrdersEntity();
-                entity.setProductIds(products.toString());
-                entity.setQuantities(qty.toString());
-                entity.setSizes(sizes.toString());
-                entity.setPrices(prices.toString());
+                entity.setProductIds(products.toString().substring(0,products.length()-1));
+                entity.setQuantities(qty.toString().substring(0,qty.length()-1));
+                entity.setSizes(sizes.toString().substring(0,sizes.length()-1));
+                entity.setPrices(prices.toString().substring(0,prices.length()-1));
                 entity.setTotalCost(cart.getTotalCost());
                 entity.setTimeOfOrder(LocalDateTime.now());
                 entity.setUser(user);
