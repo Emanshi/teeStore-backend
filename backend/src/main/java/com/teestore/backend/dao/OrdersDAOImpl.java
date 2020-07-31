@@ -18,6 +18,7 @@ import javax.persistence.EntityManager;
 import javax.persistence.Query;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 @Repository(value = "ordersDAO")
@@ -50,10 +51,18 @@ public class OrdersDAOImpl implements OrdersDAO {
 
             for (int i=0;i< productList.size();i++) {
                 ProductEntity pe = entityManager.find(ProductEntity.class,productList.get(i).getProductId());
-                if (Integer.parseInt(pe.getQuantity()) < qtyList.get(i))
+                String[] quantity = pe.getQuantity().split(",");
+                String[] size = pe.getSize().split(",");
+                Integer index = Arrays.asList(size).indexOf(sizesList.get(i));
+                if(index >= 0 && index < productList.size()) {
+                    if (Integer.parseInt(quantity[index]) < qtyList.get(i))
+                        return null;
+                    else
+                        pe.setQuantity(String.valueOf(Integer.parseInt(quantity[index]) - qtyList.get(i)));
+                }
+                else{
                     return null;
-                else
-                    pe.setQuantity(String.valueOf(Integer.parseInt(pe.getQuantity()) - qtyList.get(i)));
+                }
                 products.append(productList.get(i).getProductId()).append(",");
                 qty.append(qtyList.get(i)).append(",");
                 sizes.append(sizesList.get(i)).append(",");
