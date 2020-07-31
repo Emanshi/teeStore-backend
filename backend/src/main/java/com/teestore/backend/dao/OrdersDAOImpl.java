@@ -54,7 +54,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                 String[] quantity = pe.getQuantity().split(",");
                 String[] size = pe.getSize().split(",");
                 Integer index = Arrays.asList(size).indexOf(sizesList.get(i));
-                if(index >= 0 && index < productList.size()) {
+                if(index >= 0 && index < size.length) {
                     if (Integer.parseInt(quantity[index]) < qtyList.get(i)) {
                         return null;
                     }
