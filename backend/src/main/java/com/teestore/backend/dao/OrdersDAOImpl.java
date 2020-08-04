@@ -90,7 +90,8 @@ public class OrdersDAOImpl implements OrdersDAO {
                 entity.setPaymentType(payment);
 
                 entityManager.persist(entity);
-                Cart c=cartService.clearCart(cart.getCartId());
+                if (cart.getCartId() != null && cart.getCartId().equals(""))
+                    cartService.clearCart(cart.getCartId());
                 id = entity.getOrderId();
             }
         }
