@@ -12,7 +12,25 @@ public class Order {
     private Double totalCost;
     private LocalDateTime timeOfOrder;
     private User user;
+    private String paymentType;
+    private Address deliveryAddress;
     private List<Double> prices;
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public Address getDeliveryAddress() {
+        return deliveryAddress;
+    }
+
+    public void setDeliveryAddress(Address deliveryAddress) {
+        this.deliveryAddress = deliveryAddress;
+    }
 
     public List<String> getSizes() {
         return sizes;

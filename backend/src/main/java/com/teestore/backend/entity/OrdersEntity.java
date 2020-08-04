@@ -24,12 +24,33 @@ public class OrdersEntity {
     private String sizes;
     private Double totalCost;
     private LocalDateTime timeOfOrder;
+    @Column(length = 50)
+    private String paymentType;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "delivery_address", unique = true)
+    private AddressEntity deliverAddress;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
     public String getSizes() {
         return sizes;
+    }
+
+    public String getPaymentType() {
+        return paymentType;
+    }
+
+    public void setPaymentType(String paymentType) {
+        this.paymentType = paymentType;
+    }
+
+    public AddressEntity getDeliverAddress() {
+        return deliverAddress;
+    }
+
+    public void setDeliverAddress(AddressEntity deliverAddress) {
+        this.deliverAddress = deliverAddress;
     }
 
     public void setSizes(String sizes) {

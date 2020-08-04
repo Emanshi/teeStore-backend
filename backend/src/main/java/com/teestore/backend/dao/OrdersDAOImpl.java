@@ -1,13 +1,7 @@
 package com.teestore.backend.dao;
 
-import com.teestore.backend.entity.CartEntity;
-import com.teestore.backend.entity.OrdersEntity;
-import com.teestore.backend.entity.ProductEntity;
-import com.teestore.backend.entity.UserEntity;
-import com.teestore.backend.model.Cart;
-import com.teestore.backend.model.Order;
-import com.teestore.backend.model.Product;
-import com.teestore.backend.model.User;
+import com.teestore.backend.entity.*;
+import com.teestore.backend.model.*;
 import com.teestore.backend.service.CartService;
 import com.teestore.backend.service.ProductService;
 import com.teestore.backend.service.UserService;
@@ -37,7 +31,7 @@ public class OrdersDAOImpl implements OrdersDAO {
     private CartService cartService;
 
     @Override
-    public String buyNow(Cart cart) throws Exception {
+    public String buyNow(Cart cart, String aId, String payment) throws Exception {
         String id = null;
 
         if (cart.getProducts() != null && !cart.getProducts().isEmpty()) {
@@ -49,11 +43,16 @@ public class OrdersDAOImpl implements OrdersDAO {
             List<Integer> qtyList = cart.getQuantities();
             List<String>  sizesList=cart.getSizes();
 
+            AddressEntity addressEntity = entityManager.find(AddressEntity.class, aId);
+            if (addressEntity == null)
+                return null;
+
+
             for (int i=0;i< productList.size();i++) {
                 ProductEntity pe = entityManager.find(ProductEntity.class,productList.get(i).getProductId());
                 String[] quantity = pe.getQuantity().split(",");
                 String[] size = pe.getSize().split(",");
-                Integer index = Arrays.asList(size).indexOf(sizesList.get(i));
+                int index = Arrays.asList(size).indexOf(sizesList.get(i));
                 if(index >= 0 && index < size.length) {
                     if (Integer.parseInt(quantity[index]) < qtyList.get(i)) {
                         return null;
@@ -64,7 +63,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                         for(String q : quantity){
                             s.append(q).append(',');
                         }
-                        pe.setQuantity(s.toString().substring(0,s.length()-1));
+                        pe.setQuantity(s.substring(0,s.length()-1));
                     }
                 }
                 else{
@@ -80,13 +79,15 @@ public class OrdersDAOImpl implements OrdersDAO {
 
             if (user != null) {
                 OrdersEntity entity = new OrdersEntity();
-                entity.setProductIds(products.toString().substring(0,products.length()-1));
-                entity.setQuantities(qty.toString().substring(0,qty.length()-1));
-                entity.setSizes(sizes.toString().substring(0,sizes.length()-1));
-                entity.setPrices(prices.toString().substring(0,prices.length()-1));
+                entity.setProductIds(products.substring(0,products.length()-1));
+                entity.setQuantities(qty.substring(0,qty.length()-1));
+                entity.setSizes(sizes.substring(0,sizes.length()-1));
+                entity.setPrices(prices.substring(0,prices.length()-1));
                 entity.setTotalCost(cart.getTotalCost());
                 entity.setTimeOfOrder(LocalDateTime.now());
                 entity.setUser(user);
+                entity.setDeliverAddress(addressEntity);
+                entity.setPaymentType(payment);
 
                 entityManager.persist(entity);
                 Cart c=cartService.clearCart(cart.getCartId());
@@ -137,6 +138,17 @@ public class OrdersDAOImpl implements OrdersDAO {
                 orders.setTotalCost(entity.getTotalCost());
                 orders.setTimeOfOrder(entity.getTimeOfOrder());
                 orders.setOrderId(entity.getOrderId());
+                orders.setPaymentType(entity.getPaymentType());
+
+                if (entity.getDeliverAddress() != null) {
+                    Address address = new Address();
+                    address.setAddressId(entity.getDeliverAddress().getAddressId());
+                    address.setCity(entity.getDeliverAddress().getCity());
+                    address.setPinCode(entity.getDeliverAddress().getPinCode());
+                    address.setState(entity.getDeliverAddress().getState());
+                    address.setStreet(entity.getDeliverAddress().getStreet());
+                    orders.setDeliveryAddress(address);
+                }
             }
         }
         return orders;
@@ -150,7 +162,7 @@ public class OrdersDAOImpl implements OrdersDAO {
         List<Order> orders = null;
 
         if (entities != null && !entities.isEmpty()) {
-            Order order = null;
+            Order order = new Order();
             orders = new ArrayList<>();
 
             for (OrdersEntity entity:entities) {
@@ -161,7 +173,6 @@ public class OrdersDAOImpl implements OrdersDAO {
                 if (entity != null) {
                     User user = userService.getUser(entity.getUser().getUserId());
                     if (user != null) {
-                        order = new Order();
                         order.setTotalCost(entity.getTotalCost());
                         order.setUser(user);
                         String[] ids = entity.getProductIds().split(",");
@@ -171,7 +182,6 @@ public class OrdersDAOImpl implements OrdersDAO {
                         if (ids.length > 0) {
                             products = new ArrayList<>();
                             qty = new ArrayList<>();
-                            size = new ArrayList<>();
                             price = new ArrayList<>();
                             for (String id : ids) {
                                 Product product = productService.getProductById(id);
@@ -180,9 +190,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                             for (String q : qs) {
                                 qty.add(Integer.parseInt(q));
                             }
-                            for (String s : si) {
-                                size.add(s);
-                            }
+                            size = new ArrayList<>(Arrays.asList(si));
                             for (String p : pr) {
                                 price.add(Double.parseDouble(p));
                             }
@@ -194,6 +202,17 @@ public class OrdersDAOImpl implements OrdersDAO {
                         order.setTotalCost(entity.getTotalCost());
                         order.setTimeOfOrder(entity.getTimeOfOrder());
                         order.setOrderId(entity.getOrderId());
+                        order.setPaymentType(entity.getPaymentType());
+
+                        if (entity.getDeliverAddress() != null) {
+                            Address address = new Address();
+                            address.setAddressId(entity.getDeliverAddress().getAddressId());
+                            address.setCity(entity.getDeliverAddress().getCity());
+                            address.setPinCode(entity.getDeliverAddress().getPinCode());
+                            address.setState(entity.getDeliverAddress().getState());
+                            address.setStreet(entity.getDeliverAddress().getStreet());
+                            order.setDeliveryAddress(address);
+                        }
                         orders.add(order);
                     }
                 }

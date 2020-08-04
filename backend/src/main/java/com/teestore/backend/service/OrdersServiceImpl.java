@@ -18,10 +18,14 @@ public class OrdersServiceImpl implements OrdersService {
     OrdersDAO ordersDAO;
 
     @Override
-    public String buyNow(Cart cart) throws Exception {
+    public String buyNow(Cart cart, String aId, String payment) throws Exception {
         if (cart == null)
             throw new Exception("OrdersService.INVALID_CART");
-        String res = ordersDAO.buyNow(cart);
+        if (aId == null || aId.equals(""))
+            throw new Exception("OrdersService.INVALID_DELIVERY_ADDRESS");
+        if (payment == null || payment.equals(""))
+            throw new Exception("OrdersService.INVALID_PAYMENT_METHOD");
+        String res = ordersDAO.buyNow(cart, aId, payment);
         if (res == null)
             throw new Exception("OrdersService.UNABLE_TO_PLACE_ORDER");
         return res;

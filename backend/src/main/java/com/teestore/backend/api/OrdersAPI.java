@@ -19,10 +19,10 @@ public class OrdersAPI {
     @Autowired
     OrdersService ordersService;
 
-    @PostMapping("/buyNow")
-    public ResponseEntity<String> buyNow (@RequestBody Cart cartId) throws Exception {
+    @PostMapping("/buyNow/{aId}")
+    public ResponseEntity<String> buyNow (@RequestBody Cart cart, @PathVariable String aId, @RequestParam String payment) throws Exception {
         try {
-            String res = ordersService.buyNow(cartId);
+            String res = ordersService.buyNow(cart, aId, payment);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
