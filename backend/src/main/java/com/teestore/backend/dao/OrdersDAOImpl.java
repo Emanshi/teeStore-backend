@@ -117,6 +117,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                 if (ids.length > 0) {
                     products = new ArrayList<>();
                     qty = new ArrayList<>();
+                    price = new ArrayList<>();
                     for (String id:ids) {
                         Product p = productService.getProductById(id);
                         products.add(p);
@@ -124,9 +125,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                     for (String q:qs) {
                         qty.add(Integer.parseInt(q));
                     }
-                    for (String s : si) {
-                        size.add(s);
-                    }
+                    size = new ArrayList<>(Arrays.asList(si));
                     for (String p : pr) {
                         price.add(Double.parseDouble(p));
                     }
