@@ -26,8 +26,8 @@ public class OrdersEntity {
     private LocalDateTime timeOfOrder;
     @Column(length = 50)
     private String paymentType;
-    @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "delivery_address", unique = true)
+    @ManyToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "delivery_address")
     private AddressEntity deliverAddress;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")
