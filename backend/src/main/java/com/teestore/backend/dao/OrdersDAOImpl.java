@@ -163,7 +163,7 @@ public class OrdersDAOImpl implements OrdersDAO {
         List<Order> orders = null;
 
         if (entities != null && !entities.isEmpty()) {
-            Order order = new Order();
+            Order order;
             orders = new ArrayList<>();
 
             for (OrdersEntity entity:entities) {
@@ -174,6 +174,7 @@ public class OrdersDAOImpl implements OrdersDAO {
                 if (entity != null) {
                     User user = userService.getUser(entity.getUser().getUserId());
                     if (user != null) {
+                        order = new Order();
                         order.setTotalCost(entity.getTotalCost());
                         order.setUser(user);
                         String[] ids = entity.getProductIds().split(",");
