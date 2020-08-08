@@ -18,6 +18,19 @@ public class ProductServiceImpl implements ProductService {
     private ProductDAO productDAO;
 
     @Override
+    public String addNewProduct(Product product) throws Exception {
+        if(product==null)
+        throw new Exception("ProductService.INVALID_PRODUCT");
+
+        String id= productDAO.addNewProduct(product);
+
+        if(id==null)
+            throw new Exception("ProductService.PRODUCT_NOT_ADDED");
+
+        return id;
+    }
+
+    @Override
     public Product getProductById(String productId) throws Exception {
 
         if(productId==null)

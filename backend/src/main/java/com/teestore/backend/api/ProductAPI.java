@@ -20,13 +20,23 @@ public class ProductAPI {
     @Autowired
     private ProductService productService;
 
+    @PostMapping(value = "/addNewProduct")
+    private ResponseEntity<String> addNewProduct(@RequestBody Product product){
+
+        try{
+            return new ResponseEntity<>(productService.addNewProduct(product), HttpStatus.CREATED);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
     @RequestMapping(value = "/getProductById/{productId}" , method = RequestMethod.GET)
     private ResponseEntity<Product> getProductById(@PathVariable String productId){
 
         try{
-            return new ResponseEntity<>(productService.getProductById(productId), HttpStatus.OK);
+            return new ResponseEntity<>(productService.getProductById(productId), HttpStatus.FOUND);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 

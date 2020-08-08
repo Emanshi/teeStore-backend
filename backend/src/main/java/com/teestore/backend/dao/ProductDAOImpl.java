@@ -25,6 +25,35 @@ public class ProductDAOImpl implements ProductDAO{
     private ImagesService imagesService;
 
     @Override
+    public String addNewProduct(Product product) throws Exception {
+        ProductEntity entity = new ProductEntity();
+
+        entity.setCategory(product.getCategory());
+        entity.setCost(product.getCost());
+        entity.setDateOfAddition(LocalDateTime.now());
+        entity.setDiscount(product.getDiscount());
+        entity.setProductInfo(product.getProductInfo());
+        entity.setSex(product.getSex());
+        entity.setProductName(product.getProductName());
+        entity.setAvgRating("0.0");
+
+        StringBuilder size = new StringBuilder();
+        StringBuilder qty = new StringBuilder();
+
+        for (Map.Entry<String,Integer> entry:product.getSizeAndQuantity().entrySet()) {
+            size.append(entry.getKey()).append(",");
+            qty.append(entry.getValue()).append(",");
+        }
+
+        entity.setSize(size.substring(0,size.length()-1));
+        entity.setQuantity(qty.substring(0,qty.length()-1));
+
+        entityManager.persist(entity);
+
+        return entity.getProductId();
+    }
+
+    @Override
     public Product getProductById(String productId) throws Exception {
 
         ProductEntity productEntity =entityManager.find(ProductEntity.class, productId);

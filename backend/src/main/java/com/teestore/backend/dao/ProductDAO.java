@@ -6,6 +6,14 @@ import com.teestore.backend.model.Product;
 import java.util.List;
 
 public interface ProductDAO {
+
+    /**
+     * DAO method to persist a new product to the database
+     * @param product Product details to persist
+     * @return persisted product id
+     * @throws Exception Unable to persist new product
+     */
+    String addNewProduct(Product product) throws Exception;
     Product getProductById(String productId) throws Exception;
     List<Product> getProductsByCategory(Category category) throws Exception;
     List<Product> getAllProducts() throws Exception;
