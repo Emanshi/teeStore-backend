@@ -59,6 +59,20 @@ public class ProductServiceImpl implements ProductService {
     }
 
     @Override
+    public List<Product> getSimilarProducts(Category category) throws Exception {
+
+        if(category== null)
+            throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
+
+        List<Product> productList= productDAO.getSimilarProducts(category);
+
+        if(productList== null || productList.isEmpty())
+            throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
+
+        return productList;
+    }
+
+    @Override
     public List<Product> getAllProducts() throws Exception {
 
         List<Product> productList= productDAO.getAllProducts();

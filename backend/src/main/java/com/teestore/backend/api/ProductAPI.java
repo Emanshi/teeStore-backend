@@ -50,6 +50,16 @@ public class ProductAPI {
         }
     }
 
+    @RequestMapping(value ="/getSimilarProducts/{category}" ,method = RequestMethod.GET)
+    private ResponseEntity<List<Product>> getSimilarProducts(@PathVariable Category category){
+
+        try{
+            return new ResponseEntity<>(productService.getSimilarProducts(category), HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
+        }
+    }
+
     @RequestMapping(value = "/getAllProducts" ,method = RequestMethod.GET)
     private ResponseEntity<List<Product>> getAllProducts(){
 

@@ -32,6 +32,14 @@ public interface ProductService {
     List<Product> getProductsByCategory(Category category) throws Exception;
 
     /**
+     * Service method to get similar product to the one selected product
+     * @param category Product category
+     * @return List of retrieved product
+     * @throws Exception Not found
+     */
+    List<Product> getSimilarProducts(Category category) throws Exception;
+
+    /**
      * Service method to get all product
      * @return List of retrieved product
      * @throws Exception Not found

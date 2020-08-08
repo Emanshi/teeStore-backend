@@ -16,6 +16,7 @@ public interface ProductDAO {
     String addNewProduct(Product product) throws Exception;
     Product getProductById(String productId) throws Exception;
     List<Product> getProductsByCategory(Category category) throws Exception;
+    List<Product> getSimilarProducts(Category category) throws Exception;
     List<Product> getAllProducts() throws Exception;
     List<Product> getNewArrivals() throws Exception;
     List<Product> getProductByDiscount(Category category) throws Exception;

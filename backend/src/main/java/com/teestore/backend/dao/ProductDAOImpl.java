@@ -135,6 +135,51 @@ public class ProductDAOImpl implements ProductDAO{
     }
 
     @Override
+    public List<Product> getSimilarProducts(Category category) throws Exception {
+
+        Query query= entityManager.createQuery("select p from ProductEntity p where p.category =:category");
+        query.setParameter("category",category);
+
+        List<ProductEntity> productEntityList=query.setMaxResults(6).getResultList();
+        List<Product> productList=null;
+
+        if(productEntityList!=null && !productEntityList.isEmpty()){
+
+            productList=new ArrayList<>();
+            for(ProductEntity productEntity:productEntityList){
+                Product product=new Product();
+                product.setProductId(productEntity.getProductId());
+                product.setProductName(productEntity.getProductName());
+                product.setCategory(productEntity.getCategory());
+                product.setCost(productEntity.getCost());
+                product.setDateOfAddition(productEntity.getDateOfAddition());
+                product.setSex(productEntity.getSex());
+
+                Map<String,Integer> sizeMap= new HashMap<>();
+                String[] sizes=productEntity.getSize().split(",");
+                String[] quantities=productEntity.getQuantity().split(",");
+
+                for(int i=0;i<sizes.length;i++){
+                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                }
+                product.setSizeAndQuantity(sizeMap);
+                product.setProductInfo(productEntity.getProductInfo());
+                product.setDiscount(productEntity.getDiscount());
+                product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
+                double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
+                rating = rating/(Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(String.valueOf(rating));
+
+                product.setImages(imagesService.getImagesByReference(product.getProductId()));
+
+                productList.add(product);
+            }
+
+        }
+        return productList;
+    }
+
+    @Override
     public List<Product> getAllProducts() throws Exception {
 
         Query query= entityManager.createQuery("select p from ProductEntity p");
@@ -180,11 +225,9 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getNewArrivals() throws Exception {
 
-        LocalDateTime withinOneMonthDate= LocalDateTime.now().minusMonths(1);
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.dateOfAddition > :withinOneMonthDate");
-        query.setParameter("withinOneMonthDate", withinOneMonthDate);
+        Query query= entityManager.createQuery("select p from ProductEntity p order by p.dateOfAddition desc");
 
-        List<ProductEntity> productEntityList= query.getResultList();
+        List<ProductEntity> productEntityList= query.setMaxResults(6).getResultList();
         List<Product> productList= null;
 
         if(productEntityList!=null && !productEntityList.isEmpty()){
