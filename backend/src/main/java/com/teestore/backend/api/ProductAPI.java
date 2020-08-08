@@ -24,7 +24,7 @@ public class ProductAPI {
     private ResponseEntity<String> addNewProduct(@RequestBody Product product){
 
         try{
-            return new ResponseEntity<>(productService.addNewProduct(product), HttpStatus.CREATED);
+            return new ResponseEntity<>(productService.addNewProduct(product), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
@@ -34,7 +34,7 @@ public class ProductAPI {
     private ResponseEntity<Product> getProductById(@PathVariable String productId){
 
         try{
-            return new ResponseEntity<>(productService.getProductById(productId), HttpStatus.FOUND);
+            return new ResponseEntity<>(productService.getProductById(productId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
