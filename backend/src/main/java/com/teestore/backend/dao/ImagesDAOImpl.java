@@ -40,7 +40,7 @@ public class ImagesDAOImpl implements ImagesDAO{
     @Override
     public List<String> addImages(List<Images> imagesList) throws Exception {
 
-        List<String> imageIdList=null;
+        List<String> imageIdList=new ArrayList<>();
 
         for(Images images:imagesList){
             ImagesEntity imagesEntity=new ImagesEntity();
