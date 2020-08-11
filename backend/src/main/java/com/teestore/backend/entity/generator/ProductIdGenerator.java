@@ -18,7 +18,7 @@ public class ProductIdGenerator implements IdentifierGenerator {
             ResultSet set= null;
             String randomId = null;
             do {
-                randomId = "P" + Integer.parseInt((Math.random() * 9999 + 10001) + "");
+                randomId = "P" + (int)(Math.round(Double.parseDouble((Math.random() * 9999 + 10001) + "")));
                 preparedStatement= connection.prepareStatement("select * from Product where product_id=?");
                 preparedStatement.setString(1, randomId);
                 set= preparedStatement.executeQuery();
