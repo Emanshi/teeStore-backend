@@ -45,8 +45,10 @@ public class ProductDAOImpl implements ProductDAO{
             qty.append(entry.getValue()).append(",");
         }
 
-        entity.setSize(size.substring(0,size.length()-1));
-        entity.setQuantity(qty.substring(0,qty.length()-1));
+        if (size.length()>1) {
+            entity.setSize(size.substring(0, size.length() - 1));
+            entity.setQuantity(qty.substring(0, qty.length() - 1));
+        }
 
         entityManager.persist(entity);
 
