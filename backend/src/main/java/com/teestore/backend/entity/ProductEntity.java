@@ -2,6 +2,7 @@ package com.teestore.backend.entity;
 
 import com.teestore.backend.enums.Category;
 import com.teestore.backend.enums.Sex;
+import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 import org.hibernate.annotations.TypeDef;
 
@@ -17,6 +18,8 @@ import java.time.LocalDateTime;
 public class ProductEntity {
 
     @Id
+    @GenericGenerator(name = "pIdGen", strategy = "com.teestore.backend.entity.generator.ProductIdGenerator")
+    @GeneratedValue(generator = "pIdGen")
     @Column(length = 7)
     private String productId;
     @Column(length = 150)
