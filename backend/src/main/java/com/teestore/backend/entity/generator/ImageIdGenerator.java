@@ -18,7 +18,7 @@ public class ImageIdGenerator implements IdentifierGenerator {
             ResultSet set= null;
             String randomId = null;
             do {
-                randomId = "I" + Integer.parseInt((Math.random() * 99999 + 10000) + "");
+                randomId = "I" + (int)(Math.round(Double.parseDouble((Math.random() * 99999 + 10000) + "")));
                 preparedStatement= connection.prepareStatement("select * from Images where image_id=?");
                 preparedStatement.setString(1, randomId);
                 set= preparedStatement.executeQuery();
