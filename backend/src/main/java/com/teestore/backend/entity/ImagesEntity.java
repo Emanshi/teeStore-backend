@@ -5,7 +5,7 @@ import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
 
 @Entity
-@Table(name="Images")
+@Table(name = "Images")
 public class ImagesEntity {
 
     @Id
@@ -13,9 +13,9 @@ public class ImagesEntity {
     @GeneratedValue(generator = "iIdGen")
     @Column(length = 7)
     private String imageId;
-    @Column(length= 200)
+    @Column(length = 200)
     private String linkImage;
-    @Column(length= 9)
+    @Column(length = 9)
     private String reference;
 
     public String getImageId() {

@@ -15,8 +15,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-@Repository(value= "productDAO")
-public class ProductDAOImpl implements ProductDAO{
+@Repository(value = "productDAO")
+public class ProductDAOImpl implements ProductDAO {
 
     @Autowired
     private EntityManager entityManager;
@@ -40,12 +40,12 @@ public class ProductDAOImpl implements ProductDAO{
         StringBuilder size = new StringBuilder();
         StringBuilder qty = new StringBuilder();
 
-        for (Map.Entry<String,Integer> entry:product.getSizeAndQuantity().entrySet()) {
+        for (Map.Entry<String, Integer> entry : product.getSizeAndQuantity().entrySet()) {
             size.append(entry.getKey()).append(",");
             qty.append(entry.getValue()).append(",");
         }
 
-        if (size.length()>1) {
+        if (size.length() > 1) {
             entity.setSize(size.substring(0, size.length() - 1));
             entity.setQuantity(qty.substring(0, qty.length() - 1));
         }
@@ -58,12 +58,12 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public Product getProductById(String productId) throws Exception {
 
-        ProductEntity productEntity =entityManager.find(ProductEntity.class, productId);
+        ProductEntity productEntity = entityManager.find(ProductEntity.class, productId);
 
-        if(productEntity== null)
+        if (productEntity == null)
             return null;
 
-        Product product=new Product();
+        Product product = new Product();
         product.setProductId(productEntity.getProductId());
         product.setProductName(productEntity.getProductName());
         product.setCategory(productEntity.getCategory());
@@ -71,20 +71,21 @@ public class ProductDAOImpl implements ProductDAO{
         product.setDateOfAddition(productEntity.getDateOfAddition());
         product.setSex(productEntity.getSex());
 
-        Map<String,Integer> sizeMap= new HashMap<>();
-        String[] sizes=productEntity.getSize().split(",");
-        String[] quantities=productEntity.getQuantity().split(",");
+        Map<String, Integer> sizeMap = new HashMap<>();
+        String[] sizes = productEntity.getSize().split(",");
+        String[] quantities = productEntity.getQuantity().split(",");
 
-        for(int i=0;i<sizes.length;i++){
-            sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+        for (int i = 0; i < sizes.length; i++) {
+            sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
         }
         product.setSizeAndQuantity(sizeMap);
         product.setProductInfo(productEntity.getProductInfo());
         product.setDiscount(productEntity.getDiscount());
         product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
         double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-        rating = rating/(Integer.parseInt(product.getTotalRaters()));
-        product.setAvgRating(rating+"");
+        if (!product.getTotalRaters().equals("0"))
+            rating = rating / (Integer.parseInt(product.getTotalRaters()));
+        product.setAvgRating(rating + "");
 
         product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
@@ -94,17 +95,17 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductsByCategory(Category category) throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.category =:category");
-        query.setParameter("category",category);
+        Query query = entityManager.createQuery("select p from ProductEntity p where p.category =:category");
+        query.setParameter("category", category);
 
-        List<ProductEntity> productEntityList=query.getResultList();
-        List<Product> productList=null;
+        List<ProductEntity> productEntityList = query.getResultList();
+        List<Product> productList = null;
 
-        if(productEntityList!=null && !productEntityList.isEmpty()){
+        if (productEntityList != null && !productEntityList.isEmpty()) {
 
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
+            productList = new ArrayList<>();
+            for (ProductEntity productEntity : productEntityList) {
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
@@ -112,20 +113,21 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
 
-                Map<String,Integer> sizeMap= new HashMap<>();
-                String[] sizes=productEntity.getSize().split(",");
-                String[] quantities=productEntity.getQuantity().split(",");
+                Map<String, Integer> sizeMap = new HashMap<>();
+                String[] sizes = productEntity.getSize().split(",");
+                String[] quantities = productEntity.getQuantity().split(",");
 
-                for(int i=0;i<sizes.length;i++){
-                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                for (int i = 0; i < sizes.length; i++) {
+                    sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
                 }
                 product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setDiscount(productEntity.getDiscount());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(rating+"");
+                if (!product.getTotalRaters().equals("0"))
+                    rating = rating / (Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(rating + "");
 
                 product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
@@ -139,17 +141,17 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getSimilarProducts(Category category) throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.category =:category");
-        query.setParameter("category",category);
+        Query query = entityManager.createQuery("select p from ProductEntity p where p.category =:category");
+        query.setParameter("category", category);
 
-        List<ProductEntity> productEntityList=query.setMaxResults(6).getResultList();
-        List<Product> productList=null;
+        List<ProductEntity> productEntityList = query.setMaxResults(6).getResultList();
+        List<Product> productList = null;
 
-        if(productEntityList!=null && !productEntityList.isEmpty()){
+        if (productEntityList != null && !productEntityList.isEmpty()) {
 
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
+            productList = new ArrayList<>();
+            for (ProductEntity productEntity : productEntityList) {
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
@@ -157,20 +159,21 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
 
-                Map<String,Integer> sizeMap= new HashMap<>();
-                String[] sizes=productEntity.getSize().split(",");
-                String[] quantities=productEntity.getQuantity().split(",");
+                Map<String, Integer> sizeMap = new HashMap<>();
+                String[] sizes = productEntity.getSize().split(",");
+                String[] quantities = productEntity.getQuantity().split(",");
 
-                for(int i=0;i<sizes.length;i++){
-                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                for (int i = 0; i < sizes.length; i++) {
+                    sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
                 }
                 product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setDiscount(productEntity.getDiscount());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(rating+"");
+                if (!product.getTotalRaters().equals("0"))
+                    rating = rating / (Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(rating + "");
 
                 product.setImages(imagesService.getImagesByReference(product.getProductId()));
 
@@ -184,16 +187,16 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getAllProducts() throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p");
+        Query query = entityManager.createQuery("select p from ProductEntity p");
 
-        List<ProductEntity> productEntityList= query.getResultList();
-        List<Product> productList= null;
+        List<ProductEntity> productEntityList = query.getResultList();
+        List<Product> productList = null;
 
-        if(productEntityList!=null && !productEntityList.isEmpty()){
+        if (productEntityList != null && !productEntityList.isEmpty()) {
 
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
+            productList = new ArrayList<>();
+            for (ProductEntity productEntity : productEntityList) {
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
@@ -201,19 +204,20 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
 
-                Map<String,Integer> sizeMap= new HashMap<>();
-                String[] sizes=productEntity.getSize().split(",");
-                String[] quantities=productEntity.getQuantity().split(",");
+                Map<String, Integer> sizeMap = new HashMap<>();
+                String[] sizes = productEntity.getSize().split(",");
+                String[] quantities = productEntity.getQuantity().split(",");
 
-                for(int i=0;i<sizes.length;i++){
-                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                for (int i = 0; i < sizes.length; i++) {
+                    sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
                 }
                 product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(rating+"");
+                if (!product.getTotalRaters().equals("0"))
+                    rating = rating / (Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(rating + "");
                 product.setDiscount(productEntity.getDiscount());
 
                 product.setImages(imagesService.getImagesByReference(product.getProductId()));
@@ -227,16 +231,16 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getNewArrivals() throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p order by p.dateOfAddition desc");
+        Query query = entityManager.createQuery("select p from ProductEntity p order by p.dateOfAddition desc");
 
-        List<ProductEntity> productEntityList= query.setMaxResults(6).getResultList();
-        List<Product> productList= null;
+        List<ProductEntity> productEntityList = query.setMaxResults(6).getResultList();
+        List<Product> productList = null;
 
-        if(productEntityList!=null && !productEntityList.isEmpty()){
+        if (productEntityList != null && !productEntityList.isEmpty()) {
 
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
+            productList = new ArrayList<>();
+            for (ProductEntity productEntity : productEntityList) {
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
@@ -244,19 +248,20 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
 
-                Map<String,Integer> sizeMap= new HashMap<>();
-                String[] sizes=productEntity.getSize().split(",");
-                String[] quantities=productEntity.getQuantity().split(",");
+                Map<String, Integer> sizeMap = new HashMap<>();
+                String[] sizes = productEntity.getSize().split(",");
+                String[] quantities = productEntity.getQuantity().split(",");
 
-                for(int i=0;i<sizes.length;i++){
-                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                for (int i = 0; i < sizes.length; i++) {
+                    sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
                 }
                 product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(rating+"");
+                if (!product.getTotalRaters().equals("0"))
+                    rating = rating / (Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(rating + "");
                 product.setDiscount(productEntity.getDiscount());
 
                 product.setImages(imagesService.getImagesByReference(product.getProductId()));
@@ -270,17 +275,17 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductByDiscount(Category category) throws Exception {
 
-        Query query= entityManager.createQuery("select p from ProductEntity p where p.category =:category and p.discount>0.0");
+        Query query = entityManager.createQuery("select p from ProductEntity p where p.category =:category and p.discount>0.0");
         query.setParameter("category", category);
 
-        List<ProductEntity> productEntityList= query.getResultList();
-        List<Product> productList= null;
+        List<ProductEntity> productEntityList = query.getResultList();
+        List<Product> productList = null;
 
-        if(productEntityList!=null && !productEntityList.isEmpty()){
+        if (productEntityList != null && !productEntityList.isEmpty()) {
 
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
+            productList = new ArrayList<>();
+            for (ProductEntity productEntity : productEntityList) {
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
@@ -288,19 +293,20 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
 
-                Map<String,Integer> sizeMap= new HashMap<>();
-                String[] sizes=productEntity.getSize().split(",");
-                String[] quantities=productEntity.getQuantity().split(",");
+                Map<String, Integer> sizeMap = new HashMap<>();
+                String[] sizes = productEntity.getSize().split(",");
+                String[] quantities = productEntity.getQuantity().split(",");
 
-                for(int i=0;i<sizes.length;i++){
-                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                for (int i = 0; i < sizes.length; i++) {
+                    sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
                 }
                 product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(rating+"");
+                if (!product.getTotalRaters().equals("0"))
+                    rating = rating / (Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(rating + "");
                 product.setDiscount(productEntity.getDiscount());
 
                 product.setImages(imagesService.getImagesByReference(product.getProductId()));
@@ -314,18 +320,18 @@ public class ProductDAOImpl implements ProductDAO{
     @Override
     public List<Product> getProductBySearchQuery(String search) throws Exception {
         search = search.toLowerCase();
-        String[] categories = new String[]{"t-shirt","t shirt","tshirt","skirt","shirt","top","jean","trouser"};
+        String[] categories = new String[]{"t-shirt", "t shirt", "tshirt", "skirt", "shirt", "top", "jean", "trouser"};
 
         Category category = null;
-        List<ProductEntity> productEntityList=null;
+        List<ProductEntity> productEntityList = null;
 
-        for (int i=0; i<categories.length; i++) {
+        for (int i = 0; i < categories.length; i++) {
             if (search.contains(categories[i])) {
                 if (i < 3) category = Category.TSHIRT;
-                else if (i==3) category = Category.SKIRTS;
-                else if (i==4) category = Category.SHIRT;
-                else if (i==5) category = Category.TOPS;
-                else if (i==6) category = Category.JEANS;
+                else if (i == 3) category = Category.SKIRTS;
+                else if (i == 4) category = Category.SHIRT;
+                else if (i == 5) category = Category.TOPS;
+                else if (i == 6) category = Category.JEANS;
                 else category = Category.TROUSERS;
                 break;
             }
@@ -341,7 +347,7 @@ public class ProductDAOImpl implements ProductDAO{
             query2.setParameter("search", "%" + search.toLowerCase() + "%");
 
             List<ProductEntity> tempList = query2.getResultList();
-            for (ProductEntity pe:tempList) {
+            for (ProductEntity pe : tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
             }
@@ -349,7 +355,7 @@ public class ProductDAOImpl implements ProductDAO{
             Query query3 = entityManager.createQuery("select p from ProductEntity p where lower(p.productName) like :search or lower(p.productInfo) like :search");
             query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
             tempList = query3.getResultList();
-            for (ProductEntity pe:tempList) {
+            for (ProductEntity pe : tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
             }
@@ -365,7 +371,7 @@ public class ProductDAOImpl implements ProductDAO{
             query2.setParameter("category", category);
 
             List<ProductEntity> tempList = query2.getResultList();
-            for (ProductEntity pe:tempList) {
+            for (ProductEntity pe : tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
             }
@@ -374,19 +380,19 @@ public class ProductDAOImpl implements ProductDAO{
             query3.setParameter("search", "%" + search.replace(' ', '%').toLowerCase() + "%");
             query3.setParameter("category", category);
             tempList = query3.getResultList();
-            for (ProductEntity pe:tempList) {
+            for (ProductEntity pe : tempList) {
                 if (!productEntityList.contains(pe))
                     productEntityList.add(pe);
             }
         }
 
-        List<Product> productList= null;
+        List<Product> productList = null;
 
-        if(productEntityList!=null && !productEntityList.isEmpty()){
+        if (productEntityList != null && !productEntityList.isEmpty()) {
 
-            productList=new ArrayList<>();
-            for(ProductEntity productEntity:productEntityList){
-                Product product=new Product();
+            productList = new ArrayList<>();
+            for (ProductEntity productEntity : productEntityList) {
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
                 product.setCategory(productEntity.getCategory());
@@ -394,19 +400,20 @@ public class ProductDAOImpl implements ProductDAO{
                 product.setDateOfAddition(productEntity.getDateOfAddition());
                 product.setSex(productEntity.getSex());
 
-                Map<String,Integer> sizeMap= new HashMap<>();
-                String[] sizes=productEntity.getSize().split(",");
-                String[] quantities=productEntity.getQuantity().split(",");
+                Map<String, Integer> sizeMap = new HashMap<>();
+                String[] sizes = productEntity.getSize().split(",");
+                String[] quantities = productEntity.getQuantity().split(",");
 
-                for(int i=0;i<sizes.length;i++){
-                    sizeMap.put(sizes[i],Integer.parseInt(quantities[i]));
+                for (int i = 0; i < sizes.length; i++) {
+                    sizeMap.put(sizes[i], Integer.parseInt(quantities[i]));
                 }
                 product.setSizeAndQuantity(sizeMap);
                 product.setProductInfo(productEntity.getProductInfo());
                 product.setTotalRaters(productEntity.getAvgRating().split("\\.")[1]);
                 double rating = Double.parseDouble(productEntity.getAvgRating().split("\\.")[0]);
-                rating = rating/(Integer.parseInt(product.getTotalRaters()));
-                product.setAvgRating(rating+"");
+                if (!product.getTotalRaters().equals("0"))
+                    rating = rating / (Integer.parseInt(product.getTotalRaters()));
+                product.setAvgRating(rating + "");
                 product.setDiscount(productEntity.getDiscount());
 
                 product.setImages(imagesService.getImagesByReference(product.getProductId()));

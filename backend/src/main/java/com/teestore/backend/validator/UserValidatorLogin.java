@@ -6,7 +6,7 @@ public class UserValidatorLogin {
 
     public static void validateUserForLogin(User user) throws Exception {
 
-        if(user.getEmailId() == null && user.getContactNumber() == null)
+        if (user.getEmailId() == null && user.getContactNumber() == null)
             throw new Exception("UserValidatorLogin.INVALID_USER");
         if (user.getEmailId() == null && !validateContactNumber(user.getContactNumber()))
             throw new Exception("UserValidatorLogin.INVALID_CONTACT_NUMBER_FORMAT");
@@ -37,9 +37,9 @@ public class UserValidatorLogin {
     }
 
     private static Boolean validateEmail(String email) {
-        if (email == null || email.length()>70)
+        if (email == null || email.length() > 70)
             return false;
-        String reg="^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
+        String reg = "^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 }

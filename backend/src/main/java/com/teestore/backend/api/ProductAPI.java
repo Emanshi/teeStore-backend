@@ -1,4 +1,3 @@
-
 package com.teestore.backend.api;
 
 import com.teestore.backend.enums.Category;
@@ -21,69 +20,69 @@ public class ProductAPI {
     private ProductService productService;
 
     @PostMapping(value = "/addNewProduct")
-    private ResponseEntity<String> addNewProduct(@RequestBody Product product){
+    private ResponseEntity<String> addNewProduct(@RequestBody Product product) {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.addNewProduct(product), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/getProductById/{productId}" , method = RequestMethod.GET)
-    private ResponseEntity<Product> getProductById(@PathVariable String productId){
+    @RequestMapping(value = "/getProductById/{productId}", method = RequestMethod.GET)
+    private ResponseEntity<Product> getProductById(@PathVariable String productId) {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.getProductById(productId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
-    @RequestMapping(value ="/getProductsByCategory/{category}" ,method = RequestMethod.GET)
-    private ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Category category){
+    @RequestMapping(value = "/getProductsByCategory/{category}", method = RequestMethod.GET)
+    private ResponseEntity<List<Product>> getProductsByCategory(@PathVariable Category category) {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.getProductsByCategory(category), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @RequestMapping(value ="/getSimilarProducts/{category}" ,method = RequestMethod.GET)
-    private ResponseEntity<List<Product>> getSimilarProducts(@PathVariable Category category){
+    @RequestMapping(value = "/getSimilarProducts/{category}", method = RequestMethod.GET)
+    private ResponseEntity<List<Product>> getSimilarProducts(@PathVariable Category category) {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.getSimilarProducts(category), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/getAllProducts" ,method = RequestMethod.GET)
-    private ResponseEntity<List<Product>> getAllProducts(){
+    @RequestMapping(value = "/getAllProducts", method = RequestMethod.GET)
+    private ResponseEntity<List<Product>> getAllProducts() {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.getAllProducts(), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/getNewArrivals" ,method = RequestMethod.GET)
-    private ResponseEntity<List<Product>> getNewArrivals(){
+    @RequestMapping(value = "/getNewArrivals", method = RequestMethod.GET)
+    private ResponseEntity<List<Product>> getNewArrivals() {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.getNewArrivals(), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
-    @RequestMapping(value = "/getProductByDiscount/{category}" ,method = RequestMethod.GET)
-    private ResponseEntity<List<Product>> getProductByDiscount(@PathVariable Category category){
+    @RequestMapping(value = "/getProductByDiscount/{category}", method = RequestMethod.GET)
+    private ResponseEntity<List<Product>> getProductByDiscount(@PathVariable Category category) {
 
-        try{
+        try {
             return new ResponseEntity<>(productService.getProductByDiscount(category), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
@@ -92,7 +91,7 @@ public class ProductAPI {
 
     @GetMapping(value = "/getProducts")
     public ResponseEntity<List<Product>> getProductBySearch(@RequestParam String search) throws Exception {
-        try{
+        try {
             return new ResponseEntity<>(productService.getProductBySearch(search), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());

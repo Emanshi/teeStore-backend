@@ -18,7 +18,7 @@ public class OrdersEntity {
     private String productIds;
     @Column(length = 1000)
     private String quantities;
-    @Column(length= 1000)
+    @Column(length = 1000)
     private String prices;
     @Column
     private String sizes;

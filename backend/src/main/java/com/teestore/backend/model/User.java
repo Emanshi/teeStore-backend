@@ -60,7 +60,11 @@ public class User {
         this.dateOfBirth = dateOfBirth;
     }
 
-    public List<Address> getAddresses() { return addresses; }
+    public List<Address> getAddresses() {
+        return addresses;
+    }
 
-    public void setAddresses(List<Address> addresses) { this.addresses = addresses; }
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
 }

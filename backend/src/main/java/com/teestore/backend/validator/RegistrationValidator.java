@@ -3,21 +3,20 @@ package com.teestore.backend.validator;
 import com.teestore.backend.model.User;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.time.temporal.ChronoUnit;
 
 public class RegistrationValidator {
 
-    public static void validateRegistration(User u)throws Exception {
+    public static void validateRegistration(User u) throws Exception {
         if (!validateContactNumber(u.getContactNumber()))
             throw new Exception("RegistrationValidator.INVALID_CONTACT_NUMBER_FORMAT");
         if (!validatePassword(u.getPassword()))
             throw new Exception("RegistrationValidator.INVALID_PASSWORD_FORMAT");
-        if(!validateEmail(u.getEmailId()))
+        if (!validateEmail(u.getEmailId()))
             throw new Exception("RegistrationValidator.INVALID_EMAIL_ID_FORMAT");
-        if(!validateName(u.getUserName()))
+        if (!validateName(u.getUserName()))
             throw new Exception("RegistrationValidator.INVALID_USERNAME_FORMAT");
-        if(!validateDateOfBirth(u.getDateOfBirth()))
+        if (!validateDateOfBirth(u.getDateOfBirth()))
             throw new Exception("RegistrationValidator.INVALID_DATE_OF_BIRTH_FORMAT");
 
     }
@@ -43,24 +42,24 @@ public class RegistrationValidator {
     }
 
     private static Boolean validateEmail(String email) {
-        if (email == null || email.length()>70)
+        if (email == null || email.length() > 70)
             return false;
-        String reg="^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
+        String reg = "^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 
     private static Boolean validateName(String name) {
-        if (name == null || name.length()>50)
+        if (name == null || name.length() > 50)
             return false;
-        if(!name.equals("")) {
-            String reg="([A-Za-z]{2,})+( [A-Za-z]{2,}){0,2}";
+        if (!name.equals("")) {
+            String reg = "([A-Za-z]{2,})+( [A-Za-z]{2,}){0,2}";
             return name.matches(reg);
         }
         return false;
     }
 
     private static Boolean validateDateOfBirth(LocalDate dateOfBirth) {
-        if(dateOfBirth == null)
+        if (dateOfBirth == null)
             return false;
         return dateOfBirth.until(LocalDate.now(), ChronoUnit.YEARS) > 16;
     }

@@ -24,10 +24,10 @@ public class ReviewAPI {
     @Autowired
     private Environment environment;
 
-    @RequestMapping(value="/getReviewByUserId/{userId}", method = RequestMethod.GET)
-    public ResponseEntity<List<Review>> getReviewByUserId(@PathVariable String userId) throws Exception{
+    @RequestMapping(value = "/getReviewByUserId/{userId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Review>> getReviewByUserId(@PathVariable String userId) throws Exception {
 
-        try{
+        try {
             return new ResponseEntity<>(reviewService.getReviewByUserId(userId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
@@ -35,69 +35,69 @@ public class ReviewAPI {
 
     }
 
-    @RequestMapping(value="/getReviewByProductId/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<List<Review>> getReviewByProductId(@PathVariable String productId) throws Exception{
+    @RequestMapping(value = "/getReviewByProductId/{productId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Review>> getReviewByProductId(@PathVariable String productId) throws Exception {
 
-        try{
+        try {
             return new ResponseEntity<>(reviewService.getReviewByProductId(productId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
-    @RequestMapping(value="/addReview", method = RequestMethod.POST)
-    public ResponseEntity<String> addReview(@RequestBody Review review) throws Exception{
+    @RequestMapping(value = "/addReview", method = RequestMethod.POST)
+    public ResponseEntity<String> addReview(@RequestBody Review review) throws Exception {
 
-        try{
+        try {
             return new ResponseEntity<>(reviewService.addReview(review), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
-    @RequestMapping(value="/editReview/{reviewId}", method = RequestMethod.PUT)
-    public ResponseEntity<String> editReview(@PathVariable String reviewId,@RequestBody Review review) throws Exception{
+    @RequestMapping(value = "/editReview/{reviewId}", method = RequestMethod.PUT)
+    public ResponseEntity<String> editReview(@PathVariable String reviewId, @RequestBody Review review) throws Exception {
 
-        try{
-            return new ResponseEntity<>(reviewService.editReview(reviewId,review), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(reviewService.editReview(reviewId, review), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
     @RequestMapping(value = "/deleteReview/{reviewId}", method = RequestMethod.DELETE)
-    public ResponseEntity<String> deleteReview(@PathVariable String reviewId) throws Exception{
+    public ResponseEntity<String> deleteReview(@PathVariable String reviewId) throws Exception {
 
-        try{
+        try {
             return new ResponseEntity<>(reviewService.deleteReview(reviewId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
-    @RequestMapping(value ="/reviewHelpful/{reviewId}/{userId}", method = RequestMethod.PUT)
-    public ResponseEntity<Integer> reviewHelpful(@PathVariable String reviewId,@PathVariable String userId) throws Exception{
+    @RequestMapping(value = "/reviewHelpful/{reviewId}/{userId}", method = RequestMethod.PUT)
+    public ResponseEntity<Integer> reviewHelpful(@PathVariable String reviewId, @PathVariable String userId) throws Exception {
 
-        try{
-            return new ResponseEntity<>(reviewService.reviewHelpful(reviewId,userId), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(reviewService.reviewHelpful(reviewId, userId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
-    @RequestMapping(value ="/getReviewByRating/{productId}", method = RequestMethod.GET)
-    public ResponseEntity<List<Review>> getReviewByRating(@PathVariable String productId,@RequestBody Rating rating) throws Exception{
+    @RequestMapping(value = "/getReviewByRating/{productId}", method = RequestMethod.GET)
+    public ResponseEntity<List<Review>> getReviewByRating(@PathVariable String productId, @RequestBody Rating rating) throws Exception {
 
-        try{
-            return new ResponseEntity<>(reviewService.getReviewByRating(productId,rating), HttpStatus.OK);
+        try {
+            return new ResponseEntity<>(reviewService.getReviewByRating(productId, rating), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
     }
 
     @GetMapping(value = "/getTopReviews/{productId}")
-    public ResponseEntity<List<Review>> getTopReviews(@PathVariable String productId) throws Exception{
-        try{
+    public ResponseEntity<List<Review>> getTopReviews(@PathVariable String productId) throws Exception {
+        try {
             return new ResponseEntity<>(reviewService.getTopReviewsByProduct(productId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
@@ -105,8 +105,8 @@ public class ReviewAPI {
     }
 
     @GetMapping(value = "/getRatingCounts/{productId}")
-    public ResponseEntity<RatingCounts> getRatingCounts(@PathVariable String productId) throws Exception{
-        try{
+    public ResponseEntity<RatingCounts> getRatingCounts(@PathVariable String productId) throws Exception {
+        try {
             return new ResponseEntity<>(reviewService.getRatingCounts(productId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());

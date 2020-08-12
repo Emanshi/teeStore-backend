@@ -18,13 +18,12 @@ public class ReviewIdGenerator implements IdentifierGenerator {
         Connection connection = sharedSessionContractImplementor.connection();
 
         try {
-            Statement statement=connection.createStatement();
+            Statement statement = connection.createStatement();
 
-            ResultSet set=statement.executeQuery("select count(review_id) as Id from Review");
+            ResultSet set = statement.executeQuery("select count(review_id) as Id from Review");
 
-            if(set.next())
-            {
-                int id=set.getInt(1)+1001;
+            if (set.next()) {
+                int id = set.getInt(1) + 1001;
                 return prefix + id;
             }
         } catch (SQLException e) {

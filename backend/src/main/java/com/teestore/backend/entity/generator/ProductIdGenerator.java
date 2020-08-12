@@ -5,7 +5,10 @@ import org.hibernate.engine.spi.SharedSessionContractImplementor;
 import org.hibernate.id.IdentifierGenerator;
 
 import java.io.Serializable;
-import java.sql.*;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class ProductIdGenerator implements IdentifierGenerator {
 
@@ -15,14 +18,14 @@ public class ProductIdGenerator implements IdentifierGenerator {
 
         try {
             PreparedStatement preparedStatement = null;
-            ResultSet set= null;
+            ResultSet set = null;
             String randomId = null;
             do {
-                randomId = "P" + (int)(Math.round(Double.parseDouble((Math.random() * 9999 + 10001) + "")));
-                preparedStatement= connection.prepareStatement("select * from Product where product_id=?");
+                randomId = "P" + (int) (Math.round(Double.parseDouble((Math.random() * 9999 + 10001) + "")));
+                preparedStatement = connection.prepareStatement("select * from Product where product_id=?");
                 preparedStatement.setString(1, randomId);
-                set= preparedStatement.executeQuery();
-            }while(set.next());
+                set = preparedStatement.executeQuery();
+            } while (set.next());
 
             return randomId;
 

@@ -21,7 +21,7 @@ public class CartEntity {
     private String sizes;
     private Double totalCost;
     @OneToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name = "user_id",unique=true)
+    @JoinColumn(name = "user_id", unique = true)
     private UserEntity user;
 
     public String getSizes() {

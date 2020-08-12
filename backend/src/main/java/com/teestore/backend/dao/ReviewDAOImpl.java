@@ -1,11 +1,13 @@
 package com.teestore.backend.dao;
 
-import com.teestore.backend.entity.AddressEntity;
 import com.teestore.backend.entity.ProductEntity;
 import com.teestore.backend.entity.ReviewEntity;
 import com.teestore.backend.entity.UserEntity;
 import com.teestore.backend.enums.Rating;
-import com.teestore.backend.model.*;
+import com.teestore.backend.model.Product;
+import com.teestore.backend.model.RatingCounts;
+import com.teestore.backend.model.Review;
+import com.teestore.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
@@ -16,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Repository(value = "reviewDAO")
-public class ReviewDAOImpl implements ReviewDAO{
+public class ReviewDAOImpl implements ReviewDAO {
 
     @Autowired
     private EntityManager entityManager;
@@ -24,17 +26,17 @@ public class ReviewDAOImpl implements ReviewDAO{
     @Override
     public List<Review> getReviewByUserId(String userId) throws Exception {
 
-        Query query= entityManager.createQuery("select r from ReviewEntity r where r.user.userId= :userId");
-        query.setParameter("userId",userId);
+        Query query = entityManager.createQuery("select r from ReviewEntity r where r.user.userId= :userId");
+        query.setParameter("userId", userId);
 
-        List<ReviewEntity> reviewEntityList= query.getResultList();
-        List<Review> reviewList=null;
+        List<ReviewEntity> reviewEntityList = query.getResultList();
+        List<Review> reviewList = null;
 
-        if(reviewEntityList!=null && !reviewEntityList.isEmpty()){
+        if (reviewEntityList != null && !reviewEntityList.isEmpty()) {
 
-            reviewList=new ArrayList<>();
-            for(ReviewEntity reviewEntity: reviewEntityList){
-                Review review=new Review();
+            reviewList = new ArrayList<>();
+            for (ReviewEntity reviewEntity : reviewEntityList) {
+                Review review = new Review();
                 review.setReviewId(reviewEntity.getReviewId());
                 review.setReviewTitle(reviewEntity.getReviewTitle());
                 review.setReviewBody(reviewEntity.getReviewBody());
@@ -42,22 +44,22 @@ public class ReviewDAOImpl implements ReviewDAO{
                 review.setRatings(reviewEntity.getRatings());
                 review.setRatingHelpful(reviewEntity.getRatingHelpful());
 
-                UserEntity userEntity= reviewEntity.getUser();
+                UserEntity userEntity = reviewEntity.getUser();
 
-                if(userEntity == null)
+                if (userEntity == null)
                     return null;
 
-                User user =new User();
+                User user = new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
                 review.setUser(user);
 
-                ProductEntity productEntity= reviewEntity.getProduct();
+                ProductEntity productEntity = reviewEntity.getProduct();
 
-                if(productEntity== null)
+                if (productEntity == null)
                     return null;
 
-                Product product =new Product();
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
 
@@ -72,17 +74,17 @@ public class ReviewDAOImpl implements ReviewDAO{
     @Override
     public List<Review> getReviewByProductId(String productId) throws Exception {
 
-        Query query=entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId");
-        query.setParameter("productId",productId);
+        Query query = entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId");
+        query.setParameter("productId", productId);
 
-        List<ReviewEntity> reviewEntityList=query.getResultList();
-        List<Review> reviewList=null;
+        List<ReviewEntity> reviewEntityList = query.getResultList();
+        List<Review> reviewList = null;
 
-        if(reviewEntityList!=null && !reviewEntityList.isEmpty()){
+        if (reviewEntityList != null && !reviewEntityList.isEmpty()) {
 
-            reviewList=new ArrayList<>();
-            for(ReviewEntity reviewEntity: reviewEntityList){
-                Review review=new Review();
+            reviewList = new ArrayList<>();
+            for (ReviewEntity reviewEntity : reviewEntityList) {
+                Review review = new Review();
                 review.setReviewId(reviewEntity.getReviewId());
                 review.setReviewTitle(reviewEntity.getReviewTitle());
                 review.setReviewBody(reviewEntity.getReviewBody());
@@ -90,22 +92,22 @@ public class ReviewDAOImpl implements ReviewDAO{
                 review.setRatings(reviewEntity.getRatings());
                 review.setRatingHelpful(reviewEntity.getRatingHelpful());
 
-                UserEntity userEntity= reviewEntity.getUser();
+                UserEntity userEntity = reviewEntity.getUser();
 
-                if(userEntity == null)
+                if (userEntity == null)
                     return null;
 
-                User user =new User();
+                User user = new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
                 review.setUser(user);
 
-                ProductEntity productEntity= reviewEntity.getProduct();
+                ProductEntity productEntity = reviewEntity.getProduct();
 
-                if(productEntity== null)
+                if (productEntity == null)
                     return null;
 
-                Product product =new Product();
+                Product product = new Product();
                 product.setProductId(productEntity.getProductId());
                 product.setProductName(productEntity.getProductName());
 
@@ -120,30 +122,30 @@ public class ReviewDAOImpl implements ReviewDAO{
     @Override
     public String addReview(Review review) throws Exception {
 
-        if(review== null)
+        if (review == null)
             return null;
 
-        User user=review.getUser();
+        User user = review.getUser();
 
-        if(user == null || user.getUserId()== null)
+        if (user == null || user.getUserId() == null)
             return null;
 
-        Product product=review.getProduct();
+        Product product = review.getProduct();
 
-        if(product == null || product.getProductId() ==null)
+        if (product == null || product.getProductId() == null)
             return null;
 
-        UserEntity userEntity= entityManager.find(UserEntity.class, user.getUserId());
+        UserEntity userEntity = entityManager.find(UserEntity.class, user.getUserId());
 
-        if(userEntity== null)
+        if (userEntity == null)
             return null;
 
-        ProductEntity productEntity= entityManager.find(ProductEntity.class, product.getProductId());
+        ProductEntity productEntity = entityManager.find(ProductEntity.class, product.getProductId());
 
-        if(productEntity ==null)
+        if (productEntity == null)
             return null;
 
-        ReviewEntity reviewEntity=new ReviewEntity();
+        ReviewEntity reviewEntity = new ReviewEntity();
         reviewEntity.setUser(userEntity);
         reviewEntity.setProduct(productEntity);
         reviewEntity.setReviewTitle(review.getReviewTitle());
@@ -152,25 +154,25 @@ public class ReviewDAOImpl implements ReviewDAO{
         reviewEntity.setRatingHelpful(0);
         reviewEntity.setRatings(review.getRatings());
 
-        Rating rating= review.getRatings();
-        Integer ratingInNo=null;
-        if(rating == Rating.ONE)
-            ratingInNo=1;
-        else if(rating == Rating.TWO)
-            ratingInNo=2;
-        else if(rating == Rating.THREE)
-            ratingInNo=3;
-        else if(rating == Rating.FOUR)
-            ratingInNo=4;
-        else if(rating == Rating.FIVE)
-            ratingInNo=5;
+        Rating rating = review.getRatings();
+        Integer ratingInNo = null;
+        if (rating == Rating.ONE)
+            ratingInNo = 1;
+        else if (rating == Rating.TWO)
+            ratingInNo = 2;
+        else if (rating == Rating.THREE)
+            ratingInNo = 3;
+        else if (rating == Rating.FOUR)
+            ratingInNo = 4;
+        else if (rating == Rating.FIVE)
+            ratingInNo = 5;
 
-        String avgRating= productEntity.getAvgRating();
-        String[] ratingParameter = avgRating.split("\\.",2);
-        int noOfRatings= Integer.parseInt(ratingParameter[0]);
-        double avgRatingInNo= Math.round(((Double.parseDouble(ratingParameter[1])*noOfRatings + ratingInNo)/(noOfRatings+1))*10)/10.0 ;
-        noOfRatings+=1;
-        String newAvgRating= Integer.toString(noOfRatings) +"." + Double.toString(avgRatingInNo);
+        String avgRating = productEntity.getAvgRating();
+        String[] ratingParameter = avgRating.split("\\.", 2);
+        int noOfRatings = Integer.parseInt(ratingParameter[0]);
+        double avgRatingInNo = Math.round(((Double.parseDouble(ratingParameter[1]) * noOfRatings + ratingInNo) / (noOfRatings + 1)) * 10) / 10.0;
+        noOfRatings += 1;
+        String newAvgRating = Integer.toString(noOfRatings) + "." + Double.toString(avgRatingInNo);
 
         productEntity.setAvgRating(newAvgRating);
 
@@ -181,38 +183,38 @@ public class ReviewDAOImpl implements ReviewDAO{
     }
 
     @Override
-    public String editReview(String reviewId,Review review) throws Exception {
+    public String editReview(String reviewId, Review review) throws Exception {
 
         ReviewEntity reviewEntity = entityManager.find(ReviewEntity.class, reviewId);
 
-        if(reviewEntity ==null)
+        if (reviewEntity == null)
             return null;
 
-        if(review.getReviewTitle()!=null)
+        if (review.getReviewTitle() != null)
             reviewEntity.setReviewTitle(review.getReviewTitle());
 
-        if(review.getReviewBody()!=null)
+        if (review.getReviewBody() != null)
             reviewEntity.setReviewBody(review.getReviewBody());
 
-        if(review.getReviewDate()!=null)
+        if (review.getReviewDate() != null)
             reviewEntity.setReviewDate(review.getReviewDate());
 
-        if(review.getRatings()!=null) {
+        if (review.getRatings() != null) {
 
             reviewEntity.setRatings(review.getRatings());
-            Product product=review.getProduct();
+            Product product = review.getProduct();
 
-            if(product == null || product.getProductId() ==null)
+            if (product == null || product.getProductId() == null)
                 return null;
 
-            UserEntity userEntity= entityManager.find(UserEntity.class, review.getUser().getUserId());
+            UserEntity userEntity = entityManager.find(UserEntity.class, review.getUser().getUserId());
 
-            if(userEntity== null)
+            if (userEntity == null)
                 return null;
 
-            ProductEntity productEntity= entityManager.find(ProductEntity.class, product.getProductId());
+            ProductEntity productEntity = entityManager.find(ProductEntity.class, product.getProductId());
 
-            if(productEntity ==null)
+            if (productEntity == null)
                 return null;
 
             Rating rating = review.getRatings();
@@ -247,15 +249,15 @@ public class ReviewDAOImpl implements ReviewDAO{
     @Override
     public String deleteReview(String reviewId) throws Exception {
 
-        ReviewEntity reviewEntity= entityManager.find(ReviewEntity.class, reviewId);
+        ReviewEntity reviewEntity = entityManager.find(ReviewEntity.class, reviewId);
 
-        String rId=null;
+        String rId = null;
 
-        if(reviewEntity!= null) {
+        if (reviewEntity != null) {
             reviewEntity.setUser(null);
             reviewEntity.setProduct(null);
             entityManager.remove(reviewEntity);
-            rId=reviewEntity.getReviewId();
+            rId = reviewEntity.getReviewId();
         }
 
         return rId;
@@ -264,13 +266,13 @@ public class ReviewDAOImpl implements ReviewDAO{
     @Override
     public Integer reviewHelpful(String reviewId) throws Exception {
 
-        ReviewEntity reviewEntity= entityManager.find(ReviewEntity.class, reviewId);
-        Integer noOfHelpfulLikes=null;
+        ReviewEntity reviewEntity = entityManager.find(ReviewEntity.class, reviewId);
+        Integer noOfHelpfulLikes = null;
 
-        if(reviewEntity==null || reviewEntity.getUser()==null )
+        if (reviewEntity == null || reviewEntity.getUser() == null)
             return null;
 
-        reviewEntity.setRatingHelpful(reviewEntity.getRatingHelpful()+1);
+        reviewEntity.setRatingHelpful(reviewEntity.getRatingHelpful() + 1);
 
         return null;
     }
@@ -278,18 +280,18 @@ public class ReviewDAOImpl implements ReviewDAO{
     @Override
     public List<Review> getReviewByRating(String productId, Rating rating) throws Exception {
 
-        Query query= entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId and r.ratings=:rating");
-        query.setParameter("productId",productId);
-        query.setParameter("rating",rating);
+        Query query = entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId and r.ratings=:rating");
+        query.setParameter("productId", productId);
+        query.setParameter("rating", rating);
 
-        List<ReviewEntity> reviewEntityList= query.getResultList();
-        List<Review> reviewList=null;
+        List<ReviewEntity> reviewEntityList = query.getResultList();
+        List<Review> reviewList = null;
 
-        if(reviewEntityList!=null && !reviewEntityList.isEmpty()){
+        if (reviewEntityList != null && !reviewEntityList.isEmpty()) {
 
-            reviewList=new ArrayList<>();
-            for(ReviewEntity reviewEntity: reviewEntityList){
-                Review review=new Review();
+            reviewList = new ArrayList<>();
+            for (ReviewEntity reviewEntity : reviewEntityList) {
+                Review review = new Review();
                 review.setReviewId(reviewEntity.getReviewId());
                 review.setReviewTitle(reviewEntity.getReviewTitle());
                 review.setReviewBody(reviewEntity.getReviewBody());
@@ -297,18 +299,18 @@ public class ReviewDAOImpl implements ReviewDAO{
                 review.setRatings(reviewEntity.getRatings());
                 review.setRatingHelpful(reviewEntity.getRatingHelpful());
 
-                UserEntity userEntity= reviewEntity.getUser();
+                UserEntity userEntity = reviewEntity.getUser();
 
-                if(userEntity == null)
+                if (userEntity == null)
                     return null;
 
-                User user =new User();
+                User user = new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
 
                 review.setUser(user);
 
-                Product product =new Product();
+                Product product = new Product();
                 product.setProductId(productId);
 
                 review.setProduct(product);
@@ -322,17 +324,17 @@ public class ReviewDAOImpl implements ReviewDAO{
 
     @Override
     public List<Review> getTopReviewsForProduct(String productId) throws Exception {
-        Query query= entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId order by r.ratingHelpful desc");
-        query.setParameter("productId",productId);
+        Query query = entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId order by r.ratingHelpful desc");
+        query.setParameter("productId", productId);
 
-        List<ReviewEntity> reviewEntityList= query.setMaxResults(3).getResultList();
-        List<Review> reviewList=null;
+        List<ReviewEntity> reviewEntityList = query.setMaxResults(3).getResultList();
+        List<Review> reviewList = null;
 
-        if(reviewEntityList!=null && !reviewEntityList.isEmpty()){
+        if (reviewEntityList != null && !reviewEntityList.isEmpty()) {
 
-            reviewList=new ArrayList<>();
-            for(ReviewEntity reviewEntity: reviewEntityList){
-                Review review=new Review();
+            reviewList = new ArrayList<>();
+            for (ReviewEntity reviewEntity : reviewEntityList) {
+                Review review = new Review();
                 review.setReviewId(reviewEntity.getReviewId());
                 review.setReviewTitle(reviewEntity.getReviewTitle());
                 review.setReviewBody(reviewEntity.getReviewBody());
@@ -340,18 +342,18 @@ public class ReviewDAOImpl implements ReviewDAO{
                 review.setRatings(reviewEntity.getRatings());
                 review.setRatingHelpful(reviewEntity.getRatingHelpful());
 
-                UserEntity userEntity= reviewEntity.getUser();
+                UserEntity userEntity = reviewEntity.getUser();
 
-                if(userEntity == null)
+                if (userEntity == null)
                     return null;
 
-                User user =new User();
+                User user = new User();
                 user.setUserId(userEntity.getUserId());
                 user.setUserName(userEntity.getUserName());
 
                 review.setUser(user);
 
-                Product product =new Product();
+                Product product = new Product();
                 product.setProductId(productId);
 
                 review.setProduct(product);
@@ -365,23 +367,23 @@ public class ReviewDAOImpl implements ReviewDAO{
 
     @Override
     public RatingCounts getRatingCounts(String productId) throws Exception {
-        Query query= entityManager.createQuery("select r.ratings, count(r) from ReviewEntity r where r.product.productId =:productId group by r.ratings");
-        query.setParameter("productId",productId);
+        Query query = entityManager.createQuery("select r.ratings, count(r) from ReviewEntity r where r.product.productId =:productId group by r.ratings");
+        query.setParameter("productId", productId);
 
         List<Object[]> reviewCounts = query.getResultList();
         RatingCounts rc = new RatingCounts();
 
-        for (Object[] o:reviewCounts) {
+        for (Object[] o : reviewCounts) {
             if (o[0] == Rating.ONE)
-                rc.setOne((int)(long)o[1]);
+                rc.setOne((int) (long) o[1]);
             else if (o[0] == Rating.THREE)
-            rc.setThree((int)(long)o[1]);
+                rc.setThree((int) (long) o[1]);
             else if (o[0] == Rating.TWO)
-            rc.setTwo((int)(long)o[1]);
+                rc.setTwo((int) (long) o[1]);
             else if (o[0] == Rating.FIVE)
-            rc.setFive((int)(long)o[1]);
+                rc.setFive((int) (long) o[1]);
             else if (o[0] == Rating.FOUR)
-            rc.setFour((int)(long)o[1]);
+                rc.setFour((int) (long) o[1]);
         }
 
         return rc;

@@ -4,14 +4,14 @@ import com.teestore.backend.model.Contact;
 
 public class ContactValidator {
 
-    public static void validateContact(Contact u)throws Exception {
+    public static void validateContact(Contact u) throws Exception {
         if (!validateContactNumber(u.getPhoneNo()))
             throw new Exception("ContactValidator.INVALID_CONTACT_NUMBER_FORMAT");
-        if(!validateEmail(u.getContactEmail()))
+        if (!validateEmail(u.getContactEmail()))
             throw new Exception("ContactValidator.INVALID_EMAIL_ID_FORMAT");
-        if(!validateSubject(u.getSubject()))
+        if (!validateSubject(u.getSubject()))
             throw new Exception("ContactValidator.INVALID_SUBJECT_FORMAT");
-        if(!validateMessage(u.getMessage()))
+        if (!validateMessage(u.getMessage()))
             throw new Exception("ContactValidator.INVALID_MESSAGE_FORMAT");
     }
 
@@ -25,17 +25,17 @@ public class ContactValidator {
     }
 
     private static Boolean validateEmail(String email) {
-        if (email == null || email.length()>70)
+        if (email == null || email.length() > 70)
             return false;
-        String reg="^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
+        String reg = "^[a-zA-z]+[A-Za-z0-9_.-]+[A-Za-z0-9]+@([a-zA-Z0-9]+\\.)+[a-zA-Z0-9]+$";
         return email.matches(reg);
     }
 
     private static Boolean validateSubject(String name) {
-        if (name == null || name.length()>50)
+        if (name == null || name.length() > 50)
             return false;
-        if(!name.equals("")) {
-            String reg="([A-Za-z]+)+( [A-Za-z]+){0,15}";
+        if (!name.equals("")) {
+            String reg = "([A-Za-z]+)+( [A-Za-z]+){0,15}";
             return name.matches(reg);
         }
         return false;

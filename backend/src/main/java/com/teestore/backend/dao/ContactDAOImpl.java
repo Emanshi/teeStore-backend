@@ -69,7 +69,7 @@ public class ContactDAOImpl implements ContactDAO {
     @Override
     public List<Contact> getMessagesOfUser(String userId) throws Exception {
         UserEntity user = entityManager.find(UserEntity.class, userId);
-        Query query=entityManager.createQuery("select u from ContactEntity u where u.user =:user");
+        Query query = entityManager.createQuery("select u from ContactEntity u where u.user =:user");
         query.setParameter("user", user);
 
         List<ContactEntity> entities = query.getResultList();
@@ -79,7 +79,7 @@ public class ContactDAOImpl implements ContactDAO {
             contacts = new ArrayList<>();
 
             Contact contact;
-            for (ContactEntity entity:entities) {
+            for (ContactEntity entity : entities) {
                 contact = new Contact();
 
                 contact.setContactEmail(entity.getContactEmail());

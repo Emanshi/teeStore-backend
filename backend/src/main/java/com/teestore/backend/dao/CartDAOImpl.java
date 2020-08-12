@@ -6,7 +6,6 @@ import com.teestore.backend.model.Cart;
 import com.teestore.backend.model.Product;
 import com.teestore.backend.model.User;
 import com.teestore.backend.service.CartService;
-import com.teestore.backend.service.OrdersService;
 import com.teestore.backend.service.ProductService;
 import com.teestore.backend.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -50,18 +49,18 @@ public class CartDAOImpl implements CartDAO {
 //                qty.append(i).append(",");
 //            }
 
-            UserEntity user = entityManager.find(UserEntity.class, cart.getUser().getUserId());
+        UserEntity user = entityManager.find(UserEntity.class, cart.getUser().getUserId());
 
-            if (user != null) {
-                CartEntity entity = new CartEntity();
+        if (user != null) {
+            CartEntity entity = new CartEntity();
 //                entity.setProductIds(products.toString());
 //                entity.setQuantities(qty.toString());
 //                entity.setTotalCost(cart.getTotalCost());
-                entity.setUser(user);
+            entity.setUser(user);
 
-                entityManager.persist(entity);
+            entityManager.persist(entity);
 
-                id = entity.getCartId();
+            id = entity.getCartId();
 //            }
         }
 
@@ -72,8 +71,8 @@ public class CartDAOImpl implements CartDAO {
     public Integer addProductToCart(String userId, String productId, String size) throws Exception {
         Integer i = null;
 
-        Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
-        query.setParameter("userId",userId);
+        Query query = entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
+        query.setParameter("userId", userId);
 
         List<CartEntity> entities = query.getResultList();
 
@@ -93,8 +92,7 @@ public class CartDAOImpl implements CartDAO {
             entity.setQuantities("1");
 
             entityManager.persist(entity);
-        }
-        else {
+        } else {
             CartEntity entity = entities.get(0);
 
             entity.setProductIds(entity.getProductIds() + "," + productId);
@@ -103,7 +101,7 @@ public class CartDAOImpl implements CartDAO {
 
             entityManager.persist(entity);
         }
-        i=1;
+        i = 1;
 
         return i;
     }
@@ -112,8 +110,8 @@ public class CartDAOImpl implements CartDAO {
     public Integer removeProductFromCart(String userId, String productId, String size) throws Exception {
         Integer n = null;
 
-        Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
-        query.setParameter("userId",userId);
+        Query query = entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
+        query.setParameter("userId", userId);
 
         List<CartEntity> entities = query.getResultList();
 
@@ -133,8 +131,7 @@ public class CartDAOImpl implements CartDAO {
             entity.setQuantities("1");
 
             entityManager.persist(entity);
-        }
-        else {
+        } else {
             CartEntity entity = entities.get(0);
 
             ArrayList<String> products = new ArrayList<>(Arrays.asList(entity.getProductIds().split(",")));
@@ -156,18 +153,18 @@ public class CartDAOImpl implements CartDAO {
             StringBuilder b = new StringBuilder();
             StringBuilder c = new StringBuilder();
 
-            for (int i = 0; i < products.size(); i++){
+            for (int i = 0; i < products.size(); i++) {
                 a.append(products.get(i)).append(",");
                 b.append(sizes.get(i)).append(",");
                 c.append(qtys.get(i)).append(",");
             }
 
-            entity.setProductIds(a.toString().substring(0,a.length()-1));
-            entity.setSizes(b.toString().substring(0,b.length()-1));
-            entity.setQuantities(c.toString().substring(0,c.length()-1));
+            entity.setProductIds(a.toString().substring(0, a.length() - 1));
+            entity.setSizes(b.toString().substring(0, b.length() - 1));
+            entity.setQuantities(c.toString().substring(0, c.length() - 1));
 
             entityManager.persist(entity);
-            n=1;
+            n = 1;
         }
 
         return n;
@@ -196,9 +193,9 @@ public class CartDAOImpl implements CartDAO {
             UserEntity user = entityManager.find(UserEntity.class, cart.getUser().getUserId());
 
             if (user != null) {
-                entity.setProductIds(products.toString().substring(0,products.length()-1));
-                entity.setQuantities(qty.toString().substring(0,qty.length()-1));
-                entity.setSizes(sizes.toString().substring(0,sizes.length()-1));
+                entity.setProductIds(products.toString().substring(0, products.length() - 1));
+                entity.setQuantities(qty.toString().substring(0, qty.length() - 1));
+                entity.setSizes(sizes.toString().substring(0, sizes.length() - 1));
                 entity.setTotalCost(cart.getTotalCost());
                 entity.setUser(user);
 
@@ -231,8 +228,8 @@ public class CartDAOImpl implements CartDAO {
 
     @Override
     public Cart getCart(String userId) throws Exception {
-        Query query= entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
-        query.setParameter("userId",userId);
+        Query query = entityManager.createQuery("select c from CartEntity c where c.user.userId=:userId");
+        query.setParameter("userId", userId);
 
         List<CartEntity> entities = query.getResultList();
 
@@ -254,18 +251,18 @@ public class CartDAOImpl implements CartDAO {
                     products = new ArrayList<>();
                     qty = new ArrayList<>();
                     size = new ArrayList<>();
-                    for (String id:ids) {
+                    for (String id : ids) {
                         if (id.equals(""))
                             continue;
                         Product p = productService.getProductById(id);
                         products.add(p);
                     }
-                    for (String q:qs) {
+                    for (String q : qs) {
                         if (q.equals(""))
                             continue;
                         qty.add(Integer.parseInt(q));
                     }
-                    for (String q:sizes) {
+                    for (String q : sizes) {
                         if (q.equals(""))
                             continue;
                         size.add(q);

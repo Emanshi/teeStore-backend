@@ -20,7 +20,7 @@ public class OrdersAPI {
     OrdersService ordersService;
 
     @PostMapping("/buyNow/{aId}")
-    public ResponseEntity<String> buyNow (@RequestBody Cart cart, @PathVariable String aId, @RequestParam String payment) throws Exception {
+    public ResponseEntity<String> buyNow(@RequestBody Cart cart, @PathVariable String aId, @RequestParam String payment) throws Exception {
         try {
             String res = ordersService.buyNow(cart, aId, payment);
             return new ResponseEntity<>(res, HttpStatus.OK);
@@ -30,7 +30,7 @@ public class OrdersAPI {
     }
 
     @GetMapping("/getOrder")
-    public ResponseEntity<Order> getOrder (@RequestParam String orderId) throws Exception {
+    public ResponseEntity<Order> getOrder(@RequestParam String orderId) throws Exception {
         try {
             Order res = ordersService.getOrder(orderId);
             return new ResponseEntity<>(res, HttpStatus.OK);
@@ -40,7 +40,7 @@ public class OrdersAPI {
     }
 
     @GetMapping("/getOrderByUserId")
-    public ResponseEntity<List<Order>> getOrdersByUserId (@RequestParam String userId) throws Exception {
+    public ResponseEntity<List<Order>> getOrdersByUserId(@RequestParam String userId) throws Exception {
         try {
             List<Order> res = ordersService.getOrdersByUserId(userId);
             return new ResponseEntity<>(res, HttpStatus.OK);

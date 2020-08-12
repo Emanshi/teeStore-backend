@@ -10,8 +10,8 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository(value="imagesDAO")
-public class ImagesDAOImpl implements ImagesDAO{
+@Repository(value = "imagesDAO")
+public class ImagesDAOImpl implements ImagesDAO {
 
     @Autowired
     private EntityManager entityManager;
@@ -19,14 +19,14 @@ public class ImagesDAOImpl implements ImagesDAO{
     @Override
     public List<Images> getImagesByReference(String reference) throws Exception {
 
-        Query query= entityManager.createQuery("select i from ImagesEntity i where i.reference=:reference");
-        query.setParameter("reference",reference);
-        List<ImagesEntity> imagesEntityList= query.getResultList();
-        List<Images> imagesList=null;
+        Query query = entityManager.createQuery("select i from ImagesEntity i where i.reference=:reference");
+        query.setParameter("reference", reference);
+        List<ImagesEntity> imagesEntityList = query.getResultList();
+        List<Images> imagesList = null;
 
-        if(imagesEntityList!=null && !imagesEntityList.isEmpty()){
-            imagesList= new ArrayList<>();
-            for(ImagesEntity imagesEntity:imagesEntityList) {
+        if (imagesEntityList != null && !imagesEntityList.isEmpty()) {
+            imagesList = new ArrayList<>();
+            for (ImagesEntity imagesEntity : imagesEntityList) {
                 Images images = new Images();
                 images.setImageId(imagesEntity.getImageId());
                 images.setLinkImage(imagesEntity.getLinkImage());
@@ -40,10 +40,10 @@ public class ImagesDAOImpl implements ImagesDAO{
     @Override
     public List<String> addImages(List<Images> imagesList) throws Exception {
 
-        List<String> imageIdList=new ArrayList<>();
+        List<String> imageIdList = new ArrayList<>();
 
-        for(Images images:imagesList){
-            ImagesEntity imagesEntity=new ImagesEntity();
+        for (Images images : imagesList) {
+            ImagesEntity imagesEntity = new ImagesEntity();
             imagesEntity.setLinkImage(images.getLinkImage());
             imagesEntity.setReference(images.getReference());
             entityManager.persist(imagesEntity);
@@ -55,11 +55,11 @@ public class ImagesDAOImpl implements ImagesDAO{
     @Override
     public List<String> removeImages(List<String> imagesIdList) throws Exception {
 
-        List<String> iIdList=null;
+        List<String> iIdList = null;
 
-        for(String imageId:imagesIdList){
-            ImagesEntity imagesEntity= entityManager.find(ImagesEntity.class,imageId);
-            if(imagesEntity!=null)
+        for (String imageId : imagesIdList) {
+            ImagesEntity imagesEntity = entityManager.find(ImagesEntity.class, imageId);
+            if (imagesEntity != null)
                 entityManager.remove(imagesEntity);
             iIdList.add(imagesEntity.getImageId());
         }
@@ -69,9 +69,9 @@ public class ImagesDAOImpl implements ImagesDAO{
     @Override
     public String removeImage(String imageId) throws Exception {
 
-        ImagesEntity imagesEntity= entityManager.find(ImagesEntity.class,imageId);
+        ImagesEntity imagesEntity = entityManager.find(ImagesEntity.class, imageId);
 
-        if(imagesEntity!=null)
+        if (imagesEntity != null)
             entityManager.remove(imagesEntity);
 
         return imagesEntity.getImageId();
@@ -79,10 +79,10 @@ public class ImagesDAOImpl implements ImagesDAO{
 
     @Override
     public Images getImageById(String id) throws Exception {
-        ImagesEntity imagesEntity= entityManager.find(ImagesEntity.class,id);
+        ImagesEntity imagesEntity = entityManager.find(ImagesEntity.class, id);
         Images image = null;
 
-        if(imagesEntity!=null) {
+        if (imagesEntity != null) {
             image = new Images();
             image.setImageId(imagesEntity.getImageId());
             image.setLinkImage(imagesEntity.getLinkImage());

@@ -11,7 +11,7 @@ public class Product {
     private String productId;
     private String productName;
     private Double cost;
-    private Map<String,Integer> sizeAndQuantity;
+    private Map<String, Integer> sizeAndQuantity;
     private Sex sex;
     private Category category;
     private LocalDateTime dateOfAddition;

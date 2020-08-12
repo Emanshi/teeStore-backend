@@ -12,7 +12,7 @@ public class CardEntity {
     private String expiryMonthYear;
     private String cvv;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     public String getExpiryMonthYear() {

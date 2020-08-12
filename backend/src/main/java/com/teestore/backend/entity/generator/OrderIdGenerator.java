@@ -18,13 +18,12 @@ public class OrderIdGenerator implements IdentifierGenerator {
         Connection connection = sharedSessionContractImplementor.connection();
 
         try {
-            Statement statement=connection.createStatement();
+            Statement statement = connection.createStatement();
 
-            ResultSet set=statement.executeQuery("select count(order_id) as Id from Orders");
+            ResultSet set = statement.executeQuery("select count(order_id) as Id from Orders");
 
-            if(set.next())
-            {
-                int id=set.getInt(1)+1001;
+            if (set.next()) {
+                int id = set.getInt(1) + 1001;
                 return prefix + id;
             }
         } catch (SQLException e) {

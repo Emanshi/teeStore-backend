@@ -22,9 +22,13 @@ public class UserEntity {
     @JoinColumn(name = "user_id")
     private List<AddressEntity> addresses;
 
-    public List<AddressEntity> getAddresses() {  return addresses;  }
+    public List<AddressEntity> getAddresses() {
+        return addresses;
+    }
 
-    public void setAddresses(List<AddressEntity> addresses) {  this.addresses = addresses; }
+    public void setAddresses(List<AddressEntity> addresses) {
+        this.addresses = addresses;
+    }
 
     public String getUserId() {
         return userId;
@@ -42,7 +46,9 @@ public class UserEntity {
         this.userName = userName;
     }
 
-    public String getEmailId() { return emailId; }
+    public String getEmailId() {
+        return emailId;
+    }
 
     public void setEmailId(String emailId) {
         this.emailId = emailId;
@@ -56,7 +62,9 @@ public class UserEntity {
         this.contactNumber = contactNumber;
     }
 
-    public String getPassword() { return password; }
+    public String getPassword() {
+        return password;
+    }
 
     public void setPassword(String password) {
         this.password = password;

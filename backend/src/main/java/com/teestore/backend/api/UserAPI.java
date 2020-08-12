@@ -23,17 +23,17 @@ public class UserAPI {
 
     @PostMapping(value = "/userRegister")
     public ResponseEntity<User> registerUser(@RequestBody User user) throws Exception {
-        try{
+        try {
             User res = userService.addUser(user);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PostMapping(value = "/userLogin")
     public ResponseEntity<User> authenticateUser(@RequestBody User user) throws Exception {
-        try{
+        try {
             User res = userService.loginUser(user);
             return new ResponseEntity<>(res, HttpStatus.OK);
         } catch (Exception e) {
@@ -43,52 +43,52 @@ public class UserAPI {
 
     @GetMapping(value = "/getUser/{userId}")
     public ResponseEntity<User> getUser(@PathVariable String userId) throws Exception {
-        try{
+        try {
             User res = userService.getUser(userId);
-            return new ResponseEntity<>(res,HttpStatus.OK);
-        }catch(Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND,e.getMessage());
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
 
     }
 
     @PutMapping(value = "/editUserProfile/{userId}")
-    public ResponseEntity<String> editUser(@PathVariable String userId,@RequestBody User user) throws Exception {
-        try{
-            String res = userService.editUser(userId,user);
-            return  new ResponseEntity<>(res,HttpStatus.OK);
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST,e.getMessage());
+    public ResponseEntity<String> editUser(@PathVariable String userId, @RequestBody User user) throws Exception {
+        try {
+            String res = userService.editUser(userId, user);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, e.getMessage());
         }
     }
 
     @PostMapping(value = "/addAddress/{userId}")
     public ResponseEntity<String> addAddress(@PathVariable String userId, @RequestBody Address address) throws Exception {
-        try{
-            String res = userService.addAddress(userId,address);
-            return  new ResponseEntity<>(res,HttpStatus.OK);
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
+        try {
+            String res = userService.addAddress(userId, address);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
     @PutMapping(value = "/editAddress/{addressId}")
     public ResponseEntity<String> editAddress(@PathVariable String addressId, @RequestBody Address address) throws Exception {
-        try{
-            String res = userService.editAddress(addressId,address);
-            return  new ResponseEntity<>(res,HttpStatus.OK);
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
+        try {
+            String res = userService.editAddress(addressId, address);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 
     @DeleteMapping(value = "/deleteAddress")
-    public ResponseEntity<String> deleteAddress(@RequestParam String userId,@RequestParam String addressId ) throws Exception {
-        try{
-            String res = userService.deleteAddress(userId,addressId);
-            return  new ResponseEntity<>(res,HttpStatus.OK);
-        }catch (Exception e){
-            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE,e.getMessage());
+    public ResponseEntity<String> deleteAddress(@RequestParam String userId, @RequestParam String addressId) throws Exception {
+        try {
+            String res = userService.deleteAddress(userId, addressId);
+            return new ResponseEntity<>(res, HttpStatus.OK);
+        } catch (Exception e) {
+            throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }
     }
 }

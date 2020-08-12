@@ -19,7 +19,7 @@ public class ContactAPI {
     private ContactService contactService;
 
     @GetMapping("/getMessage/{contactId}")
-    public ResponseEntity<Contact> getMessage (@PathVariable String contactId) throws Exception {
+    public ResponseEntity<Contact> getMessage(@PathVariable String contactId) throws Exception {
         try {
             Contact contact = contactService.getMessage(contactId);
             return new ResponseEntity<>(contact, HttpStatus.OK);
@@ -29,7 +29,7 @@ public class ContactAPI {
     }
 
     @PostMapping("/addMessage")
-    public ResponseEntity<String> addMessage (@RequestBody Contact contact) throws Exception {
+    public ResponseEntity<String> addMessage(@RequestBody Contact contact) throws Exception {
         try {
             String id = contactService.addMessage(contact);
             return new ResponseEntity<>(id, HttpStatus.OK);
@@ -39,7 +39,7 @@ public class ContactAPI {
     }
 
     @GetMapping("/getUserMessages/{userId}")
-    public ResponseEntity<List<Contact>> getMessagesOfUser (@PathVariable String userId) throws Exception {
+    public ResponseEntity<List<Contact>> getMessagesOfUser(@PathVariable String userId) throws Exception {
         try {
             List<Contact> messages = contactService.getMessagesOfUser(userId);
             return new ResponseEntity<>(messages, HttpStatus.OK);

@@ -1,6 +1,9 @@
 package com.teestore.backend.dao;
 
-import com.teestore.backend.entity.*;
+import com.teestore.backend.entity.AddressEntity;
+import com.teestore.backend.entity.OrdersEntity;
+import com.teestore.backend.entity.ProductEntity;
+import com.teestore.backend.entity.UserEntity;
 import com.teestore.backend.model.*;
 import com.teestore.backend.service.CartService;
 import com.teestore.backend.service.ProductService;
@@ -41,48 +44,46 @@ public class OrdersDAOImpl implements OrdersDAO {
             StringBuilder prices = new StringBuilder();
             List<Product> productList = cart.getProducts();
             List<Integer> qtyList = cart.getQuantities();
-            List<String>  sizesList=cart.getSizes();
+            List<String> sizesList = cart.getSizes();
 
             AddressEntity addressEntity = entityManager.find(AddressEntity.class, aId);
             if (addressEntity == null)
                 return null;
 
 
-            for (int i=0;i< productList.size();i++) {
-                ProductEntity pe = entityManager.find(ProductEntity.class,productList.get(i).getProductId());
+            for (int i = 0; i < productList.size(); i++) {
+                ProductEntity pe = entityManager.find(ProductEntity.class, productList.get(i).getProductId());
                 String[] quantity = pe.getQuantity().split(",");
                 String[] size = pe.getSize().split(",");
                 int index = Arrays.asList(size).indexOf(sizesList.get(i));
-                if(index >= 0 && index < size.length) {
+                if (index >= 0 && index < size.length) {
                     if (Integer.parseInt(quantity[index]) < qtyList.get(i)) {
                         return null;
-                    }
-                    else {
-                        quantity[index]=String.valueOf(Integer.parseInt(quantity[index]) - qtyList.get(i));
+                    } else {
+                        quantity[index] = String.valueOf(Integer.parseInt(quantity[index]) - qtyList.get(i));
                         StringBuilder s = new StringBuilder();
-                        for(String q : quantity){
+                        for (String q : quantity) {
                             s.append(q).append(',');
                         }
-                        pe.setQuantity(s.substring(0,s.length()-1));
+                        pe.setQuantity(s.substring(0, s.length() - 1));
                     }
-                }
-                else{
+                } else {
                     return null;
                 }
                 products.append(productList.get(i).getProductId()).append(",");
                 qty.append(qtyList.get(i)).append(",");
                 sizes.append(sizesList.get(i)).append(",");
-                prices.append(productList.get(i).getCost()*(1-(productList.get(i).getDiscount())/100)).append(",");
+                prices.append(productList.get(i).getCost() * (1 - (productList.get(i).getDiscount()) / 100)).append(",");
             }
 
             UserEntity user = entityManager.find(UserEntity.class, cart.getUser().getUserId());
 
             if (user != null) {
                 OrdersEntity entity = new OrdersEntity();
-                entity.setProductIds(products.substring(0,products.length()-1));
-                entity.setQuantities(qty.substring(0,qty.length()-1));
-                entity.setSizes(sizes.substring(0,sizes.length()-1));
-                entity.setPrices(prices.substring(0,prices.length()-1));
+                entity.setProductIds(products.substring(0, products.length() - 1));
+                entity.setQuantities(qty.substring(0, qty.length() - 1));
+                entity.setSizes(sizes.substring(0, sizes.length() - 1));
+                entity.setPrices(prices.substring(0, prices.length() - 1));
                 entity.setTotalCost(cart.getTotalCost());
                 entity.setTimeOfOrder(LocalDateTime.now());
                 entity.setUser(user);
@@ -120,11 +121,11 @@ public class OrdersDAOImpl implements OrdersDAO {
                     products = new ArrayList<>();
                     qty = new ArrayList<>();
                     price = new ArrayList<>();
-                    for (String id:ids) {
+                    for (String id : ids) {
                         Product p = productService.getProductById(id);
                         products.add(p);
                     }
-                    for (String q:qs) {
+                    for (String q : qs) {
                         qty.add(Integer.parseInt(q));
                     }
                     size = new ArrayList<>(Arrays.asList(si));
@@ -166,7 +167,7 @@ public class OrdersDAOImpl implements OrdersDAO {
             Order order;
             orders = new ArrayList<>();
 
-            for (OrdersEntity entity:entities) {
+            for (OrdersEntity entity : entities) {
                 List<Product> products = null;
                 List<Integer> qty = null;
                 List<String> size = null;

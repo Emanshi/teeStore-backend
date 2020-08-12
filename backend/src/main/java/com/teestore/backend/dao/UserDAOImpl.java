@@ -12,8 +12,8 @@ import javax.persistence.Query;
 import java.util.ArrayList;
 import java.util.List;
 
-@Repository(value="userDAO")
-public class UserDAOImpl implements UserDAO{
+@Repository(value = "userDAO")
+public class UserDAOImpl implements UserDAO {
 
     @Autowired
     private EntityManager entityManager;
@@ -21,32 +21,32 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User addUser(User user) throws Exception {
 
-        Query query1= entityManager.createQuery("select u from UserEntity u where u.contactNumber =:contactNumber");
-        query1.setParameter("contactNumber",user.getContactNumber());
+        Query query1 = entityManager.createQuery("select u from UserEntity u where u.contactNumber =:contactNumber");
+        query1.setParameter("contactNumber", user.getContactNumber());
 
-        Query query2= entityManager.createQuery("select u from UserEntity u where u.emailId =:emailId");
-        query2.setParameter("emailId",user.getEmailId());
+        Query query2 = entityManager.createQuery("select u from UserEntity u where u.emailId =:emailId");
+        query2.setParameter("emailId", user.getEmailId());
 
-        List<UserEntity> result1= query1.getResultList();
-        List<UserEntity> result2= query2.getResultList();
-        if((result1!=null && !result1.isEmpty()) || (result2!=null && !result2.isEmpty()))
+        List<UserEntity> result1 = query1.getResultList();
+        List<UserEntity> result2 = query2.getResultList();
+        if ((result1 != null && !result1.isEmpty()) || (result2 != null && !result2.isEmpty()))
             return null;
 
-        UserEntity userEntity=new UserEntity();
+        UserEntity userEntity = new UserEntity();
         userEntity.setUserName(user.getUserName());
         userEntity.setContactNumber(user.getContactNumber());
         userEntity.setEmailId(user.getEmailId());
         userEntity.setDateOfBirth(user.getDateOfBirth());
         userEntity.setPassword(user.getPassword());
 
-        List<Address> addressList=user.getAddresses();
-        List<AddressEntity> addressEntityList=null;
+        List<Address> addressList = user.getAddresses();
+        List<AddressEntity> addressEntityList = null;
 
-        if(addressList!=null && !addressList.isEmpty()){
+        if (addressList != null && !addressList.isEmpty()) {
 
-            addressEntityList=new ArrayList<>();
-            for(Address address:addressList){
-                AddressEntity addressEntity=new AddressEntity();
+            addressEntityList = new ArrayList<>();
+            for (Address address : addressList) {
+                AddressEntity addressEntity = new AddressEntity();
                 addressEntity.setStreet(address.getStreet());
                 addressEntity.setCity(address.getStreet());
                 addressEntity.setState(address.getState());
@@ -69,13 +69,13 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User getUserByContactNumber(String contactNumber) throws Exception {
 
-        Query query=entityManager.createQuery("select u from UserEntity u where u.contactNumber =:contactNumber");
-        query.setParameter("contactNumber",contactNumber);
-        User user=null;
-        List<UserEntity> userEntities=query.getResultList();
-        if(userEntities!=null && !userEntities.isEmpty()){
-            UserEntity userEntity=userEntities.get(0);
-            user =new User();
+        Query query = entityManager.createQuery("select u from UserEntity u where u.contactNumber =:contactNumber");
+        query.setParameter("contactNumber", contactNumber);
+        User user = null;
+        List<UserEntity> userEntities = query.getResultList();
+        if (userEntities != null && !userEntities.isEmpty()) {
+            UserEntity userEntity = userEntities.get(0);
+            user = new User();
             user.setUserId(userEntity.getUserId());
             user.setUserName(userEntity.getUserName());
             user.setEmailId(userEntity.getEmailId());
@@ -83,14 +83,14 @@ public class UserDAOImpl implements UserDAO{
             user.setPassword(userEntity.getPassword());
             user.setDateOfBirth(userEntity.getDateOfBirth());
 
-            List<AddressEntity> addressEntityList=userEntity.getAddresses();
-            List<Address> addressList=null;
+            List<AddressEntity> addressEntityList = userEntity.getAddresses();
+            List<Address> addressList = null;
 
-            if(addressEntityList!=null && !addressEntityList.isEmpty()){
-                addressList=new ArrayList<>();
+            if (addressEntityList != null && !addressEntityList.isEmpty()) {
+                addressList = new ArrayList<>();
 
-                for(AddressEntity addressEntity: addressEntityList){
-                    Address address=new Address();
+                for (AddressEntity addressEntity : addressEntityList) {
+                    Address address = new Address();
                     address.setAddressId(addressEntity.getAddressId());
                     address.setStreet(addressEntity.getStreet());
                     address.setCity(addressEntity.getCity());
@@ -106,14 +106,14 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public User getUserByEmailId(String emailId) throws Exception {
-        Query query=entityManager.createQuery("select u from UserEntity u where u.emailId =:emailId");
-        query.setParameter("emailId",emailId);
-        User user=null;
-        List<UserEntity> userEntities=query.getResultList();
+        Query query = entityManager.createQuery("select u from UserEntity u where u.emailId =:emailId");
+        query.setParameter("emailId", emailId);
+        User user = null;
+        List<UserEntity> userEntities = query.getResultList();
 
-        if(userEntities!=null && !userEntities.isEmpty()){
-            UserEntity userEntity=userEntities.get(0);
-            user =new User();
+        if (userEntities != null && !userEntities.isEmpty()) {
+            UserEntity userEntity = userEntities.get(0);
+            user = new User();
             user.setUserId(userEntity.getUserId());
             user.setUserName(userEntity.getUserName());
             user.setEmailId(userEntity.getEmailId());
@@ -121,14 +121,14 @@ public class UserDAOImpl implements UserDAO{
             user.setPassword(userEntity.getPassword());
             user.setDateOfBirth(userEntity.getDateOfBirth());
 
-            List<AddressEntity> addressEntityList=userEntity.getAddresses();
-            List<Address> addressList=null;
+            List<AddressEntity> addressEntityList = userEntity.getAddresses();
+            List<Address> addressList = null;
 
-            if(addressEntityList!=null && !addressEntityList.isEmpty()){
-                addressList=new ArrayList<>();
+            if (addressEntityList != null && !addressEntityList.isEmpty()) {
+                addressList = new ArrayList<>();
 
-                for(AddressEntity addressEntity: addressEntityList){
-                    Address address=new Address();
+                for (AddressEntity addressEntity : addressEntityList) {
+                    Address address = new Address();
                     address.setAddressId(addressEntity.getAddressId());
                     address.setStreet(addressEntity.getStreet());
                     address.setCity(addressEntity.getCity());
@@ -145,12 +145,12 @@ public class UserDAOImpl implements UserDAO{
     @Override
     public User getUser(String userId) throws Exception {
 
-        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
+        UserEntity userEntity = entityManager.find(UserEntity.class, userId);
 
-        if(userEntity==null)
+        if (userEntity == null)
             return null;
 
-        User user =new User();
+        User user = new User();
         user.setUserId(userEntity.getUserId());
         user.setUserName(userEntity.getUserName());
         user.setEmailId(userEntity.getEmailId());
@@ -158,14 +158,14 @@ public class UserDAOImpl implements UserDAO{
         user.setPassword(userEntity.getPassword());
         user.setDateOfBirth(userEntity.getDateOfBirth());
 
-        List<AddressEntity> addressEntityList=userEntity.getAddresses();
-        List<Address> addressList=null;
+        List<AddressEntity> addressEntityList = userEntity.getAddresses();
+        List<Address> addressList = null;
 
-        if(addressEntityList!=null && !addressEntityList.isEmpty()){
-            addressList=new ArrayList<>();
+        if (addressEntityList != null && !addressEntityList.isEmpty()) {
+            addressList = new ArrayList<>();
 
-            for(AddressEntity addressEntity: addressEntityList){
-                Address address=new Address();
+            for (AddressEntity addressEntity : addressEntityList) {
+                Address address = new Address();
                 address.setAddressId(addressEntity.getAddressId());
                 address.setStreet(addressEntity.getStreet());
                 address.setCity(addressEntity.getCity());
@@ -181,15 +181,15 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public String editUser(String userId, User user) throws Exception {
-        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
+        UserEntity userEntity = entityManager.find(UserEntity.class, userId);
 
-        if(userEntity==null)
+        if (userEntity == null)
             return null;
 
-        if(user.getUserName() !=null)
+        if (user.getUserName() != null)
             userEntity.setUserName(user.getUserName());
 
-        if(user.getDateOfBirth() !=null)
+        if (user.getDateOfBirth() != null)
             userEntity.setDateOfBirth(user.getDateOfBirth());
 
         if (user.getPassword() != null)
@@ -202,17 +202,17 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public String addAddress(String userId, Address address) throws Exception {
-        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
+        UserEntity userEntity = entityManager.find(UserEntity.class, userId);
 
-        if(userEntity==null)
+        if (userEntity == null)
             return null;
 
-        List<AddressEntity> addressEntityList=userEntity.getAddresses();
+        List<AddressEntity> addressEntityList = userEntity.getAddresses();
 
-        if(addressEntityList==null)
-            addressEntityList=new ArrayList<>();
+        if (addressEntityList == null)
+            addressEntityList = new ArrayList<>();
 
-        AddressEntity addressEntity=new AddressEntity();
+        AddressEntity addressEntity = new AddressEntity();
         addressEntity.setStreet(address.getStreet());
         addressEntity.setCity(address.getCity());
         addressEntity.setState(address.getState());
@@ -228,9 +228,9 @@ public class UserDAOImpl implements UserDAO{
 
     @Override
     public String editAddress(String addressId, Address address) throws Exception {
-        AddressEntity addressEntity=entityManager.find(AddressEntity.class,addressId);
+        AddressEntity addressEntity = entityManager.find(AddressEntity.class, addressId);
 
-        if(addressEntity==null)
+        if (addressEntity == null)
             return null;
 
         addressEntity.setStreet(address.getStreet());
@@ -244,10 +244,10 @@ public class UserDAOImpl implements UserDAO{
     }
 
     @Override
-    public String deleteAddress(String userId,String addressId) throws Exception {
+    public String deleteAddress(String userId, String addressId) throws Exception {
 
-        UserEntity userEntity=entityManager.find(UserEntity.class,userId);
-        AddressEntity addressEntity=entityManager.find(AddressEntity.class,addressId);
+        UserEntity userEntity = entityManager.find(UserEntity.class, userId);
+        AddressEntity addressEntity = entityManager.find(AddressEntity.class, addressId);
 
 //        String uId=null;
 //        if(userEntity!=null){
@@ -272,15 +272,15 @@ public class UserDAOImpl implements UserDAO{
 //
 //        return uId;
 
-        String id=null;
-        if(userEntity!=null){
+        String id = null;
+        if (userEntity != null) {
 
-            List<AddressEntity> addressEntityList=userEntity.getAddresses();
+            List<AddressEntity> addressEntityList = userEntity.getAddresses();
 
-            if(addressEntityList!=null && !addressEntityList.isEmpty() && addressEntity!=null){
+            if (addressEntityList != null && !addressEntityList.isEmpty() && addressEntity != null) {
 
-                for(AddressEntity aEntity:addressEntityList){
-                    if(aEntity.equals(addressEntity)){
+                for (AddressEntity aEntity : addressEntityList) {
+                    if (aEntity.equals(addressEntity)) {
                         addressEntityList.remove(aEntity);
                         entityManager.persist(userEntity);
                         entityManager.remove(aEntity);

@@ -16,7 +16,7 @@ public class ContactEntity {
     private String subject;
     private String message;
     @ManyToOne(cascade = CascadeType.ALL)
-    @JoinColumn(name="user_id")
+    @JoinColumn(name = "user_id")
     private UserEntity user;
 
     public String getContactId() {

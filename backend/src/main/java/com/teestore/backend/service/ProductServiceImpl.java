@@ -10,7 +10,7 @@ import javax.transaction.Transactional;
 import java.util.List;
 
 
-@Service(value="productService")
+@Service(value = "productService")
 @Transactional
 public class ProductServiceImpl implements ProductService {
 
@@ -19,12 +19,12 @@ public class ProductServiceImpl implements ProductService {
 
     @Override
     public String addNewProduct(Product product) throws Exception {
-        if(product==null)
-        throw new Exception("ProductService.INVALID_PRODUCT");
+        if (product == null)
+            throw new Exception("ProductService.INVALID_PRODUCT");
 
-        String id= productDAO.addNewProduct(product);
+        String id = productDAO.addNewProduct(product);
 
-        if(id==null)
+        if (id == null)
             throw new Exception("ProductService.PRODUCT_NOT_ADDED");
 
         return id;
@@ -33,12 +33,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public Product getProductById(String productId) throws Exception {
 
-        if(productId==null)
+        if (productId == null)
             throw new Exception("ProductService.INVALID_PRODUCT_ID");
 
-        Product product= productDAO.getProductById(productId);
+        Product product = productDAO.getProductById(productId);
 
-        if(product== null)
+        if (product == null)
             throw new Exception("ProductService.PRODUCT_NOT_FOUND");
 
         return product;
@@ -47,12 +47,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductsByCategory(Category category) throws Exception {
 
-        if(category== null)
+        if (category == null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
 
-        List<Product> productList= productDAO.getProductsByCategory(category);
+        List<Product> productList = productDAO.getProductsByCategory(category);
 
-        if(productList== null || productList.isEmpty())
+        if (productList == null || productList.isEmpty())
             throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
@@ -61,12 +61,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getSimilarProducts(Category category) throws Exception {
 
-        if(category== null)
+        if (category == null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
 
-        List<Product> productList= productDAO.getSimilarProducts(category);
+        List<Product> productList = productDAO.getSimilarProducts(category);
 
-        if(productList== null || productList.isEmpty())
+        if (productList == null || productList.isEmpty())
             throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
@@ -75,9 +75,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getAllProducts() throws Exception {
 
-        List<Product> productList= productDAO.getAllProducts();
+        List<Product> productList = productDAO.getAllProducts();
 
-        if(productList == null || productList.isEmpty())
+        if (productList == null || productList.isEmpty())
             throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
@@ -86,9 +86,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getNewArrivals() throws Exception {
 
-        List<Product> productList= productDAO.getNewArrivals();
+        List<Product> productList = productDAO.getNewArrivals();
 
-        if(productList == null || productList.isEmpty())
+        if (productList == null || productList.isEmpty())
             throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
@@ -97,12 +97,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductByDiscount(Category category) throws Exception {
 
-        if(category ==null)
+        if (category == null)
             throw new Exception("ProductService.INVALID_PRODUCT_CATEGORY");
 
-        List<Product> productList= productDAO.getProductByDiscount(category);
+        List<Product> productList = productDAO.getProductByDiscount(category);
 
-        if(productList == null || productList.isEmpty())
+        if (productList == null || productList.isEmpty())
             throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;
@@ -111,12 +111,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getProductBySearch(String search) throws Exception {
 
-        if(search ==null)
+        if (search == null)
             throw new Exception("ProductService.INVALID_PRODUCT_SEARCH");
 
-        List<Product> productList= productDAO.getProductBySearchQuery(search);
+        List<Product> productList = productDAO.getProductBySearchQuery(search);
 
-        if(productList == null || productList.isEmpty())
+        if (productList == null || productList.isEmpty())
             throw new Exception("ProductService.PRODUCT_LIST_NOT_FOUND");
 
         return productList;

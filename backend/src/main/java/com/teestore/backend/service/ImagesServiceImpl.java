@@ -8,7 +8,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
-@Service(value="imagesService")
+@Service(value = "imagesService")
 @Transactional
 public class ImagesServiceImpl implements ImagesService {
 
@@ -18,11 +18,11 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public List<Images> getImagesByReference(String reference) throws Exception {
 
-        if(reference == null )
+        if (reference == null)
             throw new Exception("ImagesService.INVALID_REFERENCE");
 
-        List<Images> imagesList= imagesDAO.getImagesByReference(reference);
-        if(imagesList==null || imagesList.isEmpty())
+        List<Images> imagesList = imagesDAO.getImagesByReference(reference);
+        if (imagesList == null || imagesList.isEmpty())
             throw new Exception("ImagesService.IMAGES_LIST_NOT_FOUND");
 
         return imagesList;
@@ -31,11 +31,11 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public List<String> addImages(List<Images> imagesList) throws Exception {
 
-        if(imagesList== null || imagesList.isEmpty())
+        if (imagesList == null || imagesList.isEmpty())
             throw new Exception("ImagesService.IMAGES_LIST_NOT_FOUND");
 
-        List<String> imageIdList= imagesDAO.addImages(imagesList);
-        if(imageIdList== null || imageIdList.isEmpty())
+        List<String> imageIdList = imagesDAO.addImages(imagesList);
+        if (imageIdList == null || imageIdList.isEmpty())
             throw new Exception("ImagesService.UNABLE_TO_ADD_IMAGES_LIST");
 
         return imageIdList;
@@ -44,11 +44,11 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public List<String> removeImages(List<String> imagesIdList) throws Exception {
 
-        if(imagesIdList== null || imagesIdList.isEmpty())
+        if (imagesIdList == null || imagesIdList.isEmpty())
             throw new Exception("ImagesService.IMAGES_ID_LIST_NOT_FOUND");
 
-        List<String> iIdList= imagesDAO.removeImages(imagesIdList);
-        if(iIdList== null || iIdList.isEmpty())
+        List<String> iIdList = imagesDAO.removeImages(imagesIdList);
+        if (iIdList == null || iIdList.isEmpty())
             throw new Exception("ImagesService.UNABLE_TO_DELETE_IMAGES_LIST");
 
         return iIdList;
@@ -57,11 +57,11 @@ public class ImagesServiceImpl implements ImagesService {
     @Override
     public String removeImage(String imageId) throws Exception {
 
-        if(imageId == null || imageId.equals(""))
+        if (imageId == null || imageId.equals(""))
             throw new Exception("ImagesService.INVALID_IMAGE_ID");
 
-        String iId= imagesDAO.removeImage(imageId);
-        if(iId== null || iId.equals(""))
+        String iId = imagesDAO.removeImage(imageId);
+        if (iId == null || iId.equals(""))
             throw new Exception("ImagesService.UNABLE_TO_DELETE_IMAGE");
 
         return iId;
@@ -69,11 +69,11 @@ public class ImagesServiceImpl implements ImagesService {
 
     @Override
     public Images getImageById(String imageId) throws Exception {
-        if(imageId == null || imageId.equals(""))
+        if (imageId == null || imageId.equals(""))
             throw new Exception("ImagesService.INVALID_IMAGE_ID");
 
-        Images iId= imagesDAO.getImageById(imageId);
-        if(iId== null)
+        Images iId = imagesDAO.getImageById(imageId);
+        if (iId == null)
             throw new Exception("ImagesService.IMAGE_NOT_RETRIEVED");
 
         return iId;

@@ -18,13 +18,12 @@ public class ContactIdGenerator implements IdentifierGenerator {
         Connection connection = sharedSessionContractImplementor.connection();
 
         try {
-            Statement statement=connection.createStatement();
+            Statement statement = connection.createStatement();
 
-            ResultSet set=statement.executeQuery("select count(contact_id) as Id from Contact");
+            ResultSet set = statement.executeQuery("select count(contact_id) as Id from Contact");
 
-            if(set.next())
-            {
-                int id=set.getInt(1)+101;
+            if (set.next()) {
+                int id = set.getInt(1) + 101;
                 return prefix + id;
             }
         } catch (SQLException e) {
