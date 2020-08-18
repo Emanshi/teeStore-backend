@@ -168,11 +168,11 @@ public class ReviewDAOImpl implements ReviewDAO {
             ratingInNo = 5;
 
         String avgRating = productEntity.getAvgRating();
-        String[] ratingParameter = avgRating.split("\\.", 2);
-        int noOfRatings = Integer.parseInt(ratingParameter[0]);
-        double avgRatingInNo = Math.round(((Double.parseDouble(ratingParameter[1]) * noOfRatings + ratingInNo) / (noOfRatings + 1)) * 10) / 10.0;
-        noOfRatings += 1;
-        String newAvgRating = Integer.toString(noOfRatings) + "." + Double.toString(avgRatingInNo);
+        String[] ratingParameter = avgRating.split("\\.");
+        int noOfRatings = Integer.parseInt(ratingParameter[1])+1;
+        int totalRatings = Integer.parseInt(ratingParameter[0]);
+        totalRatings += ratingInNo;
+        String newAvgRating = totalRatings + "." + noOfRatings;
 
         productEntity.setAvgRating(newAvgRating);
 
@@ -231,11 +231,11 @@ public class ReviewDAOImpl implements ReviewDAO {
                 ratingInNo = 5;
 
             String avgRating = productEntity.getAvgRating();
-            String[] ratingParameter = avgRating.split("\\.", 2);
-            Integer noOfRatings = Integer.parseInt(ratingParameter[0]);
-            Double avgRatingInNo = Math.round(((Double.parseDouble(ratingParameter[1]) * noOfRatings + ratingInNo) / (noOfRatings + 1)) * 10) / 10.0;
-            noOfRatings += 1;
-            String newAvgRating = noOfRatings.toString() + "." + avgRatingInNo.toString();
+            String[] ratingParameter = avgRating.split("\\.");
+            int noOfRatings = Integer.parseInt(ratingParameter[1])+1;
+            int totalRatings = Integer.parseInt(ratingParameter[0]);
+            totalRatings += ratingInNo;
+            String newAvgRating = totalRatings + "." + noOfRatings;
 
             productEntity.setAvgRating(newAvgRating);
             reviewEntity.setProduct(productEntity);
