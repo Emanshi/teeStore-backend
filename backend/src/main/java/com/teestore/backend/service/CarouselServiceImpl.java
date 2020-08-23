@@ -4,10 +4,12 @@ import com.teestore.backend.dao.CarouselDAO;
 import com.teestore.backend.model.Carousel;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 
 @Service( value = "carouselService")
+@Transactional
 public class CarouselServiceImpl implements CarouselService{
 
     @Autowired
