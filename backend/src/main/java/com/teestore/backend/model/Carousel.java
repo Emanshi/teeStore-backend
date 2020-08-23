@@ -1,12 +1,11 @@
 package com.teestore.backend.model;
 
-import java.time.LocalDate;
-
 public class Carousel {
 
     private String carouselId;
     private String linkImage;
-    private String linkRoute;
+    private String filter;
+    private String value;
 
     public String getCarouselId() {
         return carouselId;
@@ -24,11 +23,19 @@ public class Carousel {
         this.linkImage = linkImage;
     }
 
-    public String getLinkRoute() {
-        return linkRoute;
+    public String getFilter() {
+        return filter;
     }
 
-    public void setLinkRoute(String linkRoute) {
-        this.linkRoute = linkRoute;
+    public void setFilter(String filter) {
+        this.filter = filter;
+    }
+
+    public String getValue() {
+        return value;
+    }
+
+    public void setValue(String value) {
+        this.value = value;
     }
 }

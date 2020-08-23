@@ -31,7 +31,9 @@ public class CarouselDAOImpl implements  CarouselDAO{
 
                 carousel.setCarouselId(carouselEntity.getCarouselId());
                 carousel.setLinkImage(carouselEntity.getLinkImage());
-                carousel.setLinkRoute(carouselEntity.getLinkRoute());
+                String[] categoryType = carouselEntity.getLinkRoute().split(",");
+                carousel.setFilter(categoryType[0]);
+                carousel.setValue(categoryType[1]);
 
                 carouselList.add(carousel);
             }
@@ -46,7 +48,7 @@ public class CarouselDAOImpl implements  CarouselDAO{
         CarouselEntity carouselEntity = new CarouselEntity();
 
         carouselEntity.setLinkImage(carousel.getLinkImage());
-        carouselEntity.setLinkRoute(carousel.getLinkRoute());
+        carouselEntity.setLinkRoute(carousel.getFilter()+","+carousel.getValue());
 
         entityManager.persist(carouselEntity);
         return carouselEntity.getCarouselId();
@@ -63,7 +65,9 @@ public class CarouselDAOImpl implements  CarouselDAO{
         Carousel carousel = new Carousel();
         carousel.setCarouselId(carouselEntity.getCarouselId());
         carousel.setLinkImage(carouselEntity.getLinkImage());
-        carousel.setLinkRoute(carouselEntity.getLinkRoute());
+        String[] categoryType = carouselEntity.getLinkRoute().split(",");
+        carousel.setFilter(categoryType[0]);
+        carousel.setValue(categoryType[1]);
 
         return carousel;
     }
