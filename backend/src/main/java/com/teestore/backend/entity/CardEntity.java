@@ -7,9 +7,13 @@ import javax.persistence.*;
 public class CardEntity {
 
     @Id
+    @Column(length = 16)
     private String cardNumber;
+    @Column(length = 50)
     private String cardHolderName;
+    @Column(length = 5)
     private String expiryMonthYear;
+    @Column(length = 3)
     private String cvv;
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinColumn(name = "user_id")

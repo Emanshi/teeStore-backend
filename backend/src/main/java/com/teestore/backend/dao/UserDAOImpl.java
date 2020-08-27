@@ -1,8 +1,10 @@
 package com.teestore.backend.dao;
 
 import com.teestore.backend.entity.AddressEntity;
+import com.teestore.backend.entity.CardEntity;
 import com.teestore.backend.entity.UserEntity;
 import com.teestore.backend.model.Address;
+import com.teestore.backend.model.Card;
 import com.teestore.backend.model.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -292,5 +294,86 @@ public class UserDAOImpl implements UserDAO {
         }
 
         return id;
+    }
+
+    @Override
+    public Card getCard(String cardNo) throws Exception {
+        Card card = null;
+        CardEntity entity = entityManager.find(CardEntity.class, cardNo);
+
+        if (entity != null) {
+            card = new Card();
+            card.setCardHolderName(entity.getCardHolderName());
+            card.setCardNumber(entity.getCardNumber());
+            card.setExpiryMonthYear(entity.getExpiryMonthYear());
+
+            User user = new User();
+            user.setUserId(entity.getUser().getUserId());
+
+            card.setUser(user);
+        }
+        return card;
+    }
+
+    @Override
+    public List<Card> getAllUserCards(String userId) throws Exception {
+        Query query = entityManager.createQuery("select c from CardEntity c where c.user.userId =:userId");
+        query.setParameter("userId", userId);
+
+        List<Card> cards = null;
+        List<CardEntity> entities = query.getResultList();
+
+        if (entities != null && !entities.isEmpty()) {
+            cards = new ArrayList<>();
+
+            for (CardEntity entity : entities) {
+                if (entity != null) {
+                    Card card = new Card();
+                    card.setCardHolderName(entity.getCardHolderName());
+                    card.setCardNumber(entity.getCardNumber());
+                    card.setExpiryMonthYear(entity.getExpiryMonthYear());
+
+                    User user = new User();
+                    user.setUserId(entity.getUser().getUserId());
+
+                    card.setUser(user);
+
+                    cards.add(card);
+                }
+            }
+        }
+        return cards;
+    }
+
+    @Override
+    public String deleteCard(String cardNo) throws Exception {
+        String res = null;
+        CardEntity entity = entityManager.find(CardEntity.class, cardNo);
+
+        if (entity != null) {
+            entity.setUser(null);
+            entityManager.remove(entity);
+            res = entity.getCardNumber();
+        }
+        return res;
+    }
+
+    @Override
+    public String addCard(Card card, String userId) throws Exception {
+        UserEntity userEntity = entityManager.find(UserEntity.class, userId);
+
+        if (card != null && userEntity != null) {
+            CardEntity entity = new CardEntity();
+            entity.setCardHolderName(card.getCardHolderName());
+            entity.setCardNumber(card.getCardNumber());
+            entity.setCvv(card.getCvv());
+            entity.setExpiryMonthYear(card.getExpiryMonthYear());
+            entity.setUser(userEntity);
+
+            entityManager.persist(entity);
+
+            return entity.getCardNumber();
+        }
+        return null;
     }
 }

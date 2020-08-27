@@ -2,14 +2,17 @@ package com.teestore.backend.service;
 
 import com.teestore.backend.dao.UserDAO;
 import com.teestore.backend.model.Address;
+import com.teestore.backend.model.Card;
 import com.teestore.backend.model.User;
 import com.teestore.backend.utility.HashingUtility;
+import com.teestore.backend.validator.CardValidator;
 import com.teestore.backend.validator.RegistrationValidator;
 import com.teestore.backend.validator.UserValidatorLogin;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.transaction.Transactional;
+import java.util.List;
 
 @Service(value = "userService")
 @Transactional
@@ -146,5 +149,61 @@ public class UserServiceImpl implements UserService {
             throw new Exception("UserService.UNABLE_TO_DELETE_ADDRESS");
 
         return aId;
+    }
+
+    @Override
+    public Card getCard(String cardId) throws Exception {
+        if (cardId == null || cardId.equals(""))
+            throw new Exception("UserService.INVALID_CARD_ID");
+
+        Card card = userDAO.getCard(cardId);
+
+        if (card == null)
+            throw new Exception("UserService.UNABLE_TO_RETRIEVE_CARD");
+
+        return card;
+    }
+
+    @Override
+    public List<Card> getAllUserCards(String userId) throws Exception {
+        if (userId == null || userId.equals(""))
+            throw new Exception("UserService.INVALID_USER_ID");
+
+        List<Card> cards = userDAO.getAllUserCards(userId);
+
+        if (cards == null || cards.isEmpty())
+            throw new Exception("UserService.UNABLE_TO_DELETE_CARD");
+
+        return cards;
+    }
+
+    @Override
+    public String deleteCard(String cardId) throws Exception {
+        if (cardId == null || cardId.equals(""))
+            throw new Exception("UserService.INVALID_CARD_ID");
+
+        String card = userDAO.deleteCard(cardId);
+
+        if (card == null)
+            throw new Exception("UserService.UNABLE_TO_DELETE_CARD");
+
+        return card;
+    }
+
+    @Override
+    public String addCard(Card card, String userId) throws Exception {
+        if (userId == null || userId.equals(""))
+            throw new Exception("UserService.INVALID_USER_ID");
+
+        if (card == null)
+            throw new Exception("UserService.INVALID_CARD_DATA");
+
+        CardValidator.validateCard(card);
+        String cardId = userDAO.addCard(card, userId);
+
+        if (cardId == null)
+            throw new Exception("UserService.UNABLE_TO_ADD_CARD");
+
+        return cardId;
     }
 }
