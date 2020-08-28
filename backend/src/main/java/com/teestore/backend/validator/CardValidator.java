@@ -24,6 +24,7 @@ public class CardValidator {
     private static Boolean validateCardNumber(String cardNumber) {
         if (cardNumber == null || cardNumber.length() != 16)
             return false;
+        System.out.println("hello");
         String reg = "[0-9]{16}";
         return cardNumber.matches(reg);
     }
