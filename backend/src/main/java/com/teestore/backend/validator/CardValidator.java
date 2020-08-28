@@ -22,6 +22,7 @@ public class CardValidator {
     }
 
     private static Boolean validateCardNumber(String cardNumber) {
+        System.out.println(cardNumber + " " + cardNumber.length());
         if (cardNumber == null || cardNumber.length() != 16)
             return false;
         System.out.println("hello");
