@@ -12,14 +12,13 @@ public class CardValidator {
 
     public static void validateCard(Card c) throws Exception {
         if (!validateCardNumber(c.getCardNumber()))
-            throw new Exception("CardValidator.INVALID_CONTACT_NUMBER_FORMAT");
+            throw new Exception("CardValidator.INVALID_CARD_NUMBER_FORMAT");
         if (!validateCardHolderName(c.getCardHolderName()))
-            throw new Exception("CardValidator.INVALID_CONTACT_NUMBER_FORMAT");
+            throw new Exception("CardValidator.INVALID_CARD_NAME_FORMAT");
         if (!validateCardExpiryMonthYear(c.getExpiryMonthYear()))
-            throw new Exception("CardValidator.INVALID_CONTACT_NUMBER_FORMAT");
+            throw new Exception("CardValidator.INVALID_EXPIRY_DATE");
         if (!validateCardCvv(c.getCvv()))
-            throw new Exception("CardValidator.INVALID_CONTACT_NUMBER_FORMAT");
-
+            throw new Exception("CardValidator.INVALID_CARD_CVV");
     }
 
     private static Boolean validateCardNumber(String cardNumber) {
