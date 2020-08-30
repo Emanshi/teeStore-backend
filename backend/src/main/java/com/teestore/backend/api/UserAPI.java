@@ -124,7 +124,7 @@ public class UserAPI {
         }
     }
 
-    @DeleteMapping(value = "/deleteCard/{{cardId}}")
+    @DeleteMapping(value = "/deleteCard/{cardId}")
     public ResponseEntity<String> deleteAddress(@PathVariable String cardId) throws Exception {
         try {
             String res = userService.deleteCard(cardId);
