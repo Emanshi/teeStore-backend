@@ -251,29 +251,6 @@ public class UserDAOImpl implements UserDAO {
         UserEntity userEntity = entityManager.find(UserEntity.class, userId);
         AddressEntity addressEntity = entityManager.find(AddressEntity.class, addressId);
 
-//        String uId=null;
-//        if(userEntity!=null){
-//
-//            List<AddressEntity> addressEntityList=userEntity.getAddresses();
-//
-//            if(addressEntityList!=null && !addressEntityList.isEmpty() && addressEntity!=null){
-//
-//                for(AddressEntity aEntity:addressEntityList){
-//                    if(aEntity.getAddressId().equals(addressEntity.getAddressId())){
-//                        addressEntityList.remove(addressEntity);
-//                        break;
-//                    }
-//                }
-//
-//            }
-//
-//            userEntity.setAddresses(addressEntityList);
-//            entityManager.persist(userEntity);
-//            return userId;
-//        }
-//
-//        return uId;
-
         String id = null;
         if (userEntity != null) {
 
@@ -285,7 +262,7 @@ public class UserDAOImpl implements UserDAO {
                     if (aEntity.equals(addressEntity)) {
                         addressEntityList.remove(aEntity);
                         entityManager.persist(userEntity);
-                        entityManager.remove(aEntity);
+
                         id = addressEntity.getAddressId();
                         break;
                     }
