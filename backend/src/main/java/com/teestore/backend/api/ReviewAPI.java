@@ -3,6 +3,7 @@ package com.teestore.backend.api;
 import com.teestore.backend.enums.Rating;
 import com.teestore.backend.model.RatingCounts;
 import com.teestore.backend.model.Review;
+import com.teestore.backend.model.User;
 import com.teestore.backend.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
@@ -75,11 +76,11 @@ public class ReviewAPI {
         }
     }
 
-    @RequestMapping(value = "/reviewHelpful/{reviewId}/{userId}", method = RequestMethod.PUT)
-    public ResponseEntity<Integer> reviewHelpful(@PathVariable String reviewId, @PathVariable String userId) throws Exception {
+    @RequestMapping(value = "/reviewHelpful/{reviewId}", method = RequestMethod.PUT)
+    public ResponseEntity<Integer> reviewHelpful(@PathVariable String reviewId, @RequestBody User user) throws Exception {
 
         try {
-            return new ResponseEntity<>(reviewService.reviewHelpful(reviewId, userId), HttpStatus.OK);
+            return new ResponseEntity<>(reviewService.reviewHelpful(reviewId, user.getUserId()), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_ACCEPTABLE, e.getMessage());
         }

@@ -269,12 +269,12 @@ public class ReviewDAOImpl implements ReviewDAO {
         ReviewEntity reviewEntity = entityManager.find(ReviewEntity.class, reviewId);
         Integer noOfHelpfulLikes = null;
 
-        if (reviewEntity == null || reviewEntity.getUser() == null)
-            return null;
+        if (reviewEntity != null && reviewEntity.getUser() != null) {
+            reviewEntity.setRatingHelpful(reviewEntity.getRatingHelpful() + 1);
+            noOfHelpfulLikes = reviewEntity.getRatingHelpful();
+        }
 
-        reviewEntity.setRatingHelpful(reviewEntity.getRatingHelpful() + 1);
-
-        return null;
+        return noOfHelpfulLikes;
     }
 
     @Override
