@@ -108,6 +108,7 @@ public class ReviewAPI {
     }
 
     @GetMapping(value = "/getRatingCounts/{productId}")
+    @ApiOperation("Get rating counts for a product")
     public ResponseEntity<RatingCounts> getRatingCounts(@PathVariable String productId) throws Exception {
         try {
             return new ResponseEntity<>(reviewService.getRatingCounts(productId), HttpStatus.OK);
