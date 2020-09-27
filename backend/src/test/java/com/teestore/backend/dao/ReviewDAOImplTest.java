@@ -1,10 +1,7 @@
 package com.teestore.backend.dao;
 
 import com.teestore.backend.enums.Rating;
-import com.teestore.backend.model.Contact;
-import com.teestore.backend.model.Product;
-import com.teestore.backend.model.Review;
-import com.teestore.backend.model.User;
+import com.teestore.backend.model.*;
 import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -192,5 +189,11 @@ public class ReviewDAOImplTest {
         r.setReviewBody("This is a test review body");
         String res = reviewDAO.editReview("R1001",r);
         Assert.assertNull(res);
+    }
+
+    @Test
+    public void getRatingCountsValidTest() throws Exception {
+        RatingCounts rc = reviewDAO.getRatingCounts("P10012");
+        Assert.assertNotNull(rc);
     }
 }

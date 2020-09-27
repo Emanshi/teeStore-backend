@@ -323,11 +323,25 @@ public class ReviewDAOImpl implements ReviewDAO {
     }
 
     @Override
-    public List<Review> getTopReviewsForProduct(String productId) throws Exception {
-        Query query = entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId order by r.ratingHelpful desc");
-        query.setParameter("productId", productId);
+    public List<Review> getTopReviewsForProduct(String productId, String userId) throws Exception {
+        List<ReviewEntity> reviewEntityList;
 
-        List<ReviewEntity> reviewEntityList = query.setMaxResults(3).getResultList();
+        if (!userId.equals("null")) {
+            Query query1 = entityManager.createQuery("select r from ReviewEntity r where r.product.productId = :productId and r.user.userId = :userId");
+            query1.setParameter("userId", userId);
+            query1.setParameter("productId", productId);
+            reviewEntityList = query1.getResultList();
+
+            Query query = entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId order by r.ratingHelpful desc");
+            query.setParameter("productId", productId);
+            reviewEntityList.addAll(query.setMaxResults(2).getResultList());
+
+        } else {
+            Query query = entityManager.createQuery("select r from ReviewEntity r where r.product.productId =:productId order by r.ratingHelpful desc");
+            query.setParameter("productId", productId);
+            reviewEntityList = query.setMaxResults(3).getResultList();
+        }
+
         List<Review> reviewList = null;
 
         if (reviewEntityList != null && !reviewEntityList.isEmpty()) {

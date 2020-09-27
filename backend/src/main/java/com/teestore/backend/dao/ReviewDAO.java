@@ -22,7 +22,7 @@ public interface ReviewDAO {
 
     List<Review> getReviewByRating(String productId, Rating rating) throws Exception;
 
-    List<Review> getTopReviewsForProduct(String productId) throws Exception;
+    List<Review> getTopReviewsForProduct(String productId, String userId) throws Exception;
 
     RatingCounts getRatingCounts(String productId) throws Exception;
 }

@@ -116,11 +116,11 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public List<Review> getTopReviewsByProduct(String productId) throws Exception {
+    public List<Review> getTopReviewsByProduct(String productId, String userId) throws Exception {
         if (productId == null || productId.equals(""))
             throw new Exception("ReviewService.INVALID_PRODUCT_ID");
 
-        List<Review> reviewList = reviewDAO.getTopReviewsForProduct(productId);
+        List<Review> reviewList = reviewDAO.getTopReviewsForProduct(productId, userId);
 
         if (reviewList == null || reviewList.isEmpty())
             throw new Exception("ReviewService.REVIEW_LIST_NOT_FOUND");

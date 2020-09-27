@@ -21,7 +21,7 @@ public interface ReviewService {
 
     List<Review> getReviewByRating(String productId, Rating rating) throws Exception;
 
-    List<Review> getTopReviewsByProduct(String productId) throws Exception;
+    List<Review> getTopReviewsByProduct(String productId, String userId) throws Exception;
 
     RatingCounts getRatingCounts(String productId) throws Exception;
 }

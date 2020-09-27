@@ -5,6 +5,7 @@ import com.teestore.backend.model.RatingCounts;
 import com.teestore.backend.model.Review;
 import com.teestore.backend.model.User;
 import com.teestore.backend.service.ReviewService;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.core.env.Environment;
 import org.springframework.http.HttpStatus;
@@ -96,10 +97,11 @@ public class ReviewAPI {
         }
     }
 
-    @GetMapping(value = "/getTopReviews/{productId}")
-    public ResponseEntity<List<Review>> getTopReviews(@PathVariable String productId) throws Exception {
+    @GetMapping(value = "/getTopReviews")
+    @ApiOperation("Retrieve top reviews for a product")
+    public ResponseEntity<List<Review>> getTopReviews(@RequestParam String productId, @RequestParam(required = false, defaultValue = "null") String userId) throws Exception {
         try {
-            return new ResponseEntity<>(reviewService.getTopReviewsByProduct(productId), HttpStatus.OK);
+            return new ResponseEntity<>(reviewService.getTopReviewsByProduct(productId, userId), HttpStatus.OK);
         } catch (Exception e) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND, e.getMessage());
         }
