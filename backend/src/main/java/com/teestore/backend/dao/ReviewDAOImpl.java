@@ -326,7 +326,7 @@ public class ReviewDAOImpl implements ReviewDAO {
     public List<Review> getTopReviewsForProduct(String productId, String userId) throws Exception {
         List<ReviewEntity> reviewEntityList;
 
-        if (!userId.equals("null")) {
+        if (!userId.equals("null") && !userId.equals("")) {
             Query query1 = entityManager.createQuery("select r from ReviewEntity r where r.product.productId = :productId and r.user.userId = :userId");
             query1.setParameter("userId", userId);
             query1.setParameter("productId", productId);
