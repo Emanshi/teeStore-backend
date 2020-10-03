@@ -1,3 +1,5 @@
+<img src="https://github.com/Emanshi/teeStore-frontend/blob/master/src/assets/TeeStoreLogo.png?raw=true">
+
 # TeeStore Backend
 
 > This is the backend application of the TeeStore project.
